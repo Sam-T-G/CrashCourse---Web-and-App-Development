@@ -333,38 +333,51 @@ const cssFlexboxExamples = {
 .btn.secondary:hover {
     background: #4b5563;
 }
-</style>`
+</style>`,
 };
 
 function streamlineCSSFlexboxModule() {
-    console.log("🔧 Streamlining CSS Flexbox Module for Better Viewport Fit...\n");
-    
-    const modulePath = path.join(__dirname, "..", "traditional-web-stack", "04-css-flexbox");
-    const scriptPath = path.join(modulePath, "script.js");
-    
-    console.log("  📝 Streamlining CSS Flexbox module...");
-    
-    // Read current script
-    let scriptContent = fs.readFileSync(scriptPath, "utf8");
-    
-    // Find and replace the sectionCodeExamples object
-    const examplesRegex = /const sectionCodeExamples = \{[\s\S]*?\};/;
-    const newExamples = `const sectionCodeExamples = ${JSON.stringify(cssFlexboxExamples, null, 2)};`;
-    
-    if (examplesRegex.test(scriptContent)) {
-        scriptContent = scriptContent.replace(examplesRegex, newExamples);
-        fs.writeFileSync(scriptPath, scriptContent);
-        console.log("    ✅ CSS Flexbox code examples streamlined");
-    } else {
-        console.log("    ❌ Could not find sectionCodeExamples in CSS Flexbox module");
-    }
-    
-    console.log("🎉 CSS Flexbox module streamlined for better viewport fit!");
+	console.log(
+		"🔧 Streamlining CSS Flexbox Module for Better Viewport Fit...\n"
+	);
+
+	const modulePath = path.join(
+		__dirname,
+		"..",
+		"traditional-web-stack",
+		"04-css-flexbox"
+	);
+	const scriptPath = path.join(modulePath, "script.js");
+
+	console.log("  📝 Streamlining CSS Flexbox module...");
+
+	// Read current script
+	let scriptContent = fs.readFileSync(scriptPath, "utf8");
+
+	// Find and replace the sectionCodeExamples object
+	const examplesRegex = /const sectionCodeExamples = \{[\s\S]*?\};/;
+	const newExamples = `const sectionCodeExamples = ${JSON.stringify(
+		cssFlexboxExamples,
+		null,
+		2
+	)};`;
+
+	if (examplesRegex.test(scriptContent)) {
+		scriptContent = scriptContent.replace(examplesRegex, newExamples);
+		fs.writeFileSync(scriptPath, scriptContent);
+		console.log("    ✅ CSS Flexbox code examples streamlined");
+	} else {
+		console.log(
+			"    ❌ Could not find sectionCodeExamples in CSS Flexbox module"
+		);
+	}
+
+	console.log("🎉 CSS Flexbox module streamlined for better viewport fit!");
 }
 
 // Run the streamlining
 if (require.main === module) {
-    streamlineCSSFlexboxModule();
+	streamlineCSSFlexboxModule();
 }
 
 module.exports = { streamlineCSSFlexboxModule };
