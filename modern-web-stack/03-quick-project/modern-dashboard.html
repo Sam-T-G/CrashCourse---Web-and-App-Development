@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dashboard - Quick Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        /* Custom animations for modern feel */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-slideInRight {
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Custom gradient backgrounds */
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .gradient-bg-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .gradient-bg-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* Interactive hover effects */
+        .interactive-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Modern glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Header Section -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex items-center justify-between">
+                <div class="animate-fadeInUp">
+                    <h1 class="text-4xl font-bold mb-2">🚀 Modern Dashboard</h1>
+                    <p class="text-xl opacity-90">Built with React, Tailwind CSS, and Next.js principles</p>
+                </div>
+                <div class="animate-slideInRight">
+                    <div class="glass rounded-lg p-4">
+                        <div class="text-sm opacity-75">Live Demo</div>
+                        <div class="text-2xl font-bold">Modern Stack</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Stats Overview -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-gray-800">📊 Performance Metrics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="interactive-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">First Contentful Paint</p>
+                            <p class="text-3xl font-bold text-blue-600">0.8s</p>
+                            <p class="text-sm text-green-600">80% faster</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">⚡</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Bundle Size</p>
+                            <p class="text-3xl font-bold text-green-600">245KB</p>
+                            <p class="text-sm text-green-600">90% smaller</p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">📦</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-purple-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">SEO Score</p>
+                            <p class="text-3xl font-bold text-purple-600">95/100</p>
+                            <p class="text-sm text-green-600">95% better</p>
+                        </div>
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🎯</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-card bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Development Speed</p>
+                            <p class="text-3xl font-bold text-orange-600">5x</p>
+                            <p class="text-sm text-green-600">Faster</p>
+                        </div>
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🚀</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Components Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-gray-800">🎮 Interactive Components</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- React Component Demo -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">⚛️ React Components</h3>
+                    <div id="react-demo" class="space-y-4"></div>
+                </div>
+
+                <!-- Tailwind Styling Demo -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">🎨 Tailwind CSS</h3>
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap gap-2">
+                            <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                                Primary
+                            </button>
+                            <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                                Success
+                            </button>
+                            <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                                Danger
+                            </button>
+                        </div>
+                        <div class="p-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg text-white">
+                            <p class="font-semibold">Gradient Background</p>
+                            <p class="text-sm opacity-90">Utility-first CSS makes this easy!</p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="h-16 bg-blue-100 rounded flex items-center justify-center text-blue-600 font-semibold">
+                                Grid 1
+                            </div>
+                            <div class="h-16 bg-green-100 rounded flex items-center justify-center text-green-600 font-semibold">
+                                Grid 2
+                            </div>
+                            <div class="h-16 bg-purple-100 rounded flex items-center justify-center text-purple-600 font-semibold">
+                                Grid 3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Showcase -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-gray-800">✨ Modern Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="interactive-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 gradient-bg-2 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">⚡</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Hot Reloading</h3>
+                    <p class="text-gray-600">Instant feedback on code changes</p>
+                </div>
+
+                <div class="interactive-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 gradient-bg-3 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">🔧</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Zero Config</h3>
+                    <p class="text-gray-600">Out-of-the-box optimization</p>
+                </div>
+
+                <div class="interactive-card bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">📱</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Responsive</h3>
+                    <p class="text-gray-600">Mobile-first design</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Comparison Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-gray-800">💻 Code Comparison</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-red-800">❌ Traditional Approach</h3>
+                    <div class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono overflow-x-auto">
+                        <div class="text-gray-500">// HTML</div>
+                        <div>&lt;div class="card"&gt;</div>
+                        <div>&nbsp;&nbsp;&lt;h3 class="title"&gt;Title&lt;/h3&gt;</div>
+                        <div>&nbsp;&nbsp;&lt;p class="content"&gt;Content&lt;/p&gt;</div>
+                        <div>&lt;/div&gt;</div>
+                        <br>
+                        <div class="text-gray-500">// CSS (50+ lines)</div>
+                        <div>.card { /* 20+ lines */ }</div>
+                        <div>.title { /* 15+ lines */ }</div>
+                        <div>.content { /* 15+ lines */ }</div>
+                        <br>
+                        <div class="text-gray-500">// JavaScript</div>
+                        <div>document.querySelector('.card')</div>
+                        <div>&nbsp;&nbsp;.addEventListener('click', ...)</div>
+                    </div>
+                    <p class="text-sm text-red-700 mt-2">Complex, scattered, hard to maintain</p>
+                </div>
+
+                <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-green-800">✅ Modern Approach</h3>
+                    <div class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono overflow-x-auto">
+                        <div class="text-gray-500">// React Component</div>
+                        <div>function Card({ title, content }) {</div>
+                        <div>&nbsp;&nbsp;return (</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div className="bg-white p-6 rounded-lg shadow"&gt;</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3 className="text-xl font-bold mb-2"&gt;</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{title}</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/h3&gt;</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p className="text-gray-600"&gt;</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{content}</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div>
+                        <div>&nbsp;&nbsp;);</div>
+                        <div>}</div>
+                    </div>
+                    <p class="text-sm text-green-700 mt-2">Simple, organized, easy to maintain</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Demo Section -->
+        <section class="mb-12">
+            <div class="gradient-bg rounded-xl p-8 text-white text-center">
+                <h2 class="text-3xl font-bold mb-4">🎯 Try It Yourself!</h2>
+                <p class="text-xl mb-6 opacity-90">Experience the power of modern frameworks</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="showDemo('performance')" class="px-6 py-3 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-all">
+                        📊 Performance Demo
+                    </button>
+                    <button onclick="showDemo('components')" class="px-6 py-3 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-all">
+                        ⚛️ Component Demo
+                    </button>
+                    <button onclick="showDemo('styling')" class="px-6 py-3 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-all">
+                        🎨 Styling Demo
+                    </button>
+                </div>
+                <div id="demoArea" class="mt-8 p-6 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
+                    <p class="text-lg">Click a button above to see the demo!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-2xl font-bold mb-4">🎉 Congratulations!</h3>
+            <p class="text-lg mb-4">You've experienced the power of modern web development</p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm">
+                <span class="px-3 py-1 bg-blue-600 rounded-full">React Components</span>
+                <span class="px-3 py-1 bg-green-600 rounded-full">Tailwind CSS</span>
+                <span class="px-3 py-1 bg-purple-600 rounded-full">Next.js Principles</span>
+                <span class="px-3 py-1 bg-orange-600 rounded-full">Modern Performance</span>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/babel">
+        // React Components for the demo
+        const { useState, useEffect } = React;
+
+        function Counter() {
+            const [count, setCount] = useState(0);
+            const [isAnimating, setIsAnimating] = useState(false);
+
+            const increment = () => {
+                setIsAnimating(true);
+                setCount(count + 1);
+                setTimeout(() => setIsAnimating(false), 300);
+            };
+
+            return (
+                <div className="text-center">
+                    <div className={`text-4xl font-bold mb-4 ${isAnimating ? 'animate-pulse' : ''}`}>
+                        {count}
+                    </div>
+                    <button 
+                        onClick={increment}
+                        className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                    >
+                        Increment
+                    </button>
+                </div>
+            );
+        }
+
+        function TodoList() {
+            const [todos, setTodos] = useState([
+                { id: 1, text: 'Learn React', completed: false },
+                { id: 2, text: 'Master Tailwind CSS', completed: true },
+                { id: 3, text: 'Build with Next.js', completed: false }
+            ]);
+            const [newTodo, setNewTodo] = useState('');
+
+            const addTodo = () => {
+                if (newTodo.trim()) {
+                    setTodos([...todos, { 
+                        id: Date.now(), 
+                        text: newTodo, 
+                        completed: false 
+                    }]);
+                    setNewTodo('');
+                }
+            };
+
+            const toggleTodo = (id) => {
+                setTodos(todos.map(todo => 
+                    todo.id === id ? { ...todo, completed: !todo.completed } : todo
+                ));
+            };
+
+            return (
+                <div className="space-y-4">
+                    <div className="flex gap-2">
+                        <input
+                            type="text"
+                            value={newTodo}
+                            onChange={(e) => setNewTodo(e.target.value)}
+                            placeholder="Add a todo..."
+                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            onKeyPress={(e) => e.key === 'Enter' && addTodo()}
+                        />
+                        <button 
+                            onClick={addTodo}
+                            className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+                        >
+                            Add
+                        </button>
+                    </div>
+                    <div className="space-y-2">
+                        {todos.map(todo => (
+                            <div 
+                                key={todo.id}
+                                className={`flex items-center gap-3 p-3 rounded-lg ${
+                                    todo.completed ? 'bg-green-50 text-green-800' : 'bg-gray-50'
+                                }`}
+                            >
+                                <input
+                                    type="checkbox"
+                                    checked={todo.completed}
+                                    onChange={() => toggleTodo(todo.id)}
+                                    className="w-4 h-4 text-green-600 rounded focus:ring-green-500"
+                                />
+                                <span className={todo.completed ? 'line-through' : ''}>
+                                    {todo.text}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        function UserCard() {
+            const [user, setUser] = useState({
+                name: 'John Doe',
+                email: 'john@example.com',
+                avatar: '👨‍💻'
+            });
+
+            const [isEditing, setIsEditing] = useState(false);
+
+            return (
+                <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                    <div className="text-center">
+                        <div className="text-4xl mb-4">{user.avatar}</div>
+                        {isEditing ? (
+                            <div className="space-y-3">
+                                <input
+                                    type="text"
+                                    value={user.name}
+                                    onChange={(e) => setUser({...user, name: e.target.value})}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <input
+                                    type="email"
+                                    value={user.email}
+                                    onChange={(e) => setUser({...user, email: e.target.value})}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <button 
+                                    onClick={() => setIsEditing(false)}
+                                    className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        ) : (
+                            <div>
+                                <h3 className="text-xl font-semibold mb-2">{user.name}</h3>
+                                <p className="text-gray-600 mb-4">{user.email}</p>
+                                <button 
+                                    onClick={() => setIsEditing(true)}
+                                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                                >
+                                    Edit Profile
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        // Render React components
+        ReactDOM.render(<Counter />, document.getElementById('react-demo'));
+
+        // Demo functions
+        function showDemo(type) {
+            const demoArea = document.getElementById('demoArea');
+            
+            switch(type) {
+                case 'performance':
+                    demoArea.innerHTML = `
+                        <div class="text-left">
+                            <h4 class="text-xl font-semibold mb-4">📊 Performance Comparison</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-red-100 rounded-lg">
+                                    <h5 class="font-semibold text-red-800 mb-2">Traditional</h5>
+                                    <div class="space-y-1 text-sm text-red-700">
+                                        <div>FCP: 3-5 seconds</div>
+                                        <div>Bundle: 2-5MB</div>
+                                        <div>SEO: 0/100</div>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-green-100 rounded-lg">
+                                    <h5 class="font-semibold text-green-800 mb-2">Modern</h5>
+                                    <div class="space-y-1 text-sm text-green-700">
+                                        <div>FCP: 0.5-1 seconds</div>
+                                        <div>Bundle: 100-500KB</div>
+                                        <div>SEO: 95/100</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'components':
+                    demoArea.innerHTML = `
+                        <div class="text-left">
+                            <h4 class="text-xl font-semibold mb-4">⚛️ React Components</h4>
+                            <div class="space-y-4">
+                                <div class="p-4 bg-blue-100 rounded-lg">
+                                    <h5 class="font-semibold text-blue-800 mb-2">Component Benefits</h5>
+                                    <div class="space-y-1 text-sm text-blue-700">
+                                        <div>✅ Reusable across the app</div>
+                                        <div>✅ Self-contained logic</div>
+                                        <div>✅ Easy to test and maintain</div>
+                                        <div>✅ Declarative state management</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'styling':
+                    demoArea.innerHTML = `
+                        <div class="text-left">
+                            <h4 class="text-xl font-semibold mb-4">🎨 Tailwind CSS</h4>
+                            <div class="space-y-4">
+                                <div class="p-4 bg-purple-100 rounded-lg">
+                                    <h5 class="font-semibold text-purple-800 mb-2">Utility-First Benefits</h5>
+                                    <div class="space-y-1 text-sm text-purple-700">
+                                        <div>✅ No CSS conflicts</div>
+                                        <div>✅ Consistent design system</div>
+                                        <div>✅ Rapid prototyping</div>
+                                        <div>✅ Small bundle size</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all interactive cards
+            document.querySelectorAll('.interactive-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Add click effects to buttons
+            document.querySelectorAll('button').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

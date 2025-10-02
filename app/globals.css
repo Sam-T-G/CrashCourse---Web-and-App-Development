@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
+}
+
+body {
+	color: rgb(var(--foreground-rgb));
+	background: linear-gradient(
+			to bottom,
+			transparent,
+			rgb(var(--background-end-rgb))
+		)
+		rgb(var(--background-start-rgb));
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+/* Glassmorphism effect */
+.glass {
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Interactive card hover effects */
+.interactive-card {
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.interactive-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Code syntax highlighting */
+.code-snippet {
+	background-color: #1e293b;
+	color: #e2e8f0;
+	padding: 1rem;
+	border-radius: 8px;
+	margin: 1rem 0;
+	font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+	font-size: 0.875rem;
+	overflow-x: auto;
+}
+
+.code-snippet .property {
+	color: #f472b6;
+}
+
+.code-snippet .value {
+	color: #10b981;
+}
+
+.code-snippet .comment {
+	color: #64748b;
+}

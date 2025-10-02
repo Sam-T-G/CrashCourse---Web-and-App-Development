@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Centering - Utility-First Centering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Traditional CSS for comparison */
+        .traditional-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+        }
+
+        .traditional-center-text {
+            text-align: center;
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            padding: 1rem;
+        }
+
+        .traditional-center-block {
+            display: block;
+            margin: 0 auto;
+            width: 200px;
+            height: 100px;
+            background-color: #3b82f6;
+            border-radius: 0.375rem;
+        }
+
+        .traditional-center-absolute {
+            position: relative;
+            height: 200px;
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+        }
+
+        .traditional-center-absolute .centered-element {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 50px;
+            background-color: #10b981;
+            border-radius: 0.375rem;
+        }
+
+        .traditional-center-grid {
+            display: grid;
+            place-items: center;
+            height: 200px;
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+        }
+
+        /* Demo styling */
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e5e7eb;
+        }
+
+        .demo-section h2 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .comparison-card.traditional {
+            border-color: #ef4444;
+        }
+
+        .comparison-card.modern {
+            border-color: #10b981;
+        }
+
+        .comparison-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .comparison-title.traditional {
+            color: #ef4444;
+        }
+
+        .comparison-title.modern {
+            color: #10b981;
+        }
+
+        .demo-element {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .demo-element:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-label {
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .property-comment {
+            font-style: italic;
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .code-snippet {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+
+        .code-snippet .property {
+            color: #f472b6;
+        }
+
+        .code-snippet .value {
+            color: #10b981;
+        }
+
+        .code-snippet .comment {
+            color: #64748b;
+        }
+
+        /* Centering Demo Areas */
+        .centering-demo {
+            background-color: #f1f5f9;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            min-height: 200px;
+        }
+
+        .centering-demo h3 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Interactive Demo */
+        .interactive-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .control-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .control-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .demo-area {
+            background-color: white;
+            color: black;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-height: 200px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1 class="text-4xl font-bold mb-4">🎯 Tailwind Centering</h1>
+            <p class="text-xl">Utility-first centering with fundamental improvements over traditional CSS</p>
+        </div>
+
+        <!-- Flexbox Centering Section -->
+        <div class="demo-section">
+            <h2>🔄 Flexbox Centering</h2>
+            <p>Learn how Tailwind's flexbox utilities provide simple and consistent centering.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional CSS</div>
+                    <div class="demo-element">
+                        <div class="property-label">Manual Flexbox Properties</div>
+                        <div class="centering-demo">
+                            <h3>Traditional Approach</h3>
+                            <div class="traditional-center">
+                                <div style="background-color: #3b82f6; color: white; padding: 1rem; border-radius: 0.375rem;">Centered Content</div>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Manual flexbox properties with complex CSS</p>
+                        </div>
+                        <div class="property-comment">Manual flexbox properties with complex CSS</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Tailwind Flexbox</div>
+                    <div class="demo-element">
+                        <div class="property-label">Flexbox Utility Classes</div>
+                        <div class="centering-demo">
+                            <h3>Tailwind Approach</h3>
+                            <div class="flex justify-center items-center h-48 bg-gray-100 border border-gray-300 rounded">
+                                <div class="bg-blue-500 text-white px-4 py-2 rounded">Centered Content</div>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Simple flexbox utility classes</p>
+                        </div>
+                        <div class="property-comment">Simple flexbox utility classes with consistent behavior</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Manual flexbox properties</span>
+.traditional-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+}
+
+<span class="comment">// Tailwind: Flexbox utility classes</span>
+&lt;div class="flex justify-center items-center h-48 bg-gray-100 border border-gray-300 rounded"&gt;
+    &lt;div class="bg-blue-500 text-white px-4 py-2 rounded"&gt;Centered Content&lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Text Centering Section -->
+        <div class="demo-section">
+            <h2>📝 Text Centering</h2>
+            <p>See how Tailwind provides simple text centering utilities.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional CSS</div>
+                    <div class="demo-element">
+                        <div class="property-label">Manual Text Alignment</div>
+                        <div class="centering-demo">
+                            <h3>Traditional Approach</h3>
+                            <div class="traditional-center-text">
+                                <h4 style="color: #1f2937; font-size: 1.125rem; margin-bottom: 0.5rem;">Centered Title</h4>
+                                <p style="color: #6b7280;">This text is centered using traditional CSS text-align property.</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Manual text-align property</p>
+                        </div>
+                        <div class="property-comment">Manual text-align property with potential inconsistencies</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Tailwind Text Centering</div>
+                    <div class="demo-element">
+                        <div class="property-label">Text Centering Utilities</div>
+                        <div class="centering-demo">
+                            <h3>Tailwind Approach</h3>
+                            <div class="text-center bg-gray-100 border border-gray-300 rounded p-4">
+                                <h4 class="text-gray-900 text-lg font-semibold mb-2">Centered Title</h4>
+                                <p class="text-gray-600">This text is centered using Tailwind text-center utility.</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Simple text-center utility class</p>
+                        </div>
+                        <div class="property-comment">Simple text-center utility class with consistent behavior</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Manual text alignment</span>
+.traditional-center-text {
+    text-align: center;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    padding: 1rem;
+}
+
+<span class="comment">// Tailwind: Text centering utilities</span>
+&lt;div class="text-center bg-gray-100 border border-gray-300 rounded p-4"&gt;
+    &lt;h4 class="text-gray-900 text-lg font-semibold mb-2"&gt;Centered Title&lt;/h4&gt;
+    &lt;p class="text-gray-600"&gt;Centered text content&lt;/p&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Block Centering Section -->
+        <div class="demo-section">
+            <h2>📦 Block Centering</h2>
+            <p>Compare how block elements are centered in traditional CSS vs Tailwind.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional CSS</div>
+                    <div class="demo-element">
+                        <div class="property-label">Manual Block Centering</div>
+                        <div class="centering-demo">
+                            <h3>Traditional Approach</h3>
+                            <div class="traditional-center-block"></div>
+                            <p class="text-sm mt-2 text-gray-600">Manual margin: 0 auto with fixed width</p>
+                        </div>
+                        <div class="property-comment">Manual margin: 0 auto with fixed width</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Tailwind Block Centering</div>
+                    <div class="demo-element">
+                        <div class="property-label">Block Centering Utilities</div>
+                        <div class="centering-demo">
+                            <h3>Tailwind Approach</h3>
+                            <div class="block mx-auto w-48 h-24 bg-blue-500 rounded"></div>
+                            <p class="text-sm mt-2 text-gray-600">Simple mx-auto utility class</p>
+                        </div>
+                        <div class="property-comment">Simple mx-auto utility class with consistent behavior</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Manual block centering</span>
+.traditional-center-block {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 100px;
+    background-color: #3b82f6;
+    border-radius: 0.375rem;
+}
+
+<span class="comment">// Tailwind: Block centering utilities</span>
+&lt;div class="block mx-auto w-48 h-24 bg-blue-500 rounded"&gt;&lt;/div&gt;
+&lt;div class="mx-auto w-32 h-16 bg-green-500 rounded"&gt;&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Absolute Centering Section -->
+        <div class="demo-section">
+            <h2>📍 Absolute Centering</h2>
+            <p>See how Tailwind simplifies absolute positioning and centering.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional CSS</div>
+                    <div class="demo-element">
+                        <div class="property-label">Manual Absolute Centering</div>
+                        <div class="centering-demo">
+                            <h3>Traditional Approach</h3>
+                            <div class="traditional-center-absolute">
+                                <div class="centered-element"></div>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Complex absolute positioning with transform</p>
+                        </div>
+                        <div class="property-comment">Complex absolute positioning with transform</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Tailwind Absolute Centering</div>
+                    <div class="demo-element">
+                        <div class="property-label">Absolute Centering Utilities</div>
+                        <div class="centering-demo">
+                            <h3>Tailwind Approach</h3>
+                            <div class="relative h-48 bg-gray-100 border border-gray-300 rounded">
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-12 bg-green-500 rounded"></div>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Simple absolute centering utilities</p>
+                        </div>
+                        <div class="property-comment">Simple absolute centering utilities with consistent behavior</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Manual absolute centering</span>
+.traditional-center-absolute {
+    position: relative;
+    height: 200px;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+}
+
+.traditional-center-absolute .centered-element {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 50px;
+    background-color: #10b981;
+    border-radius: 0.375rem;
+}
+
+<span class="comment">// Tailwind: Absolute centering utilities</span>
+&lt;div class="relative h-48 bg-gray-100 border border-gray-300 rounded"&gt;
+    &lt;div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-12 bg-green-500 rounded"&gt;&lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Grid Centering Section -->
+        <div class="demo-section">
+            <h2>🔲 Grid Centering</h2>
+            <p>Learn how Tailwind's grid utilities provide simple centering solutions.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional CSS</div>
+                    <div class="demo-element">
+                        <div class="property-label">Manual Grid Centering</div>
+                        <div class="centering-demo">
+                            <h3>Traditional Approach</h3>
+                            <div class="traditional-center-grid">
+                                <div style="background-color: #f59e0b; color: white; padding: 1rem; border-radius: 0.375rem;">Grid Centered</div>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Manual grid properties with place-items</p>
+                        </div>
+                        <div class="property-comment">Manual grid properties with place-items</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Tailwind Grid Centering</div>
+                    <div class="demo-element">
+                        <div class="property-label">Grid Centering Utilities</div>
+                        <div class="centering-demo">
+                            <h3>Tailwind Approach</h3>
+                            <div class="grid place-items-center h-48 bg-gray-100 border border-gray-300 rounded">
+                                <div class="bg-orange-500 text-white px-4 py-2 rounded">Grid Centered</div>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Simple grid centering utilities</p>
+                        </div>
+                        <div class="property-comment">Simple grid centering utilities with consistent behavior</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Manual grid centering</span>
+.traditional-center-grid {
+    display: grid;
+    place-items: center;
+    height: 200px;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+}
+
+<span class="comment">// Tailwind: Grid centering utilities</span>
+&lt;div class="grid place-items-center h-48 bg-gray-100 border border-gray-300 rounded"&gt;
+    &lt;div class="bg-orange-500 text-white px-4 py-2 rounded"&gt;Grid Centered&lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="interactive-demo">
+            <h3 class="text-2xl font-bold mb-4">🎮 Interactive Centering Demo</h3>
+            <p class="mb-6">Click the buttons below to see Tailwind centering utilities in action:</p>
+            
+            <button class="control-button" onclick="showCenteringDemo('flexbox')">Flexbox Centering</button>
+            <button class="control-button" onclick="showCenteringDemo('text')">Text Centering</button>
+            <button class="control-button" onclick="showCenteringDemo('block')">Block Centering</button>
+            <button class="control-button" onclick="showCenteringDemo('absolute')">Absolute Centering</button>
+            <button class="control-button" onclick="showCenteringDemo('grid')">Grid Centering</button>
+            
+            <div class="demo-area">
+                <div id="centeringDemo">Click buttons to see Tailwind centering utilities</div>
+            </div>
+        </div>
+
+        <!-- Try This Section -->
+        <div class="demo-section">
+            <h2>🔧 Try This</h2>
+            <p>Experiment with Tailwind centering utilities:</p>
+            <ol class="list-decimal list-inside space-y-2">
+                <li><strong>Click the centering demo buttons:</strong> See different Tailwind centering utilities in action</li>
+                <li><strong>Compare traditional vs Tailwind:</strong> Notice the difference in code complexity</li>
+                <li><strong>Resize your browser:</strong> See how centering utilities work across different screen sizes</li>
+                <li><strong>Inspect the elements:</strong> See how centering utility classes are applied</li>
+                <li><strong>Modify the classes:</strong> Change centering utility classes to see different effects</li>
+                <li><strong>Think about consistency:</strong> Consider how Tailwind's centering utilities improve consistency</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Interactive demo functions
+        function showCenteringDemo(type) {
+            const demoArea = document.getElementById('centeringDemo');
+            
+            switch(type) {
+                case 'flexbox':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Flexbox Centering</h4>
+                            <div class="flex justify-center items-center h-32 bg-blue-100 border border-blue-300 rounded">
+                                <div class="bg-blue-500 text-white px-4 py-2 rounded">Flexbox Centered</div>
+                            </div>
+                            <div class="flex justify-center items-center h-32 bg-green-100 border border-green-300 rounded">
+                                <div class="bg-green-500 text-white px-4 py-2 rounded">Another Centered Item</div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'text':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Text Centering</h4>
+                            <div class="text-center bg-blue-100 border border-blue-300 rounded p-4">
+                                <h5 class="text-lg font-semibold mb-2">Centered Title</h5>
+                                <p class="text-gray-600">This text is centered using Tailwind utilities</p>
+                            </div>
+                            <div class="text-center bg-green-100 border border-green-300 rounded p-4">
+                                <h5 class="text-lg font-semibold mb-2">Another Centered Title</h5>
+                                <p class="text-gray-600">More centered text content</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'block':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Block Centering</h4>
+                            <div class="block mx-auto w-32 h-16 bg-blue-500 rounded"></div>
+                            <div class="block mx-auto w-24 h-12 bg-green-500 rounded"></div>
+                            <div class="block mx-auto w-40 h-20 bg-orange-500 rounded"></div>
+                        </div>
+                    `;
+                    break;
+                case 'absolute':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Absolute Centering</h4>
+                            <div class="relative h-32 bg-blue-100 border border-blue-300 rounded">
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-10 bg-blue-500 rounded"></div>
+                            </div>
+                            <div class="relative h-32 bg-green-100 border border-green-300 rounded">
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-8 bg-green-500 rounded"></div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'grid':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Grid Centering</h4>
+                            <div class="grid place-items-center h-32 bg-blue-100 border border-blue-300 rounded">
+                                <div class="bg-blue-500 text-white px-4 py-2 rounded">Grid Centered</div>
+                            </div>
+                            <div class="grid place-items-center h-32 bg-green-100 border border-green-300 rounded">
+                                <div class="bg-green-500 text-white px-4 py-2 rounded">Another Grid Centered</div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate demo elements on load
+            const demoElements = document.querySelectorAll('.demo-element');
+            demoElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                    element.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 50);
+            });
+
+            // Add hover effects to comparison cards
+            const comparisonCards = document.querySelectorAll('.comparison-card');
+            comparisonCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 8px 25px -5px rgba(0, 0, 0, 0.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Add click effects to interactive elements
+            const interactiveElements = document.querySelectorAll('.control-button, button');
+            interactiveElements.forEach(element => {
+                element.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

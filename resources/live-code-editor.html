@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Code Editor Component</title>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <style>
+        /* Live Code Editor Styles */
+        .live-editor-container {
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 1rem 0;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 2px solid #334155;
+        }
+
+        .live-editor-header {
+            background: linear-gradient(135deg, #334155, #475569);
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #475569;
+        }
+
+        .live-editor-title {
+            color: #e2e8f0;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .language-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .language-icon.css {
+            background: #1572b6;
+            color: white;
+        }
+
+        .language-icon.javascript {
+            background: #f7df1e;
+            color: #000;
+        }
+
+        .language-icon.html {
+            background: #e34f26;
+            color: white;
+        }
+
+        .live-editor-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .live-editor-btn {
+            background: #475569;
+            color: #e2e8f0;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .live-editor-btn:hover {
+            background: #64748b;
+            transform: translateY(-1px);
+        }
+
+        .live-editor-btn.primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .live-editor-btn.primary:hover {
+            background: #2563eb;
+        }
+
+        .live-editor-btn.success {
+            background: #10b981;
+            color: white;
+        }
+
+        .live-editor-btn.success:hover {
+            background: #059669;
+        }
+
+        .live-editor-btn.danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .live-editor-btn.danger:hover {
+            background: #dc2626;
+        }
+
+        .monaco-editor {
+            height: 300px;
+        }
+
+        .live-editor-footer {
+            background: #334155;
+            padding: 0.5rem 1rem;
+            color: #94a3b8;
+            font-size: 0.75rem;
+            border-top: 1px solid #475569;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .live-editor-stats {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .live-editor-status {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.error {
+            background: #ef4444;
+        }
+
+        .status-indicator.warning {
+            background: #f59e0b;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Live Preview Area */
+        .live-preview {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin: 1rem 0;
+            padding: 1rem;
+            min-height: 100px;
+        }
+
+        .live-preview-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .live-preview-title {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Error Display */
+        .error-display {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #dc2626;
+            font-size: 0.875rem;
+        }
+
+        .error-display.hidden {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .live-editor-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .live-editor-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .live-editor-footer {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="live-editor-container">
+        <div class="live-editor-header">
+            <div class="live-editor-title">
+                <div class="language-icon css">CSS</div>
+                <span>live-styles.css</span>
+            </div>
+            <div class="live-editor-actions">
+                <button class="live-editor-btn" onclick="copyCode('live-editor')">
+                    📋 Copy
+                </button>
+                <button class="live-editor-btn primary" onclick="executeCode('live-editor')">
+                    ▶️ Run
+                </button>
+                <button class="live-editor-btn success" onclick="resetCode('live-editor')">
+                    🔄 Reset
+                </button>
+            </div>
+        </div>
+        <div id="live-editor" class="monaco-editor"></div>
+        <div class="live-editor-footer">
+            <div class="live-editor-stats">
+                <span id="live-editor-lines">0 lines</span>
+                <span id="live-editor-chars">0 characters</span>
+            </div>
+            <div class="live-editor-status">
+                <div class="status-indicator"></div>
+                <span>Live Editor Ready</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="error-display hidden" id="error-display">
+        <strong>Error:</strong> <span id="error-message"></span>
+    </div>
+
+    <div class="live-preview" id="live-preview">
+        <div class="live-preview-header">
+            <div class="live-preview-title">Live Preview</div>
+        </div>
+        <div id="preview-content">
+            <!-- Live preview content will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Global variables for live editors
+        window.liveEditors = {};
+        window.originalCode = {};
+
+        // Initialize Monaco Editor
+        require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@0.44.0/min/vs' } });
+
+        require(['vs/editor/editor.main'], function () {
+            initializeLiveEditor();
+        });
+
+        function initializeLiveEditor() {
+            const editorId = 'live-editor';
+            const initialCode = `/* Live CSS Editor - Edit and see changes in real-time */
+:root {
+    --primary-color: #3b82f6;
+    --secondary-color: #10b981;
+    --background-color: #f8fafc;
+}
+
+.demo-box {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.demo-box:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+}`;
+
+            // Store original code
+            window.originalCode[editorId] = initialCode;
+
+            // Create editor
+            const editor = monaco.editor.create(document.getElementById(editorId), {
+                value: initialCode,
+                language: 'css',
+                theme: 'vs-dark',
+                automaticLayout: true,
+                minimap: { enabled: false },
+                scrollBeyondLastLine: false,
+                fontSize: 14,
+                lineNumbers: 'on',
+                roundedSelection: false,
+                scrollbar: {
+                    vertical: 'auto',
+                    horizontal: 'auto'
+                },
+                readOnly: false, // Make it editable
+                wordWrap: 'on',
+                folding: true
+            });
+
+            // Store editor reference
+            window.liveEditors[editorId] = editor;
+
+            // Update stats
+            updateStats(editorId, editor);
+
+            // Listen for changes
+            editor.onDidChangeModelContent(() => {
+                updateStats(editorId, editor);
+                executeCode(editorId);
+            });
+
+            // Initial execution
+            executeCode(editorId);
+        }
+
+        function updateStats(editorId, editor) {
+            const model = editor.getModel();
+            const lines = model.getLineCount();
+            const chars = model.getValueLength();
+            
+            document.getElementById(`${editorId}-lines`).textContent = `${lines} lines`;
+            document.getElementById(`${editorId}-chars`).textContent = `${chars} characters`;
+        }
+
+        function copyCode(editorId) {
+            const editor = window.liveEditors[editorId];
+            if (editor) {
+                navigator.clipboard.writeText(editor.getValue()).then(() => {
+                    showFeedback(event.target, 'Copied!', '#10b981');
+                });
+            }
+        }
+
+        function executeCode(editorId) {
+            const editor = window.liveEditors[editorId];
+            if (!editor) return;
+
+            const code = editor.getValue();
+            const language = editor.getModel().getLanguageId();
+            
+            try {
+                if (language === 'css') {
+                    executeCSS(code);
+                } else if (language === 'javascript') {
+                    executeJavaScript(code);
+                } else if (language === 'html') {
+                    executeHTML(code);
+                }
+                
+                hideError();
+                updateStatus('success', 'Code executed successfully');
+            } catch (error) {
+                showError(error.message);
+                updateStatus('error', 'Execution failed');
+            }
+        }
+
+        function executeCSS(cssCode) {
+            // Remove existing live styles
+            const existingStyle = document.getElementById('live-styles');
+            if (existingStyle) {
+                existingStyle.remove();
+            }
+
+            // Create new style element
+            const style = document.createElement('style');
+            style.id = 'live-styles';
+            style.textContent = cssCode;
+            document.head.appendChild(style);
+
+            // Update preview content
+            updateCSSPreview();
+        }
+
+        function executeJavaScript(jsCode) {
+            // Create a safe execution context
+            try {
+                // Use Function constructor for safer execution
+                const func = new Function(jsCode);
+                func();
+            } catch (error) {
+                throw new Error(`JavaScript Error: ${error.message}`);
+            }
+        }
+
+        function executeHTML(htmlCode) {
+            // Update preview content with HTML
+            const previewContent = document.getElementById('preview-content');
+            previewContent.innerHTML = htmlCode;
+        }
+
+        function updateCSSPreview() {
+            const previewContent = document.getElementById('preview-content');
+            previewContent.innerHTML = `
+                <div class="demo-box">
+                    <h3>Live CSS Demo</h3>
+                    <p>This box uses the CSS variables and styles you're editing!</p>
+                    <button onclick="this.style.background='var(--secondary-color)'">Hover Effect</button>
+                </div>
+                <div class="demo-box" style="background: var(--secondary-color);">
+                    <h3>Secondary Color Demo</h3>
+                    <p>This shows the secondary color variable in action.</p>
+                </div>
+            `;
+        }
+
+        function resetCode(editorId) {
+            const editor = window.liveEditors[editorId];
+            if (editor && window.originalCode[editorId]) {
+                editor.setValue(window.originalCode[editorId]);
+                executeCode(editorId);
+                showFeedback(event.target, 'Reset!', '#3b82f6');
+            }
+        }
+
+        function showError(message) {
+            const errorDisplay = document.getElementById('error-display');
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorDisplay.classList.remove('hidden');
+        }
+
+        function hideError() {
+            const errorDisplay = document.getElementById('error-display');
+            errorDisplay.classList.add('hidden');
+        }
+
+        function updateStatus(type, message) {
+            const statusIndicator = document.querySelector('.status-indicator');
+            const statusText = document.querySelector('.live-editor-status span');
+            
+            statusIndicator.className = `status-indicator ${type}`;
+            statusText.textContent = message;
+        }
+
+        function showFeedback(element, message, color) {
+            const originalText = element.textContent;
+            const originalColor = element.style.background;
+            
+            element.textContent = message;
+            element.style.background = color;
+            
+            setTimeout(() => {
+                element.textContent = originalText;
+                element.style.background = originalColor;
+            }, 2000);
+        }
+
+        // Export functions for use in other modules
+        window.LiveCodeEditor = {
+            initializeLiveEditor,
+            executeCode,
+            copyCode,
+            resetCode,
+            showError,
+            hideError,
+            updateStatus
+        };
+    </script>
+</body>
+</html>

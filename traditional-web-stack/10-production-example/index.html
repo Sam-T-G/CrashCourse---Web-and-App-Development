@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production-Grade Traditional Web Development</title>
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header animate-fade-in">
+            <h1 class="text-4xl font-bold mb-2"> Production-Grade Traditional Web Development</h1>
+            <p class="text-xl opacity-90">Enterprise-ready HTML, CSS, and JavaScript with proper architecture</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('overview')">Overview</button>
+            <button class="tab" onclick="showTab('code')">Code Quality</button>
+            <button class="tab" onclick="showTab('architecture')">Architecture</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview-tab" class="tab-content">
+            <!-- Performance Metrics -->
+            <section class="section animate-fade-in">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800"> Real-Time Performance Metrics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="metric-card primary">
+                        <div class="metric-value" id="fcp-metric">0.8s</div>
+                        <div class="metric-label">First Contentful Paint</div>
+                        <div class="metric-status status-good">Good</div>
+                    </div>
+                    <div class="metric-card success">
+                        <div class="metric-value" id="bundle-metric">245KB</div>
+                        <div class="metric-label">Bundle Size</div>
+                        <div class="metric-status status-good">Optimized</div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-value" id="seo-metric">95/100</div>
+                        <div class="metric-label">SEO Score</div>
+                        <div class="metric-status status-good">Excellent</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Todo Manager -->
+            <section class="section animate-fade-in">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800"> Production Todo Manager</h2>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-semibold">Task Management</h3>
+                            <div class="flex gap-2">
+                                <button class="btn btn-secondary" onclick="setFilter('all')">All</button>
+                                <button class="btn btn-secondary" onclick="setFilter('active')">Active</button>
+                                <button class="btn btn-secondary" onclick="setFilter('completed')">Completed</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="flex gap-2">
+                                <input type="text" id="new-todo" class="form-input" placeholder="Add a new todo..." onkeypress="handleTodoKeyPress(event)">
+                                <button class="btn btn-primary" onclick="addTodo()">Add Todo</button>
+                            </div>
+                        </div>
+                        <div id="todo-list" class="space-y-2">
+                            <!-- Todos will be dynamically inserted here -->
+                        </div>
+                        <div class="text-sm text-gray-600 mt-4" id="todo-stats">
+                            <!-- Stats will be dynamically updated -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Management -->
+            <section class="section animate-fade-in">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800"> User Management</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-xl font-semibold">User List</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="user-list" class="space-y-4">
+                                <!-- Users will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-xl font-semibold">Edit User</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="user-form" class="space-y-4">
+                                <div class="form-group">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" id="user-name" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" id="user-email" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Role</label>
+                                    <select id="user-role" class="form-select">
+                                        <option value="admin">Admin</option>
+                                        <option value="user">User</option>
+                                        <option value="guest">Guest</option>
+                                    </select>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button type="submit" class="btn btn-primary">Save User</button>
+                                    <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Code Quality Tab -->
+        <div id="code-tab" class="tab-content hidden">
+            <section class="section animate-fade-in">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800"> Code Quality Features</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-xl font-semibold">Production Standards</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3">
+                                    <span class="text-green-600"></span>
+                                    <span>Modular CSS with CSS Variables</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-green-600"></span>
+                                    <span>Semantic HTML Structure</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-green-600"></span>
+                                    <span>Error Handling & Validation</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-green-600"></span>
+                                    <span>Accessibility (ARIA labels)</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-green-600"></span>
+                                    <span>Responsive Design</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-green-600"></span>
+                                    <span>Performance Optimization</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-xl font-semibold">Best Practices</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3">
+                                    <span class="text-blue-600"></span>
+                                    <span>Separation of Concerns</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-blue-600"></span>
+                                    <span>Event Delegation</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-blue-600"></span>
+                                    <span>Local Storage Management</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-blue-600"></span>
+                                    <span>Form Validation</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-blue-600"></span>
+                                    <span>State Management</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="text-blue-600"></span>
+                                    <span>Code Organization</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Architecture Tab -->
+        <div id="architecture-tab" class="tab-content hidden">
+            <section class="section animate-fade-in">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">️ Architecture Patterns</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-xl font-semibold">Traditional Architecture</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-blue-500 pl-4">
+                                    <h4 class="font-semibold text-blue-800">HTML Structure</h4>
+                                    <p class="text-sm text-gray-600 mt-1">Semantic markup with proper accessibility</p>
+                                </div>
+                                <div class="border-l-4 border-green-500 pl-4">
+                                    <h4 class="font-semibold text-green-800">CSS Organization</h4>
+                                    <p class="text-sm text-gray-600 mt-1">Modular styles with CSS variables</p>
+                                </div>
+                                <div class="border-l-4 border-purple-500 pl-4">
+                                    <h4 class="font-semibold text-purple-800">JavaScript Modules</h4>
+                                    <p class="text-sm text-gray-600 mt-1">Organized functions and event handling</p>
+                                </div>
+                    </div>
+                    <div class="live-preview" id="live-preview">
+                        <div class="live-preview-header">
+                            <div class="live-preview-title">Live Preview</div>
+                        </div>
+                        <div id="live-preview-content">
+                            <!-- Live preview content will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-xl font-semibold">Data Management</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-orange-500 pl-4">
+                                    <h4 class="font-semibold text-orange-800">Local Storage</h4>
+                                    <p class="text-sm text-gray-600 mt-1">Persistent data with error handling</p>
+                                </div>
+                                <div class="border-l-4 border-red-500 pl-4">
+                                    <h4 class="font-semibold text-red-800">State Management</h4>
+                                    <p class="text-sm text-gray-600 mt-1">Centralized state with validation</p>
+                                </div>
+                                <div class="border-l-4 border-indigo-500 pl-4">
+                                    <h4 class="font-semibold text-indigo-800">Event System</h4>
+                                    <p class="text-sm text-gray-600 mt-1">Efficient event delegation</p>
+                                </div>
+                    </div>
+                    <div class="live-preview" id="live-preview">
+                        <div class="live-preview-header">
+                            <div class="live-preview-title">Live Preview</div>
+                        </div>
+                        <div id="live-preview-content">
+                            <!-- Live preview content will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+        </div>
+    
+        <!-- Live Code Editor Section -->
+        <div class="section">
+            <h2>Live Code Editor</h2>
+            <p>Edit code in real-time and see the results immediately!</p>
+            
+            <div class="demo-card">
+                <div class="demo-title">Live Code Editor</div>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>live-code.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
+            
+                    <div id="live-code" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="live-code-lines">0 lines</span>
+                            <span id="live-code-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="live-code-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="live-code-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-live-code">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>

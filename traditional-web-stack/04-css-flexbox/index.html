@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Flexbox Advanced - Deep Dive</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> CSS Flexbox Advanced</h1>
+            <p>Master advanced Flexbox properties and patterns</p>
+        </div>
+
+        <!-- Flex Direction Section -->
+        <div class="section">
+            <h2> Flex Direction</h2>
+            <p>Control the direction of flex items with flex-direction property.</p>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div class="demo-title">Row (Default)</div>
+                    <div class="demo-element">
+                        <div class="property-label">flex-direction: row</div>
+                        <div class="flex-row">
+                            <div class="flex-item">Item 1</div>
+                            <div class="flex-item secondary">Item 2</div>
+                            <div class="flex-item warning">Item 3
+            
+                        <div class="property-comment">Items are arranged horizontally</div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-title">Column</div>
+                    <div class="demo-element">
+                        <div class="property-label">flex-direction: column</div>
+                        <div class="flex-column">
+                            <div class="flex-item">Item 1</div>
+                            <div class="flex-item secondary">Item 2</div>
+                            <div class="flex-item warning">Item 3</div>
+                        </div>
+                        <div class="property-comment">Items are arranged vertically</div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-title">Row Reverse</div>
+                    <div class="demo-element">
+                        <div class="property-label">flex-direction: row-reverse</div>
+                        <div class="flex-row-reverse">
+                            <div class="flex-item">Item 1</div>
+                            <div class="flex-item secondary">Item 2</div>
+                            <div class="flex-item warning">Item 3</div>
+                        </div>
+                        <div class="property-comment">Items are arranged horizontally in reverse</div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-title">Column Reverse</div>
+                    <div class="demo-element">
+                        <div class="property-label">flex-direction: column-reverse</div>
+                        <div class="flex-column-reverse">
+                            <div class="flex-item">Item 1</div>
+                            <div class="flex-item secondary">Item 2</div>
+                            <div class="flex-item warning">Item 3</div>
+                        </div>
+                        <div class="property-comment">Items are arranged vertically in reverse</div>
+                    </div>
+                    <div class="live-preview" id="live-preview">
+                        <div class="live-preview-header">
+                            <div class="live-preview-title">Live Preview</div>
+                        </div>
+                        <div id="live-preview-content">
+                            <!-- Live preview content will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Flex direction properties */</span>
+<span class="property">flex-direction</span>: <span class="value">row</span>; <span class="comment">/* Horizontal (default) */</span>
+<span class="property">flex-direction</span>: <span class="value">column</span>; <span class="comment">/* Vertical */</span>
+<span class="property">flex-direction</span>: <span class="value">row-reverse</span>; <span class="comment">/* Horizontal reverse */</span>
+<span class="property">flex-direction</span>: <span class="value">column-reverse</span>; <span class="comment">/* Vertical reverse */</span>
+            </div>
+        </div>
+
+        <!-- Flex Wrap Section -->
+        <div class="section">
+            <h2> Flex Wrap</h2>
+            <p>Control whether flex items wrap to new lines with flex-wrap property.</p>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div class="demo-title">No Wrap (Default)</div>
+                    <div class="demo-element">
+                        <div class="property-label">flex-wrap: nowrap</div>
+                        <div class="flex-nowrap">
+                            <div class="flex-item">Item 1</div>
+                            <div class="flex-item secondary">Item 2</div>
+                            <div class="flex-item warning">Item 3</div>
+                            <div class="flex-item danger">Item 4</div>
+                            <div class="flex-item">Item 5</div>
+                            <div class="flex-item secondary">Item 6
+            
+                        <div class="property-comment">Items stay on one line and shrink if needed</div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-title">Wrap</div>
+                    <div class="demo-element">
+                        <div class="property-label">flex-wrap: wrap</div>
+                        <div class="flex-wrap">
+                            <div class="flex-item">Item 1</div>
+                            <div class="flex-item secondary">Item 2</div>
+                            <div class="flex-item warning">Item 3</div>
+                            <div class="flex-item danger">Item 4</div>
+                            <div class="flex-item">Item 5</div>
+                            <div class="flex-item secondary">Item 6</div>
+                        </div>
+                        <div class="property-comment">Items wrap to new lines when needed</div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-title">Wrap Reverse</div>
+                    <div class="demo-element">
+                        <div class="property-label">flex-wrap: wrap-reverse</div>
+                        <div class="flex-wrap-reverse">
+                            <div class="flex-item">Item 1</div>
+                            <div class="flex-item secondary">Item 2</div>
+                            <div class="flex-item warning">Item 3</div>
+                            <div class="flex-item danger">Item 4</div>
+                            <div class="flex-item">Item 5</div>
+                            <div class="flex-item secondary">Item 6</div>
+                        </div>
+                        <div class="property-comment">Items wrap to new lines in reverse order</div>
+                    </div>
+                    <div class="live-preview" id="live-preview">
+                        <div class="live-preview-header">
+                            <div class="live-preview-title">Live Preview</div>
+                        </div>
+                        <div id="live-preview-content">
+                            <!-- Live preview content will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Flex wrap properties */</span>
+<span class="property">flex-wrap</span>: <span class="value">nowrap</span>; <span class="comment">/* No wrapping (default) */</span>
+<span class="property">flex-wrap</span>: <span class="value">wrap</span>; <span class="comment">/* Wrap to new lines */</span>
+<span class="property">flex-wrap</span>: <span class="value">wrap-reverse</span>; <span class="comment">/* Wrap in reverse order */</span>
+            </div>
+        </div>
+
+        <!-- Flex Grow Section -->
+        <div class="section">
+            <h2> Flex Grow</h2>
+            <p>Control how much flex items grow relative to each other with flex-grow property.</p>
+
+            <div class="demo-element">
+                <div class="property-label">flex-grow: 1, 2, 3</div>
+                <div class="flex-grow-demo">
+                    <div class="flex-grow-1">Grow 1</div>
+                    <div class="flex-grow-2">Grow 2</div>
+                    <div class="flex-grow-3">Grow 3
+            
+                <div class="property-comment">Items grow proportionally based on their flex-grow values</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Flex grow properties */</span>
+<span class="property">flex-grow</span>: <span class="value">1</span>; <span class="comment">/* Grow 1x */</span>
+<span class="property">flex-grow</span>: <span class="value">2</span>; <span class="comment">/* Grow 2x */</span>
+<span class="property">flex-grow</span>: <span class="value">3</span>; <span class="comment">/* Grow 3x */</span>
+            </div>
+        </div>
+
+        <!-- Flex Shrink Section -->
+        <div class="section">
+            <h2> Flex Shrink</h2>
+            <p>Control how much flex items shrink relative to each other with flex-shrink property.</p>
+
+            <div class="demo-element">
+                <div class="property-label">flex-shrink: 0, 1</div>
+                <div class="flex-shrink-demo">
+                    <div class="flex-shrink-0">No Shrink</div>
+                    <div class="flex-shrink-1">Can Shrink</div>
+                    <div class="flex-shrink-1">Can Shrink
+            
+                <div class="property-comment">First item won't shrink, others will shrink proportionally</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Flex shrink properties */</span>
+<span class="property">flex-shrink</span>: <span class="value">0</span>; <span class="comment">/* Don't shrink */</span>
+<span class="property">flex-shrink</span>: <span class="value">1</span>; <span class="comment">/* Shrink proportionally */</span>
+            </div>
+        </div>
+
+        <!-- Flex Basis Section -->
+        <div class="section">
+            <h2> Flex Basis</h2>
+            <p>Set the initial size of flex items with flex-basis property.</p>
+
+            <div class="demo-element">
+                <div class="property-label">flex-basis: 100px, 200px, 300px</div>
+                <div class="flex-basis-demo">
+                    <div class="flex-basis-100">100px</div>
+                    <div class="flex-basis-200">200px</div>
+                    <div class="flex-basis-300">300px
+            
+                <div class="property-comment">Items start with their specified basis size</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Flex basis properties */</span>
+<span class="property">flex-basis</span>: <span class="value">100px</span>; <span class="comment">/* Initial size 100px */</span>
+<span class="property">flex-basis</span>: <span class="value">200px</span>; <span class="comment">/* Initial size 200px */</span>
+<span class="property">flex-basis</span>: <span class="value">300px</span>; <span class="comment">/* Initial size 300px */</span>
+            </div>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="interactive-demo">
+            <h3> Interactive Flexbox Demo</h3>
+            <p>Click the buttons below to see different flexbox properties in action:</p>
+            
+            <button class="control-button" onclick="changeFlexDirection('row')">Row</button>
+            <button class="control-button" onclick="changeFlexDirection('column')">Column</button>
+            <button class="control-button" onclick="changeFlexDirection('row-reverse')">Row Reverse</button>
+            <button class="control-button" onclick="changeFlexDirection('column-reverse')">Column Reverse</button>
+            
+            <button class="control-button" onclick="changeFlexWrap('nowrap')">No Wrap</button>
+            <button class="control-button" onclick="changeFlexWrap('wrap')">Wrap</button>
+            <button class="control-button" onclick="changeFlexWrap('wrap-reverse')">Wrap Reverse</button>
+            
+            <div class="demo-area" id="demoArea">
+                <div class="demo-box">Item 1</div>
+                <div class="demo-box">Item 2</div>
+                <div class="demo-box">Item 3</div>
+                <div class="demo-box">Item 4</div>
+                <div class="demo-box">Item 5</div>
+                <div class="demo-box">Item 6</div>
+            </div>
+        </div>
+
+        <!-- Try This Section -->
+        <div class="section">
+            <h2> Try This</h2>
+            <p>Experiment with advanced flexbox properties:</p>
+            <ol>
+                <li><strong>Use the interactive demo:</strong> Click buttons to see different flexbox properties</li>
+                <li><strong>Compare flex directions:</strong> Notice how row vs column affects layout</li>
+                <li><strong>Test flex wrap:</strong> See how items behave when they don't fit</li>
+                <li><strong>Experiment with flex-grow:</strong> Try different grow values to see proportional sizing</li>
+                <li><strong>Test flex-shrink:</strong> See how items shrink when space is limited</li>
+                <li><strong>Try flex-basis:</strong> Set initial sizes for flex items</li>
+            </ol>
+        </div>
+    
+        <!-- Live Code Editor Section -->
+        <div class="section">
+            <h2>Live Code Editor</h2>
+            <p>Edit code in real-time and see the results immediately!</p>
+            
+            <div class="demo-card">
+                <div class="demo-title">Live Code Editor</div>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>live-code.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
+            
+                    <div id="live-code" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="live-code-lines">0 lines</span>
+                            <span id="live-code-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="live-code-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="live-code-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-live-code">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

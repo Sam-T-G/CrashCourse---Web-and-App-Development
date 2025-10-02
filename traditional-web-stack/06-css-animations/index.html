@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Transitions - Smooth Property Changes</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> CSS Transitions</h1>
+            <p>Smooth property changes with CSS transitions</p>
+        </div>
+
+        <!-- Basic Transition Section -->
+        <div class="section">
+            <h2> Basic Transition</h2>
+            <p>CSS transitions create smooth changes between property values.</p>
+
+            <div class="demo-element">
+                <div class="property-label">transition: background-color 0.3s ease</div>
+                <button class="basic-transition">Hover Me!</button>
+                <div class="property-comment">Background color changes smoothly on hover
+            
+
+            <div class="code-snippet">
+<span class="comment">/* Basic transition */</span>
+.basic-transition {
+    <span class="property">background-color</span>: <span class="value">var(--primary-color)</span>;
+    <span class="property">transition</span>: <span class="value">background-color 0.3s ease</span>;
+}
+
+.basic-transition:hover {
+    <span class="property">background-color</span>: <span class="value">var(--secondary-color)</span>;
+}
+            </div>
+        </div>
+
+        <!-- Multiple Properties Transition Section -->
+        <div class="section">
+            <h2> Multiple Properties</h2>
+            <p>You can transition multiple properties at once using the 'all' keyword.</p>
+
+            <div class="demo-element">
+                <div class="property-label">transition: all 0.3s ease</div>
+                <button class="multiple-transition">Hover Me!</button>
+                <div class="property-comment">Background, transform, and shadow all change smoothly
+            
+
+            <div class="code-snippet">
+<span class="comment">/* Multiple properties transition */</span>
+.multiple-transition {
+    <span class="property">background-color</span>: <span class="value">var(--warning-color)</span>;
+    <span class="property">transition</span>: <span class="value">all 0.3s ease</span>;
+}
+
+.multiple-transition:hover {
+    <span class="property">background-color</span>: <span class="value">var(--danger-color)</span>;
+    <span class="property">transform</span>: <span class="value">scale(1.05)</span>;
+    <span class="property">box-shadow</span>: <span class="value">0 4px 12px rgba(0, 0, 0, 0.2)</span>;
+}
+            </div>
+        </div>
+
+        <!-- Timing Functions Section -->
+        <div class="section">
+            <h2>⏱️ Timing Functions</h2>
+            <p>Control how the transition accelerates and decelerates.</p>
+
+            <div class="demo-element">
+                <div class="property-label">Different timing functions</div>
+                <div class="timing-functions">
+                    <button class="timing-button ease">Ease (Default)</button>
+                    <button class="timing-button ease-in">Ease In</button>
+                    <button class="timing-button ease-out">Ease Out</button>
+                    <button class="timing-button ease-in-out">Ease In Out</button>
+                    <button class="timing-button linear">Linear</button>
+                    <button class="timing-button cubic-bezier">Cubic Bezier</button>
+                </div>
+                <div class="property-comment">Hover over buttons to see different timing functions
+            
+
+            <div class="code-snippet">
+<span class="comment">/* Timing functions */</span>
+.timing-button {
+    <span class="property">transition</span>: <span class="value">transform 0.5s ease</span>;
+}
+
+.timing-button.ease-in {
+    <span class="property">transition-timing-function</span>: <span class="value">ease-in</span>;
+}
+
+.timing-button.ease-out {
+    <span class="property">transition-timing-function</span>: <span class="value">ease-out</span>;
+}
+
+.timing-button.linear {
+    <span class="property">transition-timing-function</span>: <span class="value">linear</span>;
+}
+
+.timing-button.cubic-bezier {
+    <span class="property">transition-timing-function</span>: <span class="value">cubic-bezier(0.68, -0.55, 0.265, 1.55)</span>;
+}
+            </div>
+        </div>
+
+        <!-- Duration Section -->
+        <div class="section">
+            <h2>⏰ Duration</h2>
+            <p>Control how long the transition takes to complete.</p>
+
+            <div class="demo-element">
+                <div class="property-label">Different durations</div>
+                <div class="duration-demo">
+                    <button class="duration-button fast">Fast (0.1s)</button>
+                    <button class="duration-button normal">Normal (0.3s)</button>
+                    <button class="duration-button slow">Slow (1s)</button>
+                </div>
+                <div class="property-comment">Hover over buttons to see different transition speeds
+            
+
+            <div class="code-snippet">
+<span class="comment">/* Different durations */</span>
+.duration-button {
+    <span class="property">transition</span>: <span class="value">background-color 0.3s ease</span>;
+}
+
+.duration-button.fast {
+    <span class="property">transition-duration</span>: <span class="value">0.1s</span>;
+}
+
+.duration-button.normal {
+    <span class="property">transition-duration</span>: <span class="value">0.3s</span>;
+}
+
+.duration-button.slow {
+    <span class="property">transition-duration</span>: <span class="value">1s</span>;
+}
+            </div>
+        </div>
+
+        <!-- Delay Section -->
+        <div class="section">
+            <h2>⏳ Delay</h2>
+            <p>Add a delay before the transition starts.</p>
+
+            <div class="demo-element">
+                <div class="property-label">Different delays</div>
+                <div class="delay-demo">
+                    <button class="delay-button no-delay">No Delay</button>
+                    <button class="delay-button short-delay">Short Delay (0.2s)</button>
+                    <button class="delay-button long-delay">Long Delay (0.5s)</button>
+                </div>
+                <div class="property-comment">Hover over buttons to see different delay effects
+            
+
+            <div class="code-snippet">
+<span class="comment">/* Different delays */</span>
+.delay-button {
+    <span class="property">transition</span>: <span class="value">transform 0.3s ease</span>;
+}
+
+.delay-button.no-delay {
+    <span class="property">transition-delay</span>: <span class="value">0s</span>;
+}
+
+.delay-button.short-delay {
+    <span class="property">transition-delay</span>: <span class="value">0.2s</span>;
+}
+
+.delay-button.long-delay {
+    <span class="property">transition-delay</span>: <span class="value">0.5s</span>;
+}
+            </div>
+        </div>
+
+        <!-- Transform Transitions Section -->
+        <div class="section">
+            <h2> Transform Transitions</h2>
+            <p>Create smooth animations with CSS transforms.</p>
+
+            <div class="demo-element">
+                <div class="property-label">Transform transitions</div>
+                <div class="transform-demo">
+                    <div class="transform-box translate">Translate</div>
+                    <div class="transform-box scale">Scale</div>
+                    <div class="transform-box rotate">Rotate</div>
+                    <div class="transform-box skew">Skew
+            
+                <div class="property-comment">Hover over boxes to see different transform effects</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Transform transitions */</span>
+.transform-box {
+    <span class="property">transition</span>: <span class="value">all 0.3s ease</span>;
+}
+
+.transform-box.translate:hover {
+    <span class="property">transform</span>: <span class="value">translate(20px, -20px)</span>;
+}
+
+.transform-box.scale:hover {
+    <span class="property">transform</span>: <span class="value">scale(1.2)</span>;
+}
+
+.transform-box.rotate:hover {
+    <span class="property">transform</span>: <span class="value">rotate(180deg)</span>;
+}
+
+.transform-box.skew:hover {
+    <span class="property">transform</span>: <span class="value">skew(10deg, 5deg)</span>;
+}
+            </div>
+        </div>
+
+        <!-- Color Transitions Section -->
+        <div class="section">
+            <h2> Color Transitions</h2>
+            <p>Create smooth color changes with transitions.</p>
+
+            <div class="demo-element">
+                <div class="property-label">Color transitions</div>
+                <div class="color-demo">
+                    <div class="color-box red">Red</div>
+                    <div class="color-box yellow">Yellow</div>
+                    <div class="color-box green">Green
+            
+                <div class="property-comment">Hover over boxes to see smooth color changes</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Color transitions */</span>
+.color-box {
+    <span class="property">background-color</span>: <span class="value">var(--primary-color)</span>;
+    <span class="property">transition</span>: <span class="value">background-color 0.3s ease</span>;
+}
+
+.color-box.red:hover {
+    <span class="property">background-color</span>: <span class="value">var(--danger-color)</span>;
+}
+
+.color-box.yellow:hover {
+    <span class="property">background-color</span>: <span class="value">var(--warning-color)</span>;
+}
+
+.color-box.green:hover {
+    <span class="property">background-color</span>: <span class="value">var(--secondary-color)</span>;
+}
+            </div>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="interactive-demo">
+            <h3> Interactive Transition Demo</h3>
+            <p>Click the buttons below to see different transition properties in action:</p>
+            
+            <button class="control-button" onclick="changeTransition('all 0.3s ease')">All Properties</button>
+            <button class="control-button" onclick="changeTransition('transform 0.5s ease-in-out')">Transform Only</button>
+            <button class="control-button" onclick="changeTransition('background-color 1s linear')">Color Only</button>
+            <button class="control-button" onclick="changeTransition('all 0.2s ease-out 0.1s')">With Delay</button>
+            
+            <div class="demo-area">
+                <div class="demo-box" id="demoBox">Hover Me!</div>
+            </div>
+        </div>
+
+        <!-- Try This Section -->
+        <div class="section">
+            <h2> Try This</h2>
+            <p>Experiment with CSS transitions:</p>
+            <ol>
+                <li><strong>Use the interactive demo:</strong> Click buttons to see different transition properties</li>
+                <li><strong>Hover over elements:</strong> See how transitions create smooth changes</li>
+                <li><strong>Compare timing functions:</strong> Notice the difference between ease, linear, and cubic-bezier</li>
+                <li><strong>Test different durations:</strong> See how speed affects the feel of transitions</li>
+                <li><strong>Try delays:</strong> See how delays can create interesting effects</li>
+                <li><strong>Combine properties:</strong> Use 'all' to transition multiple properties at once</li>
+            </ol>
+        </div>
+    
+        <!-- Live Code Editor Section -->
+        <div class="section">
+            <h2>Live Code Editor</h2>
+            <p>Edit code in real-time and see the results immediately!</p>
+            
+            <div class="demo-card">
+                <div class="demo-title">Live Code Editor</div>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>live-code.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
+            
+                    <div id="live-code" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="live-code-lines">0 lines</span>
+                            <span id="live-code-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="live-code-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="live-code-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-live-code">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

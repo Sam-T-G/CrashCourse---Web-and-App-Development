@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid Basics - Visual Grid Lines</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> CSS Grid Basics</h1>
+            <p>Basic grid setup with visual grid lines and interactive examples</p>
+        </div>
+
+        <!-- Basic Grid Section -->
+        <div class="section">
+            <h2> Basic Grid</h2>
+            <p>CSS Grid creates a two-dimensional layout system with rows and columns.</p>
+
+            <div class="demo-element">
+                <div class="property-label">grid-template-columns: 1fr 1fr 1fr</div>
+                <div class="basic-grid">
+                    <div class="basic-grid-item">Item 1</div>
+                    <div class="basic-grid-item">Item 2</div>
+                    <div class="basic-grid-item">Item 3</div>
+                    <div class="basic-grid-item">Item 4</div>
+                    <div class="basic-grid-item">Item 5</div>
+                    <div class="basic-grid-item">Item 6
+            
+                <div class="property-comment">Three equal columns with automatic rows</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Basic grid setup */</span>
+.basic-grid {
+    <span class="property">display</span>: <span class="value">grid</span>;
+    <span class="property">grid-template-columns</span>: <span class="value">1fr 1fr 1fr</span>; <span class="comment">/* Three equal columns */</span>
+    <span class="property">grid-gap</span>: <span class="value">1rem</span>; <span class="comment">/* Space between items */</span>
+}
+            </div>
+        </div>
+
+        <!-- Grid with Different Column Sizes -->
+        <div class="section">
+            <h2> Different Column Sizes</h2>
+            <p>You can create columns of different sizes using fractional units.</p>
+
+            <div class="demo-element">
+                <div class="property-label">grid-template-columns: 2fr 1fr 1fr</div>
+                <div class="size-grid">
+                    <div class="size-grid-item">Wide Column (2fr)</div>
+                    <div class="size-grid-item">Narrow (1fr)</div>
+                    <div class="size-grid-item">Narrow (1fr)
+            
+                <div class="property-comment">First column is twice as wide as the others</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Different column sizes */</span>
+.size-grid {
+    <span class="property">display</span>: <span class="value">grid</span>;
+    <span class="property">grid-template-columns</span>: <span class="value">2fr 1fr 1fr</span>; <span class="comment">/* 2:1:1 ratio */</span>
+    <span class="property">grid-gap</span>: <span class="value">1rem</span>;
+}
+            </div>
+        </div>
+
+        <!-- Grid with Auto-fit -->
+        <div class="section">
+            <h2> Auto-fit Grid</h2>
+            <p>Auto-fit creates responsive grids that adapt to available space.</p>
+
+            <div class="demo-element">
+                <div class="property-label">grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))</div>
+                <div class="auto-fit-grid">
+                    <div class="auto-fit-grid-item">Auto 1</div>
+                    <div class="auto-fit-grid-item">Auto 2</div>
+                    <div class="auto-fit-grid-item">Auto 3</div>
+                    <div class="auto-fit-grid-item">Auto 4</div>
+                    <div class="auto-fit-grid-item">Auto 5</div>
+                    <div class="auto-fit-grid-item">Auto 6
+            
+                <div class="property-comment">Columns automatically fit based on available space</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Auto-fit responsive grid */</span>
+.auto-fit-grid {
+    <span class="property">display</span>: <span class="value">grid</span>;
+    <span class="property">grid-template-columns</span>: <span class="value">repeat(auto-fit, minmax(150px, 1fr))</span>;
+    <span class="property">grid-gap</span>: <span class="value">1rem</span>;
+}
+            </div>
+        </div>
+
+        <!-- Grid with Rows -->
+        <div class="section">
+            <h2> Grid with Rows</h2>
+            <p>You can control both rows and columns in CSS Grid.</p>
+
+            <div class="demo-element">
+                <div class="property-label">grid-template-rows: 100px 100px</div>
+                <div class="row-grid">
+                    <div class="row-grid-item">Row 1, Col 1</div>
+                    <div class="row-grid-item">Row 1, Col 2</div>
+                    <div class="row-grid-item">Row 1, Col 3</div>
+                    <div class="row-grid-item">Row 2, Col 1</div>
+                    <div class="row-grid-item">Row 2, Col 2</div>
+                    <div class="row-grid-item">Row 2, Col 3
+            
+                <div class="property-comment">Two rows with fixed height of 100px each</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Grid with rows */</span>
+.row-grid {
+    <span class="property">display</span>: <span class="value">grid</span>;
+    <span class="property">grid-template-columns</span>: <span class="value">1fr 1fr 1fr</span>;
+    <span class="property">grid-template-rows</span>: <span class="value">100px 100px</span>; <span class="comment">/* Fixed row heights */</span>
+    <span class="property">grid-gap</span>: <span class="value">1rem</span>;
+}
+            </div>
+        </div>
+
+        <!-- Grid with Gap -->
+        <div class="section">
+            <h2> Grid Gap</h2>
+            <p>Control the spacing between grid items with grid-gap.</p>
+
+            <div class="demo-element">
+                <div class="property-label">grid-gap: 2rem</div>
+                <div class="gap-grid">
+                    <div class="gap-grid-item">Item 1</div>
+                    <div class="gap-grid-item">Item 2</div>
+                    <div class="gap-grid-item">Item 3</div>
+                    <div class="gap-grid-item">Item 4</div>
+                    <div class="gap-grid-item">Item 5</div>
+                    <div class="gap-grid-item">Item 6
+            
+                <div class="property-comment">Larger gap between grid items</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Grid with gap */</span>
+.gap-grid {
+    <span class="property">display</span>: <span class="value">grid</span>;
+    <span class="property">grid-template-columns</span>: <span class="value">1fr 1fr 1fr</span>;
+    <span class="property">grid-gap</span>: <span class="value">2rem</span>; <span class="comment">/* Space between items */</span>
+}
+            </div>
+        </div>
+
+        <!-- Grid with Column Span -->
+        <div class="section">
+            <h2> Column Spanning</h2>
+            <p>Items can span multiple columns using grid-column.</p>
+
+            <div class="demo-element">
+                <div class="property-label">grid-column: span 2, span 3</div>
+                <div class="span-grid">
+                    <div class="span-grid-item span-2">Spans 2 Columns</div>
+                    <div class="span-grid-item">Normal</div>
+                    <div class="span-grid-item span-3">Spans 3 Columns
+            
+                <div class="property-comment">Items can span multiple columns</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Column spanning */</span>
+.span-grid {
+    <span class="property">display</span>: <span class="value">grid</span>;
+    <span class="property">grid-template-columns</span>: <span class="value">1fr 1fr 1fr</span>;
+    <span class="property">grid-gap</span>: <span class="value">1rem</span>;
+}
+
+.span-2 {
+    <span class="property">grid-column</span>: <span class="value">span 2</span>; <span class="comment">/* Spans 2 columns */</span>
+}
+
+.span-3 {
+    <span class="property">grid-column</span>: <span class="value">span 3</span>; <span class="comment">/* Spans 3 columns */</span>
+}
+            </div>
+        </div>
+
+        <!-- Grid with Row Span -->
+        <div class="section">
+            <h2> Row Spanning</h2>
+            <p>Items can also span multiple rows using grid-row.</p>
+
+            <div class="demo-element">
+                <div class="property-label">grid-row: span 2, span 3</div>
+                <div class="row-span-grid">
+                    <div class="row-span-grid-item span-2">Spans 2 Rows</div>
+                    <div class="row-span-grid-item">Normal</div>
+                    <div class="row-span-grid-item">Normal</div>
+                    <div class="row-span-grid-item span-3">Spans 3 Rows</div>
+                    <div class="row-span-grid-item">Normal
+            
+                <div class="property-comment">Items can span multiple rows</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">/* Row spanning */</span>
+.row-span-grid {
+    <span class="property">display</span>: <span class="value">grid</span>;
+    <span class="property">grid-template-columns</span>: <span class="value">1fr 1fr 1fr</span>;
+    <span class="property">grid-template-rows</span>: <span class="value">100px 100px 100px</span>;
+    <span class="property">grid-gap</span>: <span class="value">1rem</span>;
+}
+
+.span-2 {
+    <span class="property">grid-row</span>: <span class="value">span 2</span>; <span class="comment">/* Spans 2 rows */</span>
+}
+
+.span-3 {
+    <span class="property">grid-row</span>: <span class="value">span 3</span>; <span class="comment">/* Spans 3 rows */</span>
+}
+            </div>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="interactive-demo">
+            <h3> Interactive Grid Demo</h3>
+            <p>Click the buttons below to see different grid properties in action:</p>
+            
+            <button class="control-button" onclick="changeGridColumns('1fr 1fr 1fr')">3 Equal Columns</button>
+            <button class="control-button" onclick="changeGridColumns('2fr 1fr 1fr')">2:1:1 Ratio</button>
+            <button class="control-button" onclick="changeGridColumns('1fr 2fr 1fr')">1:2:1 Ratio</button>
+            <button class="control-button" onclick="changeGridColumns('1fr 1fr')">2 Columns</button>
+            <button class="control-button" onclick="changeGridColumns('1fr 1fr 1fr 1fr')">4 Columns</button>
+            
+            <div class="demo-area" id="demoArea">
+                <div class="demo-box">Item 1</div>
+                <div class="demo-box">Item 2</div>
+                <div class="demo-box">Item 3</div>
+                <div class="demo-box">Item 4</div>
+                <div class="demo-box">Item 5</div>
+                <div class="demo-box">Item 6</div>
+            </div>
+        </div>
+
+        <!-- Try This Section -->
+        <div class="section">
+            <h2> Try This</h2>
+            <p>Experiment with CSS Grid:</p>
+            <ol>
+                <li><strong>Use the interactive demo:</strong> Click buttons to see different grid layouts</li>
+                <li><strong>Resize your browser:</strong> See how auto-fit grids adapt to different screen sizes</li>
+                <li><strong>Compare column sizes:</strong> Notice how different fr values affect column widths</li>
+                <li><strong>Test spanning:</strong> See how items can span multiple columns and rows</li>
+                <li><strong>Experiment with gaps:</strong> Try different gap values to see spacing changes</li>
+                <li><strong>Create your own grids:</strong> Modify the CSS to create custom layouts</li>
+            </ol>
+        </div>
+    
+        <!-- Live Code Editor Section -->
+        <div class="section">
+            <h2>Live Code Editor</h2>
+            <p>Edit code in real-time and see the results immediately!</p>
+            
+            <div class="demo-card">
+                <div class="demo-title">Live Code Editor</div>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>live-code.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
+            
+                    <div id="live-code" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="live-code-lines">0 lines</span>
+                            <span id="live-code-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="live-code-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="live-code-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-live-code">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

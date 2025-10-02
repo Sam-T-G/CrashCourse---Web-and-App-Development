@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Components - Component-Based Architecture</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Modern CSS with variables for consistent theming */
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --background-color: #f8fafc;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: var(--spacing-unit);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--border-color);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .demo-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+        }
+
+        .demo-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .demo-element {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .demo-element:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-label {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .property-comment {
+            font-style: italic;
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .code-snippet {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+
+        .code-snippet .property {
+            color: #f472b6;
+        }
+
+        .code-snippet .value {
+            color: #10b981;
+        }
+
+        .code-snippet .comment {
+            color: #64748b;
+        }
+
+        /* React Component Demo Areas */
+        .react-demo-area {
+            background-color: #f1f5f9;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            min-height: 200px;
+        }
+
+        .react-demo-area h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Interactive Demo */
+        .interactive-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .control-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .control-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .demo-area {
+            background-color: white;
+            color: black;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-height: 200px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚛️ React Components</h1>
+            <p>Component-based architecture with fundamental improvements over traditional DOM manipulation</p>
+        </div>
+
+        <!-- Component Basics Section -->
+        <div class="section">
+            <h2>🧩 Component Basics</h2>
+            <p>Learn how React components provide fundamental improvements over traditional DOM manipulation.</p>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div class="demo-title">Traditional DOM Manipulation</div>
+                    <div class="demo-element">
+                        <div class="property-label">Manual DOM Updates</div>
+                        <div class="react-demo-area">
+                            <h3>Traditional Approach</h3>
+                            <p>Counter: <span id="traditionalCounter">0</span></p>
+                            <button onclick="incrementTraditional()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Increment</button>
+                            <p class="text-sm mt-2 text-gray-600">Each update directly manipulates the DOM</p>
+                        </div>
+                        <div class="property-comment">Direct DOM manipulation with manual updates</div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-title">React Component</div>
+                    <div class="demo-element">
+                        <div class="property-label">Declarative Component</div>
+                        <div class="react-demo-area">
+                            <h3>React Approach</h3>
+                            <div id="reactCounter"></div>
+                            <p class="text-sm mt-2 text-gray-600">Component automatically updates when state changes</p>
+                        </div>
+                        <div class="property-comment">Declarative component with automatic updates</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Manual DOM manipulation</span>
+let traditionalCount = 0;
+
+function incrementTraditional() {
+    traditionalCount++;
+    document.getElementById('traditionalCounter').textContent = traditionalCount;
+    <span class="comment">// Must manually update DOM</span>
+}
+
+<span class="comment">// React: Declarative component</span>
+function Counter() {
+    const [count, setCount] = React.useState(0);
+    
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Counter: &lt;span&gt;{count}&lt;/span&gt;&lt;/p&gt;
+            &lt;button 
+                className="bg-blue-500 text-white px-4 py-2 rounded 
+                           hover:bg-blue-600"
+                onClick={() =&gt; setCount(count + 1)}
+            &gt;
+                Increment
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+    <span class="comment">// Component automatically re-renders when state changes</span>
+}
+            </div>
+        </div>
+
+        <!-- Component Reusability Section -->
+        <div class="section">
+            <h2>🔄 Component Reusability</h2>
+            <p>See how React components eliminate code duplication and provide consistent behavior.</p>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div class="demo-title">Traditional Approach</div>
+                    <div class="demo-element">
+                        <div class="property-label">Repetitive Code</div>
+                        <div class="react-demo-area">
+                            <h3>Traditional Buttons</h3>
+                            <button onclick="handleClick1()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2">Button 1</button>
+                            <button onclick="handleClick2()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2">Button 2</button>
+                            <button onclick="handleClick3()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2">Button 3</button>
+                            <p class="text-sm mt-2 text-gray-600">Each button requires manual styling and event handling</p>
+                        </div>
+                        <div class="property-comment">Repetitive code with manual styling and event handling</div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-title">React Components</div>
+                    <div class="demo-element">
+                        <div class="property-label">Reusable Components</div>
+                        <div class="react-demo-area">
+                            <h3>React Buttons</h3>
+                            <div id="reactButtons"></div>
+                            <p class="text-sm mt-2 text-gray-600">One component definition used everywhere</p>
+                        </div>
+                        <div class="property-comment">Reusable components with consistent styling and behavior</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Repetitive code</span>
+&lt;button onclick="handleClick1()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"&gt;Button 1&lt;/button&gt;
+&lt;button onclick="handleClick2()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"&gt;Button 2&lt;/button&gt;
+&lt;button onclick="handleClick3()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"&gt;Button 3&lt;/button&gt;
+
+<span class="comment">// React: Reusable component</span>
+function MyButton({ text, onClick, variant = 'primary' }) {
+    const baseClasses = 'px-4 py-2 rounded text-white font-medium';
+    const variantClasses = {
+        primary: 'bg-blue-500 hover:bg-blue-600',
+        secondary: 'bg-gray-500 hover:bg-gray-600',
+        danger: 'bg-red-500 hover:bg-red-600'
+    };
+    
+    return (
+        &lt;button 
+            className={`${baseClasses} ${variantClasses[variant]}`}
+            onClick={onClick}
+        &gt;
+            {text}
+        &lt;/button&gt;
+    );
+}
+
+<span class="comment">// Usage</span>
+&lt;MyButton text="Button 1" onClick={handleClick1} /&gt;
+&lt;MyButton text="Button 2" onClick={handleClick2} variant="secondary" /&gt;
+&lt;MyButton text="Button 3" onClick={handleClick3} variant="danger" /&gt;
+            </div>
+        </div>
+
+        <!-- Props and State Section -->
+        <div class="section">
+            <h2>📊 Props and State</h2>
+            <p>Understand how React's props and state system provides predictable data flow.</p>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div class="demo-title">Traditional State Management</div>
+                    <div class="demo-element">
+                        <div class="property-label">Manual State Tracking</div>
+                        <div class="react-demo-area">
+                            <h3>Traditional State</h3>
+                            <p>User: <span id="traditionalUser">Guest</span></p>
+                            <p>Score: <span id="traditionalScore">0</span></p>
+                            <button onclick="updateTraditionalState()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Update State</button>
+                            <p class="text-sm mt-2 text-gray-600">Manual state tracking with potential for inconsistencies</p>
+                        </div>
+                        <div class="property-comment">Manual state tracking with scattered variables</div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-title">React Props and State</div>
+                    <div class="demo-element">
+                        <div class="property-label">Declarative State</div>
+                        <div class="react-demo-area">
+                            <h3>React State</h3>
+                            <div id="reactState"></div>
+                            <p class="text-sm mt-2 text-gray-600">Predictable state management with automatic updates</p>
+                        </div>
+                        <div class="property-comment">Declarative state with predictable data flow</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Manual state management</span>
+let user = 'Guest';
+let score = 0;
+
+function updateTraditionalState() {
+    user = 'John Doe';
+    score += 10;
+    document.getElementById('traditionalUser').textContent = user;
+    document.getElementById('traditionalScore').textContent = score;
+    <span class="comment">// Must manually update DOM</span>
+}
+
+<span class="comment">// React: Declarative state</span>
+function UserProfile({ initialUser = 'Guest' }) {
+    const [user, setUser] = React.useState(initialUser);
+    const [score, setScore] = React.useState(0);
+    
+    const updateState = () =&gt; {
+        setUser('John Doe');
+        setScore(score + 10);
+        <span class="comment">// State automatically updates UI</span>
+    };
+    
+    return (
+        &lt;div&gt;
+            &lt;p&gt;User: &lt;span&gt;{user}&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;Score: &lt;span&gt;{score}&lt;/span&gt;&lt;/p&gt;
+            &lt;button 
+                className="bg-green-500 text-white px-4 py-2 rounded 
+                           hover:bg-green-600"
+                onClick={updateState}
+            &gt;
+                Update State
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+            </div>
+        </div>
+
+        <!-- Component Lifecycle Section -->
+        <div class="section">
+            <h2>🔄 Component Lifecycle</h2>
+            <p>See how React components manage their lifecycle automatically.</p>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div class="demo-title">Traditional Lifecycle</div>
+                    <div class="demo-element">
+                        <div class="property-label">Manual Lifecycle Management</div>
+                        <div class="react-demo-area">
+                            <h3>Traditional Approach</h3>
+                            <p>Status: <span id="traditionalStatus">Initializing...</span></p>
+                            <button onclick="startTraditionalLifecycle()" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Start</button>
+                            <p class="text-sm mt-2 text-gray-600">Manual lifecycle management with potential for memory leaks</p>
+                        </div>
+                        <div class="property-comment">Manual lifecycle management with potential for errors</div>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <div class="demo-title">React Lifecycle</div>
+                    <div class="demo-element">
+                        <div class="property-label">Automatic Lifecycle</div>
+                        <div class="react-demo-area">
+                            <h3>React Approach</h3>
+                            <div id="reactLifecycle"></div>
+                            <p class="text-sm mt-2 text-gray-600">Automatic lifecycle management with cleanup</p>
+                        </div>
+                        <div class="property-comment">Automatic lifecycle management with proper cleanup</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Manual lifecycle management</span>
+let intervalId = null;
+
+function startTraditionalLifecycle() {
+    document.getElementById('traditionalStatus').textContent = 'Running...';
+    intervalId = setInterval(() =&gt; {
+        <span class="comment">// Do something</span>
+    }, 1000);
+    <span class="comment">// Must manually clean up</span>
+}
+
+<span class="comment">// React: Automatic lifecycle</span>
+function LifecycleDemo() {
+    const [status, setStatus] = React.useState('Initializing...');
+    
+    React.useEffect(() =&gt; {
+        setStatus('Running...');
+        const interval = setInterval(() =&gt; {
+            <span class="comment">// Do something</span>
+        }, 1000);
+        
+        <span class="comment">// Cleanup function</span>
+        return () =&gt; {
+            clearInterval(interval);
+            setStatus('Cleaned up');
+        };
+    }, []);
+    
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Status: &lt;span&gt;{status}&lt;/span&gt;&lt;/p&gt;
+            &lt;button 
+                className="bg-purple-500 text-white px-4 py-2 rounded 
+                           hover:bg-purple-600"
+                onClick={() =&gt; setStatus('Restarted')}
+            &gt;
+                Restart
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+            </div>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="interactive-demo">
+            <h3>🎮 Interactive React Demo</h3>
+            <p>Click the buttons below to see React components in action:</p>
+            
+            <button class="control-button" onclick="showComponentDemo('counter')">Counter Component</button>
+            <button class="control-button" onclick="showComponentDemo('buttons')">Button Components</button>
+            <button class="control-button" onclick="showComponentDemo('state')">State Management</button>
+            <button class="control-button" onclick="showComponentDemo('lifecycle')">Lifecycle Demo</button>
+            
+            <div class="demo-area">
+                <div id="interactiveDemo">Click buttons to see React components</div>
+            </div>
+        </div>
+
+        <!-- Try This Section -->
+        <div class="section">
+            <h2>🔧 Try This</h2>
+            <p>Experiment with React components:</p>
+            <ol>
+                <li><strong>Click the interactive demo buttons:</strong> See different React components in action</li>
+                <li><strong>Compare traditional vs React:</strong> Notice the difference in code organization</li>
+                <li><strong>Use the counters:</strong> See how React state management works</li>
+                <li><strong>Test component reusability:</strong> See how components eliminate code duplication</li>
+                <li><strong>Explore props and state:</strong> Understand how data flows in React</li>
+                <li><strong>Modify the code:</strong> Change component properties to see different effects</li>
+            </ol>
+        </div>
+    </div>
+
+    <script type="text/babel">
+        // Traditional DOM manipulation functions
+        let traditionalCount = 0;
+        let traditionalUser = 'Guest';
+        let traditionalScore = 0;
+        let traditionalStatus = 'Initializing...';
+
+        function incrementTraditional() {
+            traditionalCount++;
+            document.getElementById('traditionalCounter').textContent = traditionalCount;
+        }
+
+        function handleClick1() {
+            alert('Button 1 clicked!');
+        }
+
+        function handleClick2() {
+            alert('Button 2 clicked!');
+        }
+
+        function handleClick3() {
+            alert('Button 3 clicked!');
+        }
+
+        function updateTraditionalState() {
+            traditionalUser = 'John Doe';
+            traditionalScore += 10;
+            document.getElementById('traditionalUser').textContent = traditionalUser;
+            document.getElementById('traditionalScore').textContent = traditionalScore;
+        }
+
+        function startTraditionalLifecycle() {
+            document.getElementById('traditionalStatus').textContent = 'Running...';
+        }
+
+        // React Components
+        function Counter() {
+            const [count, setCount] = React.useState(0);
+            
+            return (
+                <div>
+                    <p>Counter: <span>{count}</span></p>
+                    <button 
+                        className="bg-blue-500 text-white px-4 py-2 rounded 
+                           hover:bg-blue-600"
+                        onClick={() => setCount(count + 1)}
+                    >
+                        Increment
+                    </button>
+                </div>
+            );
+        }
+
+        function MyButton({ text, onClick, variant = 'primary' }) {
+            const baseClasses = 'px-4 py-2 rounded text-white font-medium mr-2';
+            const variantClasses = {
+                primary: 'bg-blue-500 hover:bg-blue-600',
+                secondary: 'bg-gray-500 hover:bg-gray-600',
+                danger: 'bg-red-500 hover:bg-red-600'
+            };
+            
+            return (
+                <button 
+                    className={`${baseClasses} ${variantClasses[variant]}`}
+                    onClick={onClick}
+                >
+                    {text}
+                </button>
+            );
+        }
+
+        function UserProfile({ initialUser = 'Guest' }) {
+            const [user, setUser] = React.useState(initialUser);
+            const [score, setScore] = React.useState(0);
+            
+            const updateState = () => {
+                setUser('John Doe');
+                setScore(score + 10);
+            };
+            
+            return (
+                <div>
+                    <p>User: <span>{user}</span></p>
+                    <p>Score: <span>{score}</span></p>
+                    <button 
+                        className="bg-green-500 text-white px-4 py-2 rounded 
+                           hover:bg-green-600"
+                        onClick={updateState}
+                    >
+                        Update State
+                    </button>
+                </div>
+            );
+        }
+
+        function LifecycleDemo() {
+            const [status, setStatus] = React.useState('Initializing...');
+            
+            React.useEffect(() => {
+                setStatus('Running...');
+                const interval = setInterval(() => {
+                    // Simulate some work
+                }, 1000);
+                
+                return () => {
+                    clearInterval(interval);
+                    setStatus('Cleaned up');
+                };
+            }, []);
+            
+            return (
+                <div>
+                    <p>Status: <span>{status}</span></p>
+                    <button 
+                        className="bg-purple-500 text-white px-4 py-2 rounded 
+                           hover:bg-purple-600"
+                        onClick={() => setStatus('Restarted')}
+                    >
+                        Restart
+                    </button>
+                </div>
+            );
+        }
+
+        // Interactive demo functions
+        function showComponentDemo(type) {
+            const demoArea = document.getElementById('interactiveDemo');
+            
+            switch(type) {
+                case 'counter':
+                    ReactDOM.render(<Counter />, demoArea);
+                    break;
+                case 'buttons':
+                    ReactDOM.render(
+                        <div>
+                            <MyButton text="Button 1" onClick={() => alert('Button 1 clicked!')} />
+                            <MyButton text="Button 2" onClick={() => alert('Button 2 clicked!')} variant="secondary" />
+                            <MyButton text="Button 3" onClick={() => alert('Button 3 clicked!')} variant="danger" />
+                        </div>,
+                        demoArea
+                    );
+                    break;
+                case 'state':
+                    ReactDOM.render(<UserProfile />, demoArea);
+                    break;
+                case 'lifecycle':
+                    ReactDOM.render(<LifecycleDemo />, demoArea);
+                    break;
+            }
+        }
+
+        // Render initial React components
+        ReactDOM.render(<Counter />, document.getElementById('reactCounter'));
+        ReactDOM.render(
+            <div>
+                <MyButton text="Button 1" onClick={() => alert('Button 1 clicked!')} />
+                <MyButton text="Button 2" onClick={() => alert('Button 2 clicked!')} variant="secondary" />
+                <MyButton text="Button 3" onClick={() => alert('Button 3 clicked!')} variant="danger" />
+            </div>,
+            document.getElementById('reactButtons')
+        );
+        ReactDOM.render(<UserProfile />, document.getElementById('reactState'));
+        ReactDOM.render(<LifecycleDemo />, document.getElementById('reactLifecycle'));
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate demo elements on load
+            const demoElements = document.querySelectorAll('.demo-element');
+            demoElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                    element.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 50);
+            });
+
+            // Add hover effects to demo cards
+            const demoCards = document.querySelectorAll('.demo-card');
+            demoCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 8px 25px -5px rgba(0, 0, 0, 0.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Add click effects to interactive elements
+            const interactiveElements = document.querySelectorAll('.control-button, button');
+            interactiveElements.forEach(element => {
+                element.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

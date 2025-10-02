@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Forms - Interactive Demo</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 HTML Forms</h1>
+            <p>Learn how to create interactive forms that collect user input and data</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-button active" onclick="showSection('overview')">Overview</button>
+            <button class="nav-button" onclick="showSection('input-types')">Input Types</button>
+            <button class="nav-button" onclick="showSection('form-elements')">Form Elements</button>
+            <button class="nav-button" onclick="showSection('validation')">Validation</button>
+            <button class="nav-button" onclick="showSection('interactive')">Interactive Demo</button>
+        </div>
+
+        <!-- Overview Section -->
+        <div id="overview" class="content-section active">
+            <h2 class="section-title">📋 Forms Overview</h2>
+            <p>Forms are essential for user interaction on websites. They allow users to submit data, make selections, and interact with your application.</p>
+
+            <div class="element-demo">
+                <div class="element-label">Basic Form Structure</div>
+                <div class="structure-visual">
+&lt;<span class="tag">form</span> <span class="attribute">action</span>=<span class="value">"/submit"</span> <span class="attribute">method</span>=<span class="value">"POST"</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="tag">label</span>&gt;<span class="content">Name:</span>&lt;/<span class="tag">label</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">name</span>=<span class="value">"name"</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">type</span>=<span class="value">"submit"</span>&gt;<span class="content">Submit</span>&lt;/<span class="tag">button</span>&gt;<br>
+&lt;/<span class="tag">form</span>&gt;
+                </div>
+                <div class="element-comment">Forms collect and submit user data</div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the buttons above to explore different form elements and see how they work!</p>
+                <button class="demo-button" onclick="showDemoResult('overview')">Show Form Structure</button>
+                <div id="overviewResult" class="demo-result">
+                    <p>Forms are the bridge between users and your application - they collect data and send it to your server!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Types Section -->
+        <div id="input-types" class="content-section">
+            <h2 class="section-title">🔤 Input Types</h2>
+            <p>HTML provides many different input types for different kinds of data. Each type has specific behaviors and validation.</p>
+
+            <div class="interactive-demo">
+                <h3>📝 Input Types Demo</h3>
+                <p>Click to see different input types:</p>
+                <button class="demo-button" onclick="showDemoResult('input-types')">Show Input Types</button>
+                <div id="input-typesResult" class="demo-result">
+                    <div style="text-align: left;">
+                        <form style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Text Input:</label>
+                            <input type="text" placeholder="Enter text" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Email Input:</label>
+                            <input type="email" placeholder="Enter email" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Password Input:</label>
+                            <input type="password" placeholder="Enter password" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Number Input:</label>
+                            <input type="number" placeholder="Enter number" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Date Input:</label>
+                            <input type="date" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Elements Section -->
+        <div id="form-elements" class="content-section">
+            <h2 class="section-title">🎛️ Form Elements</h2>
+            <p>Beyond input fields, forms include many other elements like select dropdowns, textareas, checkboxes, and radio buttons.</p>
+
+            <div class="interactive-demo">
+                <h3>🎛️ Form Elements Demo</h3>
+                <p>Click to see different form elements:</p>
+                <button class="demo-button" onclick="showDemoResult('form-elements')">Show Form Elements</button>
+                <div id="form-elementsResult" class="demo-result">
+                    <div style="text-align: left;">
+                        <form style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Select Dropdown:</label>
+                            <select style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                                <option>Choose an option</option>
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Textarea:</label>
+                            <textarea placeholder="Enter your message" rows="3" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem; resize: vertical;"></textarea>
+                            
+                            <div style="margin-bottom: 1rem;">
+                                <label style="color: white; display: block; margin-bottom: 0.5rem;">Checkboxes:</label>
+                                <label style="color: white; display: block; margin-bottom: 0.25rem;"><input type="checkbox" style="margin-right: 0.5rem;"> Option 1</label>
+                                <label style="color: white; display: block; margin-bottom: 0.25rem;"><input type="checkbox" style="margin-right: 0.5rem;"> Option 2</label>
+                                <label style="color: white; display: block; margin-bottom: 0.25rem;"><input type="checkbox" style="margin-right: 0.5rem;"> Option 3</label>
+                            </div>
+                            
+                            <div style="margin-bottom: 1rem;">
+                                <label style="color: white; display: block; margin-bottom: 0.5rem;">Radio Buttons:</label>
+                                <label style="color: white; display: block; margin-bottom: 0.25rem;"><input type="radio" name="radio-group" style="margin-right: 0.5rem;"> Choice A</label>
+                                <label style="color: white; display: block; margin-bottom: 0.25rem;"><input type="radio" name="radio-group" style="margin-right: 0.5rem;"> Choice B</label>
+                                <label style="color: white; display: block; margin-bottom: 0.25rem;"><input type="radio" name="radio-group" style="margin-right: 0.5rem;"> Choice C</label>
+                            </div>
+                        </form>
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>validation.html</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('validation-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('validation-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('validation-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="validation-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="validation-editor-lines">0 lines</span>
+                            <span id="validation-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="validation-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="validation-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-validation-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+                    </div>
+                </div>
+            
+
+        <!-- Validation Section -->
+        <div id="validation" class="content-section">
+            <h2 class="section-title">✅ Form Validation</h2>
+            <p>HTML5 provides built-in validation attributes to ensure users enter correct data before submitting forms.</p>
+
+            <div class="interactive-demo">
+                <h3>✅ Validation Demo</h3>
+                <p>Click to see form validation in action:</p>
+                <button class="demo-button" onclick="showDemoResult('validation')">Show Validation</button>
+                <div id="validationResult" class="demo-result">
+                    <div style="text-align: left;">
+                        <form style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Required Field:</label>
+                            <input type="text" placeholder="This field is required" required style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Email with Pattern:</label>
+                            <input type="email" placeholder="Enter valid email" required style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Min Length (5 chars):</label>
+                            <input type="text" placeholder="Minimum 5 characters" minlength="5" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Number Range (1-100):</label>
+                            <input type="number" placeholder="Enter number 1-100" min="1" max="100" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <button type="submit" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Submit Form</button>
+                        </form>
+                        <p style="color: #fbbf24; margin-top: 1rem; font-size: 0.9rem;">Try submitting with invalid data to see validation messages!</p>
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>interactive.html</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('interactive-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('interactive-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('interactive-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="interactive-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="interactive-editor-lines">0 lines</span>
+                            <span id="interactive-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="interactive-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="interactive-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-interactive-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+                    </div>
+                </div>
+            
+
+        <!-- Interactive Demo Section -->
+        <div id="interactive" class="content-section">
+            <h2 class="section-title">🎮 Interactive Form Demo</h2>
+            <p>Try this complete form with JavaScript validation and interactive features.</p>
+
+            <div class="interactive-demo">
+                <h3>🎮 Complete Form Demo</h3>
+                <p>Fill out this form and see JavaScript validation in action:</p>
+                <button class="demo-button" onclick="showDemoResult('interactive')">Show Interactive Form</button>
+                <div id="interactiveResult" class="demo-result">
+                    <div style="text-align: left;">
+                        <form id="demoForm" style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Full Name:</label>
+                            <input type="text" id="fullName" placeholder="Enter your full name" required style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Email Address:</label>
+                            <input type="email" id="email" placeholder="Enter your email" required style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Age:</label>
+                            <input type="number" id="age" placeholder="Enter your age" min="13" max="120" required style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Country:</label>
+                            <select id="country" required style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                                <option value="">Select your country</option>
+                                <option value="us">United States</option>
+                                <option value="uk">United Kingdom</option>
+                                <option value="ca">Canada</option>
+                                <option value="au">Australia</option>
+                                <option value="other">Other</option>
+                            </select>
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Message:</label>
+                            <textarea id="message" placeholder="Tell us about yourself" rows="3" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem; resize: vertical;"></textarea>
+                            
+                            <div style="margin-bottom: 1rem;">
+                                <label style="color: white; display: block; margin-bottom: 0.5rem;">Interests:</label>
+                                <label style="color: white; display: block; margin-bottom: 0.25rem;"><input type="checkbox" name="interests" value="web-dev" style="margin-right: 0.5rem;"> Web Development</label>
+                                <label style="color: white; display: block; margin-bottom: 0.25rem;"><input type="checkbox" name="interests" value="design" style="margin-right: 0.5rem;"> Design</label>
+                                <label style="color: white; display: block; margin-bottom: 0.25rem;"><input type="checkbox" name="interests" value="mobile" style="margin-right: 0.5rem;"> Mobile Development</label>
+                                <label style="color: white; display: block; margin-bottom: 0.25rem;"><input type="checkbox" name="interests" value="data" style="margin-right: 0.5rem;"> Data Science</label>
+                            </div>
+                            
+                            <button type="submit" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem;">Submit Form</button>
+                            <button type="button" onclick="resetForm()" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Reset Form</button>
+                        </form>
+                        
+                        <div id="formResult" style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.2); border-radius: 8px; display: none;">
+                            <h4 style="color: #10b981; margin: 0 0 0.5rem 0;">Form Submitted Successfully!</h4>
+                            <div id="formData"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Code Editor Section -->
+        <div class="section">
+            <h2>Live Code Editor</h2>
+            <p>Edit HTML form code in real-time and see the results immediately!</p>
+            
+            <div class="demo-card">
+                <div class="demo-title">Live Code Editor</div>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>live-code.html</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
+            
+                    <div id="live-code" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="live-code-lines">0 lines</span>
+                            <span id="live-code-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="live-code-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="live-code-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-live-code">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

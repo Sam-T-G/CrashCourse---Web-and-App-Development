@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser-Based File Server</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .file-input {
+            margin: 1rem 0;
+        }
+        .file-input input[type="file"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .file-list {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        .file-item {
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        .file-name {
+            font-family: monospace;
+            color: #2c3e50;
+        }
+        .file-size {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .instructions {
+            background: #e8f4fd;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        .instructions h3 {
+            margin-top: 0;
+        }
+        .instructions ol {
+            margin: 0.5rem 0;
+        }
+        .instructions li {
+            margin: 0.25rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌐 Browser-Based File Server</h1>
+        <p>Alternative to Python HTTP Server - No Python Required!</p>
+    </div>
+
+    <div class="warning">
+        <strong>⚠️ Note:</strong> This is a client-side file browser. For full HTTP server functionality with CORS support, use one of the other server options below.
+    </div>
+
+    <div class="file-input">
+        <h3>📁 Select Directory to Browse</h3>
+        <input type="file" id="directoryInput" webkitdirectory multiple>
+    </div>
+
+    <div id="fileList" class="file-list" style="display: none;">
+        <h3>📋 Files in Directory</h3>
+        <div id="files"></div>
+    </div>
+
+    <div class="instructions">
+        <h3>🚀 Better Server Alternatives (No Python Required)</h3>
+        <ol>
+            <li><strong>Node.js Server:</strong> <code>./start-server.sh</code> (Recommended)</li>
+            <li><strong>PHP Server:</strong> <code>./php-server.sh</code></li>
+            <li><strong>Ruby Server:</strong> <code>./ruby-server.sh</code></li>
+            <li><strong>NPX Server:</strong> <code>./npx-server.sh</code></li>
+            <li><strong>Deno Server:</strong> <code>./deno-server.sh</code></li>
+        </ol>
+        
+        <h3>💡 Quick Commands</h3>
+        <ul>
+            <li><code>chmod +x *.sh</code> - Make scripts executable</li>
+            <li><code>./start-server.sh</code> - Start Node.js server (best for your course)</li>
+            <li><code>php -S localhost:8000</code> - Direct PHP command</li>
+            <li><code>ruby -run -e httpd . -p 8000</code> - Direct Ruby command</li>
+        </ul>
+    </div>
+
+    <script>
+        const directoryInput = document.getElementById('directoryInput');
+        const fileList = document.getElementById('fileList');
+        const filesContainer = document.getElementById('files');
+
+        directoryInput.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            
+            if (files.length === 0) {
+                fileList.style.display = 'none';
+                return;
+            }
+
+            fileList.style.display = 'block';
+            filesContainer.innerHTML = '';
+
+            files.forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                
+                const fileName = document.createElement('span');
+                fileName.className = 'file-name';
+                fileName.textContent = file.webkitRelativePath || file.name;
+                
+                const fileSize = document.createElement('span');
+                fileSize.className = 'file-size';
+                fileSize.textContent = formatFileSize(file.size);
+                
+                fileItem.appendChild(fileName);
+                fileItem.appendChild(fileSize);
+                filesContainer.appendChild(fileItem);
+            });
+        });
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+    </script>
+</body>
+</html>

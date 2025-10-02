@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor Component - Reusable Monaco Editor</title>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <style>
+        /* Enhanced Code Editor Component Styles */
+        .code-editor-container {
+            background: #1e293b;
+            border-radius: 12px;
+            margin: 1rem 0;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #334155;
+        }
+
+        .code-editor-header {
+            background: linear-gradient(135deg, #334155, #475569);
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #475569;
+        }
+
+        .code-editor-title {
+            color: #e2e8f0;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-editor-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .code-editor-btn {
+            background: #475569;
+            color: #e2e8f0;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .code-editor-btn:hover {
+            background: #64748b;
+            transform: translateY(-1px);
+        }
+
+        .code-editor-btn.primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .code-editor-btn.primary:hover {
+            background: #2563eb;
+        }
+
+        .code-editor-btn.success {
+            background: #10b981;
+            color: white;
+        }
+
+        .code-editor-btn.warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .monaco-editor {
+            height: 300px;
+        }
+
+        .code-editor-footer {
+            background: #334155;
+            padding: 0.5rem 1rem;
+            color: #94a3b8;
+            font-size: 0.75rem;
+            border-top: 1px solid #475569;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-editor-stats {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .code-editor-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Theme Options */
+        .code-editor-container.theme-light {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+        }
+
+        .code-editor-container.theme-light .code-editor-header {
+            background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .code-editor-container.theme-light .code-editor-title {
+            color: #374151;
+        }
+
+        .code-editor-container.theme-light .code-editor-btn {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .code-editor-container.theme-light .code-editor-btn:hover {
+            background: #d1d5db;
+        }
+
+        .code-editor-container.theme-light .code-editor-footer {
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+        }
+
+        /* Size Variants */
+        .code-editor-container.size-small .monaco-editor {
+            height: 200px;
+        }
+
+        .code-editor-container.size-large .monaco-editor {
+            height: 400px;
+        }
+
+        .code-editor-container.size-full .monaco-editor {
+            height: 500px;
+        }
+
+        /* Language Icons */
+        .language-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .language-icon.javascript {
+            background: #f7df1e;
+            color: #000;
+        }
+
+        .language-icon.css {
+            background: #1572b6;
+        }
+
+        .language-icon.html {
+            background: #e34f26;
+        }
+
+        .language-icon.typescript {
+            background: #3178c6;
+        }
+
+        .language-icon.json {
+            background: #000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .code-editor-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .code-editor-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .code-editor-footer {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .code-editor-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+        <h1>🎯 Enhanced Code Editor Component</h1>
+        <p>Reusable Monaco Editor with advanced features for all course modules</p>
+
+        <!-- JavaScript Example -->
+        <div class="code-editor-container fade-in">
+            <div class="code-editor-header">
+                <div class="code-editor-title">
+                    <div class="language-icon javascript">JS</div>
+                    <span>event-handlers.js</span>
+                </div>
+                <div class="code-editor-actions">
+                    <button class="code-editor-btn" onclick="copyCode('js-editor')">
+                        📋 Copy
+                    </button>
+                    <button class="code-editor-btn primary" onclick="runCode('js-editor')">
+                        ▶️ Run
+                    </button>
+                    <button class="code-editor-btn" onclick="formatCode('js-editor')">
+                        🎨 Format
+                    </button>
+                </div>
+            </div>
+            <div id="js-editor" class="monaco-editor"></div>
+            <div class="code-editor-footer">
+                <div class="code-editor-stats">
+                    <div class="code-editor-stat">
+                        <span>📏</span>
+                        <span id="js-lines">0 lines</span>
+                    </div>
+                    <div class="code-editor-stat">
+                        <span>📝</span>
+                        <span id="js-chars">0 characters</span>
+                    </div>
+                    <div class="code-editor-stat">
+                        <span>⚡</span>
+                        <span>JavaScript</span>
+                    </div>
+                </div>
+                <div>Monaco Editor • VS Code Engine</div>
+            </div>
+        </div>
+
+        <!-- CSS Example -->
+        <div class="code-editor-container fade-in">
+            <div class="code-editor-header">
+                <div class="code-editor-title">
+                    <div class="language-icon css">CSS</div>
+                    <span>variables.css</span>
+                </div>
+                <div class="code-editor-actions">
+                    <button class="code-editor-btn" onclick="copyCode('css-editor')">
+                        📋 Copy
+                    </button>
+                    <button class="code-editor-btn primary" onclick="runCode('css-editor')">
+                        ▶️ Run
+                    </button>
+                    <button class="code-editor-btn" onclick="formatCode('css-editor')">
+                        🎨 Format
+                    </button>
+                </div>
+            </div>
+            <div id="css-editor" class="monaco-editor"></div>
+            <div class="code-editor-footer">
+                <div class="code-editor-stats">
+                    <div class="code-editor-stat">
+                        <span>📏</span>
+                        <span id="css-lines">0 lines</span>
+                    </div>
+                    <div class="code-editor-stat">
+                        <span>📝</span>
+                        <span id="css-chars">0 characters</span>
+                    </div>
+                    <div class="code-editor-stat">
+                        <span>🎨</span>
+                        <span>CSS</span>
+                    </div>
+                </div>
+                <div>Monaco Editor • VS Code Engine</div>
+            </div>
+        </div>
+
+        <!-- HTML Example -->
+        <div class="code-editor-container fade-in">
+            <div class="code-editor-header">
+                <div class="code-editor-title">
+                    <div class="language-icon html">HTML</div>
+                    <span>component.html</span>
+                </div>
+                <div class="code-editor-actions">
+                    <button class="code-editor-btn" onclick="copyCode('html-editor')">
+                        📋 Copy
+                    </button>
+                    <button class="code-editor-btn primary" onclick="runCode('html-editor')">
+                        ▶️ Run
+                    </button>
+                    <button class="code-editor-btn" onclick="formatCode('html-editor')">
+                        🎨 Format
+                    </button>
+                </div>
+            </div>
+            <div id="html-editor" class="monaco-editor"></div>
+            <div class="code-editor-footer">
+                <div class="code-editor-stats">
+                    <div class="code-editor-stat">
+                        <span>📏</span>
+                        <span id="html-lines">0 lines</span>
+                    </div>
+                    <div class="code-editor-stat">
+                        <span>📝</span>
+                        <span id="html-chars">0 characters</span>
+                    </div>
+                    <div class="code-editor-stat">
+                        <span>🌐</span>
+                        <span>HTML</span>
+                    </div>
+                </div>
+                <div>Monaco Editor • VS Code Engine</div>
+            </div>
+        </div>
+
+        <!-- Light Theme Example -->
+        <div class="code-editor-container theme-light fade-in">
+            <div class="code-editor-header">
+                <div class="code-editor-title">
+                    <div class="language-icon typescript">TS</div>
+                    <span>types.ts</span>
+                </div>
+                <div class="code-editor-actions">
+                    <button class="code-editor-btn" onclick="copyCode('ts-editor')">
+                        📋 Copy
+                    </button>
+                    <button class="code-editor-btn primary" onclick="runCode('ts-editor')">
+                        ▶️ Run
+                    </button>
+                    <button class="code-editor-btn" onclick="formatCode('ts-editor')">
+                        🎨 Format
+                    </button>
+                </div>
+            </div>
+            <div id="ts-editor" class="monaco-editor"></div>
+            <div class="code-editor-footer">
+                <div class="code-editor-stats">
+                    <div class="code-editor-stat">
+                        <span>📏</span>
+                        <span id="ts-lines">0 lines</span>
+                    </div>
+                    <div class="code-editor-stat">
+                        <span>📝</span>
+                        <span id="ts-chars">0 characters</span>
+                    </div>
+                    <div class="code-editor-stat">
+                        <span>🔷</span>
+                        <span>TypeScript</span>
+                    </div>
+                </div>
+                <div>Monaco Editor • VS Code Engine</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Monaco Editor
+        require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@0.44.0/min/vs' } });
+        
+        require(['vs/editor/editor.main'], function () {
+            // Code snippets for each editor
+            const codeSnippets = {
+                'js-editor': `// Enhanced JavaScript Event Handling
+class EventManager {
+    constructor() {
+        this.listeners = new Map();
+        this.isInitialized = false;
+    }
+
+    // Add event listener with automatic cleanup
+    addListener(element, event, handler, options = {}) {
+        if (!this.listeners.has(element)) {
+            this.listeners.set(element, []);
+        }
+        
+        const listener = { event, handler, options };
+        this.listeners.get(element).push(listener);
+        
+        element.addEventListener(event, handler, options);
+        return listener;
+    }
+
+    // Remove specific listener
+    removeListener(element, event, handler) {
+        const elementListeners = this.listeners.get(element);
+        if (elementListeners) {
+            const index = elementListeners.findIndex(
+                l => l.event === event && l.handler === handler
+            );
+            if (index !== -1) {
+                elementListeners.splice(index, 1);
+                element.removeEventListener(event, handler);
+            }
+        }
+    }
+
+    // Cleanup all listeners for an element
+    cleanup(element) {
+        const elementListeners = this.listeners.get(element);
+        if (elementListeners) {
+            elementListeners.forEach(({ event, handler }) => {
+                element.removeEventListener(event, handler);
+            });
+            this.listeners.delete(element);
+        }
+    }
+}
+
+// Usage example
+const eventManager = new EventManager();
+const button = document.getElementById('myButton');
+
+eventManager.addListener(button, 'click', (e) => {
+    console.log('Button clicked!', e);
+});`,
+
+                'css-editor': `/* Advanced CSS Variables System */
+:root {
+    /* Color System */
+    --primary-hue: 217;
+    --primary-saturation: 91%;
+    --primary-lightness: 60%;
+    --primary-color: hsl(var(--primary-hue), var(--primary-saturation), var(--primary-lightness));
+    
+    /* Spacing Scale */
+    --spacing-unit: 0.25rem;
+    --spacing-1: calc(var(--spacing-unit) * 1);
+    --spacing-2: calc(var(--spacing-unit) * 2);
+    --spacing-4: calc(var(--spacing-unit) * 4);
+    --spacing-8: calc(var(--spacing-unit) * 8);
+    
+    /* Typography Scale */
+    --font-size-base: 1rem;
+    --font-size-scale: 1.25;
+    --font-size-sm: calc(var(--font-size-base) / var(--font-size-scale));
+    --font-size-lg: calc(var(--font-size-base) * var(--font-size-scale));
+    
+    /* Shadow System */
+    --shadow-color: 0, 0, 0;
+    --shadow-opacity: 0.1;
+    --shadow-sm: 0 1px 2px 0 rgba(var(--shadow-color), calc(var(--shadow-opacity) * 0.5));
+    --shadow-lg: 0 10px 15px -3px rgba(var(--shadow-color), var(--shadow-opacity));
+}
+
+/* Component Styles */
+.button {
+    background-color: var(--primary-color);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--spacing-1);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}`,
+
+                'html-editor': `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Web Component</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>Modern Web</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <h2>Welcome to Modern Web Development</h2>
+            <p>Building responsive, accessible, and performant web applications.</p>
+            <button class="button primary">Get Started</button>
+        </section>
+
+        <section class="features">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Responsive Design</h3>
+                    <p>Mobile-first approach with flexible layouts.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Performance</h3>
+                    <p>Optimized for speed and Core Web Vitals.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Accessibility</h3>
+                    <p>WCAG compliant with semantic HTML.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Modern Web. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>`,
+
+                'ts-editor': `// TypeScript Interface Definitions
+interface User {
+    id: number;
+    name: string;
+    email: string;
+    role: 'admin' | 'user' | 'guest';
+    createdAt: Date;
+    preferences: UserPreferences;
+}
+
+interface UserPreferences {
+    theme: 'light' | 'dark';
+    language: string;
+    notifications: boolean;
+}
+
+// Generic API Response Type
+interface ApiResponse<T> {
+    data: T;
+    status: 'success' | 'error';
+    message?: string;
+    timestamp: Date;
+}
+
+// Event Handler Types
+type EventHandler<T = Event> = (event: T) => void;
+type AsyncEventHandler<T = Event> = (event: T) => Promise<void>;
+
+// Component Props Interface
+interface ComponentProps {
+    id: string;
+    className?: string;
+    children?: React.ReactNode;
+    onClick?: EventHandler<MouseEvent>;
+    onSubmit?: EventHandler<FormEvent>;
+}
+
+// Utility Types
+type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+type Required<T, K extends keyof T> = T & Required<Pick<T, K>>;
+
+// Example Usage
+const user: User = {
+    id: 1,
+    name: 'John Doe',
+    email: 'john@example.com',
+    role: 'user',
+    createdAt: new Date(),
+    preferences: {
+        theme: 'dark',
+        language: 'en',
+        notifications: true
+    }
+};
+
+// Generic function with type safety
+async function fetchUser<T>(id: number): Promise<ApiResponse<T>> {
+    const response = await fetch(\`/api/users/\${id}\`);
+    return response.json();
+}`
+            };
+
+            // Initialize editors
+            const editors = {};
+            Object.keys(codeSnippets).forEach(editorId => {
+                const language = editorId.split('-')[0];
+                const editor = monaco.editor.create(document.getElementById(editorId), {
+                    value: codeSnippets[editorId],
+                    language: language === 'js' ? 'javascript' : language,
+                    theme: editorId === 'ts-editor' ? 'vs' : 'vs-dark',
+                    automaticLayout: true,
+                    minimap: { enabled: false },
+                    scrollBeyondLastLine: false,
+                    fontSize: 14,
+                    lineNumbers: 'on',
+                    roundedSelection: false,
+                    scrollbar: {
+                        vertical: 'auto',
+                        horizontal: 'auto'
+                    },
+                    readOnly: true,
+                    wordWrap: 'on',
+                    folding: true,
+                    lineDecorationsWidth: 10,
+                    lineNumbersMinChars: 3
+                });
+
+                editors[editorId] = editor;
+
+                // Update stats
+                updateStats(editorId, editor);
+                
+                // Listen for content changes
+                editor.onDidChangeModelContent(() => {
+                    updateStats(editorId, editor);
+                });
+            });
+
+            // Store editors globally for access
+            window.monacoEditors = editors;
+        });
+
+        // Update editor statistics
+        function updateStats(editorId, editor) {
+            const model = editor.getModel();
+            const lines = model.getLineCount();
+            const chars = model.getValueLength();
+            
+            document.getElementById(`${editorId.split('-')[0]}-lines`).textContent = `${lines} lines`;
+            document.getElementById(`${editorId.split('-')[0]}-chars`).textContent = `${chars} characters`;
+        }
+
+        // Copy code function
+        function copyCode(editorId) {
+            const editor = window.monacoEditors[editorId];
+            if (editor) {
+                navigator.clipboard.writeText(editor.getValue()).then(() => {
+                    showFeedback(event.target, 'Copied!', '#10b981');
+                });
+            }
+        }
+
+        // Run code function (simulation)
+        function runCode(editorId) {
+            showFeedback(event.target, 'Running...', '#f59e0b');
+            setTimeout(() => {
+                showFeedback(event.target, 'Executed!', '#10b981');
+            }, 1000);
+        }
+
+        // Format code function
+        function formatCode(editorId) {
+            const editor = window.monacoEditors[editorId];
+            if (editor) {
+                editor.getAction('editor.action.formatDocument').run();
+                showFeedback(event.target, 'Formatted!', '#3b82f6');
+            }
+        }
+
+        // Show feedback function
+        function showFeedback(button, text, color) {
+            const originalText = button.textContent;
+            const originalColor = button.style.background;
+            
+            button.textContent = text;
+            button.style.background = color;
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = originalColor;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

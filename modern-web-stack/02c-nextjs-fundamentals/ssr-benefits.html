@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next.js SSR - Server-Side Rendering Benefits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Traditional CSS for comparison */
+        .traditional-spa {
+            background-color: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .traditional-spa h3 {
+            color: #dc2626;
+            margin-bottom: 0.5rem;
+        }
+
+        .traditional-spa p {
+            color: #7f1d1d;
+            font-size: 0.875rem;
+        }
+
+        .nextjs-ssr {
+            background-color: #f0fdf4;
+            border: 2px solid #bbf7d0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .nextjs-ssr h3 {
+            color: #16a34a;
+            margin-bottom: 0.5rem;
+        }
+
+        .nextjs-ssr p {
+            color: #166534;
+            font-size: 0.875rem;
+        }
+
+        /* Demo styling */
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e5e7eb;
+        }
+
+        .demo-section h2 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .comparison-card.traditional {
+            border-color: #ef4444;
+        }
+
+        .comparison-card.modern {
+            border-color: #10b981;
+        }
+
+        .comparison-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .comparison-title.traditional {
+            color: #ef4444;
+        }
+
+        .comparison-title.modern {
+            color: #10b981;
+        }
+
+        .demo-element {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .demo-element:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-label {
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .property-comment {
+            font-style: italic;
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .code-snippet {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+
+        .code-snippet .property {
+            color: #f472b6;
+        }
+
+        .code-snippet .value {
+            color: #10b981;
+        }
+
+        .code-snippet .comment {
+            color: #64748b;
+        }
+
+        /* Performance Demo Areas */
+        .performance-demo {
+            background-color: #f1f5f9;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            min-height: 200px;
+        }
+
+        .performance-demo h3 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Performance Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metric-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        .metric-card.traditional .metric-value {
+            color: #ef4444;
+        }
+
+        .metric-card.modern .metric-value {
+            color: #10b981;
+        }
+
+        /* Interactive Demo */
+        .interactive-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .control-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .control-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .demo-area {
+            background-color: white;
+            color: black;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-height: 200px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1 class="text-4xl font-bold mb-4">⚡ Next.js SSR</h1>
+            <p class="text-xl">Server-Side Rendering with fundamental improvements over traditional web development</p>
+        </div>
+
+        <!-- SSR vs SPA Section -->
+        <div class="demo-section">
+            <h2>🔄 SSR vs SPA</h2>
+            <p>Learn how Next.js Server-Side Rendering provides fundamental improvements over traditional Single Page Applications.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional SPA</div>
+                    <div class="demo-element">
+                        <div class="property-label">Client-Side Rendering</div>
+                        <div class="performance-demo">
+                            <h3>Traditional SPA Approach</h3>
+                            <div class="traditional-spa">
+                                <h3>Loading...</h3>
+                                <p>JavaScript must load before content appears</p>
+                            </div>
+                            <div class="traditional-spa">
+                                <h3>Hydrating...</h3>
+                                <p>React components render on client</p>
+                            </div>
+                            <div class="traditional-spa">
+                                <h3>Interactive</h3>
+                                <p>Finally ready for user interaction</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Multiple loading phases with blank screens</p>
+                        </div>
+                        <div class="property-comment">Client-side rendering with multiple loading phases</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Next.js SSR</div>
+                    <div class="demo-element">
+                        <div class="property-label">Server-Side Rendering</div>
+                        <div class="performance-demo">
+                            <h3>Next.js SSR Approach</h3>
+                            <div class="nextjs-ssr">
+                                <h3>✅ Content Ready</h3>
+                                <p>HTML content is immediately available</p>
+                            </div>
+                            <div class="nextjs-ssr">
+                                <h3>✅ SEO Optimized</h3>
+                                <p>Search engines can crawl content</p>
+                            </div>
+                            <div class="nextjs-ssr">
+                                <h3>✅ Fast Loading</h3>
+                                <p>No JavaScript required for initial render</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Immediate content with progressive enhancement</p>
+                        </div>
+                        <div class="property-comment">Server-side rendering with immediate content</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional SPA: Client-side rendering</span>
+<span class="comment">// 1. Load HTML shell</span>
+&lt;div id="root"&gt;&lt;/div&gt;
+&lt;script src="bundle.js"&gt;&lt;/script&gt;
+
+<span class="comment">// 2. JavaScript loads and renders</span>
+ReactDOM.render(&lt;App /&gt;, document.getElementById('root'));
+
+<span class="comment">// Next.js SSR: Server-side rendering</span>
+<span class="comment">// 1. Server renders HTML with content</span>
+export async function getServerSideProps() {
+  const data = await fetchData();
+  return { props: { data } };
+}
+
+export default function Page({ data }) {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{data.title}&lt;/h1&gt;
+      &lt;p&gt;{data.content}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+            </div>
+        </div>
+
+        <!-- SEO Benefits Section -->
+        <div class="demo-section">
+            <h2>🔍 SEO Benefits</h2>
+            <p>See how Next.js SSR provides fundamental SEO improvements over traditional SPAs.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional SPA</div>
+                    <div class="demo-element">
+                        <div class="property-label">Poor SEO</div>
+                        <div class="performance-demo">
+                            <h3>Traditional SPA SEO</h3>
+                            <div class="traditional-spa">
+                                <h3>Empty HTML</h3>
+                                <p>&lt;div id="root"&gt;&lt;/div&gt;</p>
+                            </div>
+                            <div class="traditional-spa">
+                                <h3>No Meta Tags</h3>
+                                <p>Search engines see empty content</p>
+                            </div>
+                            <div class="traditional-spa">
+                                <h3>Poor Rankings</h3>
+                                <p>Content not crawlable by search engines</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Search engines can't see content</p>
+                        </div>
+                        <div class="property-comment">Empty HTML with no content for search engines</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Next.js SSR</div>
+                    <div class="demo-element">
+                        <div class="property-label">Excellent SEO</div>
+                        <div class="performance-demo">
+                            <h3>Next.js SSR SEO</h3>
+                            <div class="nextjs-ssr">
+                                <h3>✅ Full HTML</h3>
+                                <p>&lt;h1&gt;Page Title&lt;/h1&gt;&lt;p&gt;Content&lt;/p&gt;</p>
+                            </div>
+                            <div class="nextjs-ssr">
+                                <h3>✅ Meta Tags</h3>
+                                <p>Dynamic meta tags for each page</p>
+                            </div>
+                            <div class="nextjs-ssr">
+                                <h3>✅ Great Rankings</h3>
+                                <p>Search engines can crawl all content</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Search engines see full content</p>
+                        </div>
+                        <div class="property-comment">Full HTML with content for search engines</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional SPA: Empty HTML</span>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script src="bundle.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+<span class="comment">// Next.js SSR: Full HTML with content</span>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Dynamic Page Title&lt;/title&gt;
+  &lt;meta name="description" content="Dynamic description" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Page Title&lt;/h1&gt;
+  &lt;p&gt;Page content is already here!&lt;/p&gt;
+  &lt;script src="bundle.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+        </div>
+
+        <!-- Performance Benefits Section -->
+        <div class="demo-section">
+            <h2>⚡ Performance Benefits</h2>
+            <p>See the measurable performance improvements of Next.js SSR over traditional SPAs.</p>
+
+            <div class="metrics-grid">
+                <div class="metric-card traditional">
+                    <div class="metric-value">3-5s</div>
+                    <div class="metric-label">Traditional SPA FCP</div>
+                </div>
+                <div class="metric-card modern">
+                    <div class="metric-value">0.5-1s</div>
+                    <div class="metric-label">Next.js SSR FCP</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">80%</div>
+                    <div class="metric-label">FCP Improvement</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card traditional">
+                    <div class="metric-value">5-8s</div>
+                    <div class="metric-label">Traditional SPA LCP</div>
+                </div>
+                <div class="metric-card modern">
+                    <div class="metric-value">1-2s</div>
+                    <div class="metric-label">Next.js SSR LCP</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">75%</div>
+                    <div class="metric-label">LCP Improvement</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card traditional">
+                    <div class="metric-value">0/100</div>
+                    <div class="metric-label">Traditional SPA SEO</div>
+                </div>
+                <div class="metric-card modern">
+                    <div class="metric-value">95/100</div>
+                    <div class="metric-label">Next.js SSR SEO</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">SEO Improvement</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- File-Based Routing Section -->
+        <div class="demo-section">
+            <h2>📁 File-Based Routing</h2>
+            <p>Learn how Next.js file-based routing simplifies development compared to traditional routing.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional Routing</div>
+                    <div class="demo-element">
+                        <div class="property-label">Manual Route Configuration</div>
+                        <div class="performance-demo">
+                            <h3>Traditional Routing</h3>
+                            <div class="traditional-spa">
+                                <h3>Complex Setup</h3>
+                                <p>Manual route configuration required</p>
+                            </div>
+                            <div class="traditional-spa">
+                                <h3>Code Splitting</h3>
+                                <p>Manual code splitting configuration</p>
+                            </div>
+                            <div class="traditional-spa">
+                                <h3>Maintenance</h3>
+                                <p>Routes must be manually maintained</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Complex routing setup and maintenance</p>
+                        </div>
+                        <div class="property-comment">Manual route configuration with complex setup</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Next.js File-Based Routing</div>
+                    <div class="demo-element">
+                        <div class="property-label">Automatic Route Generation</div>
+                        <div class="performance-demo">
+                            <h3>Next.js File-Based Routing</h3>
+                            <div class="nextjs-ssr">
+                                <h3>✅ Simple Setup</h3>
+                                <p>Routes created automatically from file structure</p>
+                            </div>
+                            <div class="nextjs-ssr">
+                                <h3>✅ Auto Code Splitting</h3>
+                                <p>Automatic code splitting per route</p>
+                            </div>
+                            <div class="nextjs-ssr">
+                                <h3>✅ Easy Maintenance</h3>
+                                <p>Add files to create new routes</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Simple file-based routing with automatic features</p>
+                        </div>
+                        <div class="property-comment">Automatic route generation from file structure</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Manual route configuration</span>
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+        &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+        &lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;
+        &lt;Route path="/products/:id" element={&lt;Product /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}
+
+<span class="comment">// Next.js: File-based routing</span>
+<span class="comment">// pages/index.js → /</span>
+<span class="comment">// pages/about.js → /about</span>
+<span class="comment">// pages/contact.js → /contact</span>
+<span class="comment">// pages/products/[id].js → /products/:id</span>
+
+<span class="comment">// Automatic routing with no configuration needed!</span>
+            </div>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="interactive-demo">
+            <h3 class="text-2xl font-bold mb-4">🎮 Interactive SSR Demo</h3>
+            <p class="mb-6">Click the buttons below to see Next.js SSR benefits in action:</p>
+            
+            <button class="control-button" onclick="showSSRDemo('loading')">Loading Comparison</button>
+            <button class="control-button" onclick="showSSRDemo('seo')">SEO Comparison</button>
+            <button class="control-button" onclick="showSSRDemo('performance')">Performance Metrics</button>
+            <button class="control-button" onclick="showSSRDemo('routing')">Routing Comparison</button>
+            
+            <div class="demo-area">
+                <div id="ssrDemo">Click buttons to see Next.js SSR benefits</div>
+            </div>
+        </div>
+
+        <!-- Try This Section -->
+        <div class="demo-section">
+            <h2>🔧 Try This</h2>
+            <p>Experiment with Next.js SSR benefits:</p>
+            <ol class="list-decimal list-inside space-y-2">
+                <li><strong>Click the SSR demo buttons:</strong> See different Next.js SSR benefits in action</li>
+                <li><strong>Compare loading times:</strong> Notice the difference in initial page load</li>
+                <li><strong>Check SEO benefits:</strong> See how SSR improves search engine visibility</li>
+                <li><strong>Review performance metrics:</strong> See the measurable improvements</li>
+                <li><strong>Explore file-based routing:</strong> Understand how routing is simplified</li>
+                <li><strong>Think about scalability:</strong> Consider how SSR benefits large applications</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Interactive demo functions
+        function showSSRDemo(type) {
+            const demoArea = document.getElementById('ssrDemo');
+            
+            switch(type) {
+                case 'loading':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Loading Comparison</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-red-50 border border-red-200 rounded">
+                                    <h5 class="font-semibold text-red-800 mb-2">Traditional SPA</h5>
+                                    <div class="space-y-2 text-sm text-red-700">
+                                        <div>1. Load HTML shell (0.5s)</div>
+                                        <div>2. Load JavaScript (2-3s)</div>
+                                        <div>3. Render components (1-2s)</div>
+                                        <div>4. Make API calls (1-2s)</div>
+                                        <div class="font-semibold">Total: 4.5-7.5s</div>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-green-50 border border-green-200 rounded">
+                                    <h5 class="font-semibold text-green-800 mb-2">Next.js SSR</h5>
+                                    <div class="space-y-2 text-sm text-green-700">
+                                        <div>1. Server renders HTML (0.1s)</div>
+                                        <div>2. Send HTML to browser (0.2s)</div>
+                                        <div>3. Display content (0.1s)</div>
+                                        <div>4. Hydrate for interactivity (0.2s)</div>
+                                        <div class="font-semibold">Total: 0.6s</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'seo':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">SEO Comparison</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-red-50 border border-red-200 rounded">
+                                    <h5 class="font-semibold text-red-800 mb-2">Traditional SPA</h5>
+                                    <div class="space-y-2 text-sm text-red-700">
+                                        <div>❌ Empty HTML shell</div>
+                                        <div>❌ No content for crawlers</div>
+                                        <div>❌ Poor search rankings</div>
+                                        <div>❌ No social media previews</div>
+                                        <div class="font-semibold">SEO Score: 0/100</div>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-green-50 border border-green-200 rounded">
+                                    <h5 class="font-semibold text-green-800 mb-2">Next.js SSR</h5>
+                                    <div class="space-y-2 text-sm text-green-700">
+                                        <div>✅ Full HTML content</div>
+                                        <div>✅ Crawlable by search engines</div>
+                                        <div>✅ Great search rankings</div>
+                                        <div>✅ Rich social media previews</div>
+                                        <div class="font-semibold">SEO Score: 95/100</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'performance':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Performance Metrics</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="p-4 bg-blue-50 border border-blue-200 rounded text-center">
+                                    <h5 class="font-semibold text-blue-800 mb-2">First Contentful Paint</h5>
+                                    <div class="text-2xl font-bold text-blue-600">80% faster</div>
+                                    <div class="text-sm text-blue-700">3-5s → 0.5-1s</div>
+                                </div>
+                                <div class="p-4 bg-green-50 border border-green-200 rounded text-center">
+                                    <h5 class="font-semibold text-green-800 mb-2">Largest Contentful Paint</h5>
+                                    <div class="text-2xl font-bold text-green-600">75% faster</div>
+                                    <div class="text-sm text-green-700">5-8s → 1-2s</div>
+                                </div>
+                                <div class="p-4 bg-purple-50 border border-purple-200 rounded text-center">
+                                    <h5 class="font-semibold text-purple-800 mb-2">SEO Score</h5>
+                                    <div class="text-2xl font-bold text-purple-600">95% better</div>
+                                    <div class="text-sm text-purple-700">0/100 → 95/100</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'routing':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Routing Comparison</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-red-50 border border-red-200 rounded">
+                                    <h5 class="font-semibold text-red-800 mb-2">Traditional Routing</h5>
+                                    <div class="space-y-2 text-sm text-red-700">
+                                        <div>❌ Manual route configuration</div>
+                                        <div>❌ Complex setup</div>
+                                        <div>❌ Manual code splitting</div>
+                                        <div>❌ Route maintenance</div>
+                                        <div class="font-semibold">Complex & Error-prone</div>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-green-50 border border-green-200 rounded">
+                                    <h5 class="font-semibold text-green-800 mb-2">Next.js File-Based</h5>
+                                    <div class="space-y-2 text-sm text-green-700">
+                                        <div>✅ Automatic route generation</div>
+                                        <div>✅ Simple file structure</div>
+                                        <div>✅ Automatic code splitting</div>
+                                        <div>✅ Easy maintenance</div>
+                                        <div class="font-semibold">Simple & Reliable</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate demo elements on load
+            const demoElements = document.querySelectorAll('.demo-element');
+            demoElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                    element.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 50);
+            });
+
+            // Add hover effects to comparison cards
+            const comparisonCards = document.querySelectorAll('.comparison-card');
+            comparisonCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 8px 25px -5px rgba(0, 0, 0, 0.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Add click effects to interactive elements
+            const interactiveElements = document.querySelectorAll('.control-button, button');
+            interactiveElements.forEach(element => {
+                element.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next.js Performance - Core Web Vitals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Traditional CSS for comparison */
+        .traditional-metrics {
+            background-color: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .traditional-metrics h3 {
+            color: #dc2626;
+            margin-bottom: 0.5rem;
+        }
+
+        .traditional-metrics p {
+            color: #7f1d1d;
+            font-size: 0.875rem;
+        }
+
+        .nextjs-metrics {
+            background-color: #f0fdf4;
+            border: 2px solid #bbf7d0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .nextjs-metrics h3 {
+            color: #16a34a;
+            margin-bottom: 0.5rem;
+        }
+
+        .nextjs-metrics p {
+            color: #166534;
+            font-size: 0.875rem;
+        }
+
+        /* Demo styling */
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e5e7eb;
+        }
+
+        .demo-section h2 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .comparison-card.traditional {
+            border-color: #ef4444;
+        }
+
+        .comparison-card.modern {
+            border-color: #10b981;
+        }
+
+        .comparison-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .comparison-title.traditional {
+            color: #ef4444;
+        }
+
+        .comparison-title.modern {
+            color: #10b981;
+        }
+
+        .demo-element {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .demo-element:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-label {
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .property-comment {
+            font-style: italic;
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .code-snippet {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+
+        .code-snippet .property {
+            color: #f472b6;
+        }
+
+        .code-snippet .value {
+            color: #10b981;
+        }
+
+        .code-snippet .comment {
+            color: #64748b;
+        }
+
+        /* Performance Demo Areas */
+        .performance-demo {
+            background-color: #f1f5f9;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            min-height: 200px;
+        }
+
+        .performance-demo h3 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Performance Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metric-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        .metric-card.traditional .metric-value {
+            color: #ef4444;
+        }
+
+        .metric-card.modern .metric-value {
+            color: #10b981;
+        }
+
+        /* Interactive Demo */
+        .interactive-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .control-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .control-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .demo-area {
+            background-color: white;
+            color: black;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-height: 200px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1 class="text-4xl font-bold mb-4">📊 Next.js Performance</h1>
+            <p class="text-xl">Core Web Vitals and performance improvements over traditional web development</p>
+        </div>
+
+        <!-- Core Web Vitals Section -->
+        <div class="demo-section">
+            <h2>⚡ Core Web Vitals</h2>
+            <p>Learn how Next.js improves Core Web Vitals compared to traditional web development.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional Web</div>
+                    <div class="demo-element">
+                        <div class="property-label">Poor Core Web Vitals</div>
+                        <div class="performance-demo">
+                            <h3>Traditional Web Performance</h3>
+                            <div class="traditional-metrics">
+                                <h3>FCP: 3-5s</h3>
+                                <p>First Contentful Paint is slow</p>
+                            </div>
+                            <div class="traditional-metrics">
+                                <h3>LCP: 5-8s</h3>
+                                <p>Largest Contentful Paint is very slow</p>
+                            </div>
+                            <div class="traditional-metrics">
+                                <h3>CLS: 0.25+</h3>
+                                <p>High Cumulative Layout Shift</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Poor user experience and SEO rankings</p>
+                        </div>
+                        <div class="property-comment">Poor Core Web Vitals with slow loading</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Next.js Performance</div>
+                    <div class="demo-element">
+                        <div class="property-label">Excellent Core Web Vitals</div>
+                        <div class="performance-demo">
+                            <h3>Next.js Performance</h3>
+                            <div class="nextjs-metrics">
+                                <h3>FCP: 0.5-1s</h3>
+                                <p>First Contentful Paint is fast</p>
+                            </div>
+                            <div class="nextjs-metrics">
+                                <h3>LCP: 1-2s</h3>
+                                <p>Largest Contentful Paint is fast</p>
+                            </div>
+                            <div class="nextjs-metrics">
+                                <h3>CLS: 0.1-</h3>
+                                <p>Low Cumulative Layout Shift</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Excellent user experience and SEO rankings</p>
+                        </div>
+                        <div class="property-comment">Excellent Core Web Vitals with fast loading</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Poor performance</span>
+<span class="comment">// 1. Load HTML shell</span>
+&lt;div id="root"&gt;&lt;/div&gt;
+&lt;script src="bundle.js"&gt;&lt;/script&gt; <span class="comment">// Large bundle</span>
+
+<span class="comment">// 2. JavaScript loads and renders</span>
+ReactDOM.render(&lt;App /&gt;, document.getElementById('root'));
+
+<span class="comment">// Next.js: Optimized performance</span>
+<span class="comment">// 1. Server renders HTML with content</span>
+export async function getServerSideProps() {
+  const data = await fetchData();
+  return { props: { data } };
+}
+
+<span class="comment">// 2. Automatic code splitting and optimization</span>
+export default function Page({ data }) {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{data.title}&lt;/h1&gt;
+      &lt;p&gt;{data.content}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+            </div>
+        </div>
+
+        <!-- Code Splitting Section -->
+        <div class="demo-section">
+            <h2>📦 Code Splitting</h2>
+            <p>See how Next.js automatic code splitting improves performance over traditional bundling.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional Bundling</div>
+                    <div class="demo-element">
+                        <div class="property-label">Large Bundle Sizes</div>
+                        <div class="performance-demo">
+                            <h3>Traditional Bundling</h3>
+                            <div class="traditional-metrics">
+                                <h3>Bundle Size: 2-5MB</h3>
+                                <p>Large JavaScript bundles</p>
+                            </div>
+                            <div class="traditional-metrics">
+                                <h3>Load Time: 5-10s</h3>
+                                <p>Slow initial page load</p>
+                            </div>
+                            <div class="traditional-metrics">
+                                <h3>Memory Usage: High</h3>
+                                <p>High memory consumption</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Poor performance with large bundles</p>
+                        </div>
+                        <div class="property-comment">Large bundles with poor performance</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Next.js Code Splitting</div>
+                    <div class="demo-element">
+                        <div class="property-label">Automatic Code Splitting</div>
+                        <div class="performance-demo">
+                            <h3>Next.js Code Splitting</h3>
+                            <div class="nextjs-metrics">
+                                <h3>Bundle Size: 100-500KB</h3>
+                                <p>Small, optimized bundles</p>
+                            </div>
+                            <div class="nextjs-metrics">
+                                <h3>Load Time: 1-2s</h3>
+                                <p>Fast initial page load</p>
+                            </div>
+                            <div class="nextjs-metrics">
+                                <h3>Memory Usage: Low</h3>
+                                <p>Efficient memory usage</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Excellent performance with small bundles</p>
+                        </div>
+                        <div class="property-comment">Automatic code splitting with excellent performance</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Large bundles</span>
+<span class="comment">// webpack.config.js</span>
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js', <span class="comment">// Single large bundle</span>
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+
+<span class="comment">// Next.js: Automatic code splitting</span>
+<span class="comment">// No configuration needed!</span>
+<span class="comment">// pages/index.js → Automatic code splitting</span>
+<span class="comment">// pages/about.js → Automatic code splitting</span>
+<span class="comment">// pages/contact.js → Automatic code splitting</span>
+
+<span class="comment">// Dynamic imports for additional splitting</span>
+const DynamicComponent = dynamic(() =&gt; import('../components/HeavyComponent'));
+            </div>
+        </div>
+
+        <!-- Image Optimization Section -->
+        <div class="demo-section">
+            <h2>🖼️ Image Optimization</h2>
+            <p>Learn how Next.js automatic image optimization improves performance.</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card traditional">
+                    <div class="comparison-title traditional">Traditional Images</div>
+                    <div class="demo-element">
+                        <div class="property-label">Unoptimized Images</div>
+                        <div class="performance-demo">
+                            <h3>Traditional Images</h3>
+                            <div class="traditional-metrics">
+                                <h3>Image Size: 2-10MB</h3>
+                                <p>Large, unoptimized images</p>
+                            </div>
+                            <div class="traditional-metrics">
+                                <h3>Load Time: 3-8s</h3>
+                                <p>Slow image loading</p>
+                            </div>
+                            <div class="traditional-metrics">
+                                <h3>Format: JPEG/PNG</h3>
+                                <p>Inefficient image formats</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Poor performance with large images</p>
+                        </div>
+                        <div class="property-comment">Unoptimized images with poor performance</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card modern">
+                    <div class="comparison-title modern">Next.js Image Optimization</div>
+                    <div class="demo-element">
+                        <div class="property-label">Automatic Image Optimization</div>
+                        <div class="performance-demo">
+                            <h3>Next.js Image Optimization</h3>
+                            <div class="nextjs-metrics">
+                                <h3>Image Size: 50-200KB</h3>
+                                <p>Small, optimized images</p>
+                            </div>
+                            <div class="nextjs-metrics">
+                                <h3>Load Time: 0.5-1s</h3>
+                                <p>Fast image loading</p>
+                            </div>
+                            <div class="nextjs-metrics">
+                                <h3>Format: WebP/AVIF</h3>
+                                <p>Modern, efficient formats</p>
+                            </div>
+                            <p class="text-sm mt-2 text-gray-600">Excellent performance with optimized images</p>
+                        </div>
+                        <div class="property-comment">Automatic image optimization with excellent performance</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Traditional: Unoptimized images</span>
+&lt;img src="/large-image.jpg" alt="Large image" /&gt; <span class="comment">// 5MB JPEG</span>
+
+<span class="comment">// Next.js: Optimized images</span>
+import Image from 'next/image';
+
+&lt;Image
+  src="/large-image.jpg"
+  alt="Optimized image"
+  width={800}
+  height={600}
+  priority
+/&gt; <span class="comment">// Automatically optimized to 200KB WebP</span>
+            </div>
+        </div>
+
+        <!-- Performance Metrics Section -->
+        <div class="demo-section">
+            <h2>📊 Performance Metrics</h2>
+            <p>See the measurable performance improvements of Next.js over traditional web development.</p>
+
+            <div class="metrics-grid">
+                <div class="metric-card traditional">
+                    <div class="metric-value">3-5s</div>
+                    <div class="metric-label">Traditional FCP</div>
+                </div>
+                <div class="metric-card modern">
+                    <div class="metric-value">0.5-1s</div>
+                    <div class="metric-label">Next.js FCP</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">80%</div>
+                    <div class="metric-label">FCP Improvement</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card traditional">
+                    <div class="metric-value">5-8s</div>
+                    <div class="metric-label">Traditional LCP</div>
+                </div>
+                <div class="metric-card modern">
+                    <div class="metric-value">1-2s</div>
+                    <div class="metric-label">Next.js LCP</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">75%</div>
+                    <div class="metric-label">LCP Improvement</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card traditional">
+                    <div class="metric-value">2-5MB</div>
+                    <div class="metric-label">Traditional Bundle</div>
+                </div>
+                <div class="metric-card modern">
+                    <div class="metric-value">100-500KB</div>
+                    <div class="metric-label">Next.js Bundle</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">90%</div>
+                    <div class="metric-label">Bundle Reduction</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="interactive-demo">
+            <h3 class="text-2xl font-bold mb-4">🎮 Interactive Performance Demo</h3>
+            <p class="mb-6">Click the buttons below to see Next.js performance improvements:</p>
+            
+            <button class="control-button" onclick="showPerformanceDemo('vitals')">Core Web Vitals</button>
+            <button class="control-button" onclick="showPerformanceDemo('bundling')">Code Splitting</button>
+            <button class="control-button" onclick="showPerformanceDemo('images')">Image Optimization</button>
+            <button class="control-button" onclick="showPerformanceDemo('metrics')">Performance Metrics</button>
+            
+            <div class="demo-area">
+                <div id="performanceDemo">Click buttons to see Next.js performance improvements</div>
+            </div>
+        </div>
+
+        <!-- Try This Section -->
+        <div class="demo-section">
+            <h2>🔧 Try This</h2>
+            <p>Experiment with Next.js performance benefits:</p>
+            <ol class="list-decimal list-inside space-y-2">
+                <li><strong>Click the performance demo buttons:</strong> See different Next.js performance improvements</li>
+                <li><strong>Compare loading times:</strong> Notice the difference in performance metrics</li>
+                <li><strong>Check bundle sizes:</strong> See how code splitting reduces bundle size</li>
+                <li><strong>Review image optimization:</strong> See how images are automatically optimized</li>
+                <li><strong>Explore Core Web Vitals:</strong> Understand how Next.js improves user experience</li>
+                <li><strong>Think about scalability:</strong> Consider how performance benefits large applications</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Interactive demo functions
+        function showPerformanceDemo(type) {
+            const demoArea = document.getElementById('performanceDemo');
+            
+            switch(type) {
+                case 'vitals':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Core Web Vitals Comparison</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-red-50 border border-red-200 rounded">
+                                    <h5 class="font-semibold text-red-800 mb-2">Traditional Web</h5>
+                                    <div class="space-y-2 text-sm text-red-700">
+                                        <div>❌ FCP: 3-5s (Poor)</div>
+                                        <div>❌ LCP: 5-8s (Poor)</div>
+                                        <div>❌ CLS: 0.25+ (Poor)</div>
+                                        <div>❌ FID: 300ms+ (Poor)</div>
+                                        <div class="font-semibold">Overall: Poor</div>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-green-50 border border-green-200 rounded">
+                                    <h5 class="font-semibold text-green-800 mb-2">Next.js</h5>
+                                    <div class="space-y-2 text-sm text-green-700">
+                                        <div>✅ FCP: 0.5-1s (Good)</div>
+                                        <div>✅ LCP: 1-2s (Good)</div>
+                                        <div>✅ CLS: 0.1- (Good)</div>
+                                        <div>✅ FID: 100ms- (Good)</div>
+                                        <div class="font-semibold">Overall: Excellent</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'bundling':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Code Splitting Comparison</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-red-50 border border-red-200 rounded">
+                                    <h5 class="font-semibold text-red-800 mb-2">Traditional Bundling</h5>
+                                    <div class="space-y-2 text-sm text-red-700">
+                                        <div>❌ Single large bundle (2-5MB)</div>
+                                        <div>❌ Manual code splitting setup</div>
+                                        <div>❌ Slow initial load (5-10s)</div>
+                                        <div>❌ High memory usage</div>
+                                        <div class="font-semibold">Poor Performance</div>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-green-50 border border-green-200 rounded">
+                                    <h5 class="font-semibold text-green-800 mb-2">Next.js Code Splitting</h5>
+                                    <div class="space-y-2 text-sm text-green-700">
+                                        <div>✅ Automatic code splitting</div>
+                                        <div>✅ Small bundles (100-500KB)</div>
+                                        <div>✅ Fast initial load (1-2s)</div>
+                                        <div>✅ Low memory usage</div>
+                                        <div class="font-semibold">Excellent Performance</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'images':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Image Optimization Comparison</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-red-50 border border-red-200 rounded">
+                                    <h5 class="font-semibold text-red-800 mb-2">Traditional Images</h5>
+                                    <div class="space-y-2 text-sm text-red-700">
+                                        <div>❌ Large file sizes (2-10MB)</div>
+                                        <div>❌ Inefficient formats (JPEG/PNG)</div>
+                                        <div>❌ Slow loading (3-8s)</div>
+                                        <div>❌ No responsive images</div>
+                                        <div class="font-semibold">Poor Performance</div>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-green-50 border border-green-200 rounded">
+                                    <h5 class="font-semibold text-green-800 mb-2">Next.js Image Optimization</h5>
+                                    <div class="space-y-2 text-sm text-green-700">
+                                        <div>✅ Small file sizes (50-200KB)</div>
+                                        <div>✅ Modern formats (WebP/AVIF)</div>
+                                        <div>✅ Fast loading (0.5-1s)</div>
+                                        <div>✅ Automatic responsive images</div>
+                                        <div class="font-semibold">Excellent Performance</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'metrics':
+                    demoArea.innerHTML = `
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-semibold mb-4">Performance Metrics</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="p-4 bg-blue-50 border border-blue-200 rounded text-center">
+                                    <h5 class="font-semibold text-blue-800 mb-2">First Contentful Paint</h5>
+                                    <div class="text-2xl font-bold text-blue-600">80% faster</div>
+                                    <div class="text-sm text-blue-700">3-5s → 0.5-1s</div>
+                                </div>
+                                <div class="p-4 bg-green-50 border border-green-200 rounded text-center">
+                                    <h5 class="font-semibold text-green-800 mb-2">Largest Contentful Paint</h5>
+                                    <div class="text-2xl font-bold text-green-600">75% faster</div>
+                                    <div class="text-sm text-green-700">5-8s → 1-2s</div>
+                                </div>
+                                <div class="p-4 bg-purple-50 border border-purple-200 rounded text-center">
+                                    <h5 class="font-semibold text-purple-800 mb-2">Bundle Size</h5>
+                                    <div class="text-2xl font-bold text-purple-600">90% smaller</div>
+                                    <div class="text-sm text-purple-700">2-5MB → 100-500KB</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate demo elements on load
+            const demoElements = document.querySelectorAll('.demo-element');
+            demoElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                    element.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 50);
+            });
+
+            // Add hover effects to comparison cards
+            const comparisonCards = document.querySelectorAll('.comparison-card');
+            comparisonCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 8px 25px -5px rgba(0, 0, 0, 0.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Add click effects to interactive elements
+            const interactiveElements = document.querySelectorAll('.control-button, button');
+            interactiveElements.forEach(element => {
+                element.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

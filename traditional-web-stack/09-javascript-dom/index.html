@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript DOM Manipulation - Interactive Web Pages</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> JavaScript DOM Manipulation</h1>
+            <p>Interactive web pages with JavaScript</p>
+        </div>
+
+        <!-- Button Interactions Section -->
+        <div class="section">
+            <h2> Button Interactions</h2>
+            <p>Learn how to handle button clicks and change content dynamically.</p>
+
+            <div class="demo-element">
+                <div class="property-label">Button click handlers</div>
+                <button class="interactive-button" onclick="changeContent()">Change Content</button>
+                <button class="interactive-button secondary" onclick="toggleHighlight()">Toggle Highlight</button>
+                <button class="interactive-button warning" onclick="showAlert()">Show Alert</button>
+                <button class="interactive-button danger" onclick="changeColor()">Change Color</button>
+                
+                <div class="content-area" id="contentArea">
+                    <p>This content will change when you click the buttons above!</p>
+                </div>
+                <div class="property-comment">Click buttons to see different interactions
+            
+
+            <div class="code-snippet">
+<span class="comment">// Button click handlers</span>
+function changeContent() {
+    const contentArea = document.getElementById('contentArea');
+    contentArea.innerHTML = '&lt;p&gt;Content changed! The button worked!&lt;/p&gt;';
+}
+
+function toggleHighlight() {
+    const contentArea = document.getElementById('contentArea');
+    contentArea.classList.toggle('highlighted');
+}
+
+function showAlert() {
+    alert('Hello from JavaScript!');
+}
+
+function changeColor() {
+    const contentArea = document.getElementById('contentArea');
+    contentArea.classList.toggle('error');
+}
+            </div>
+        </div>
+
+        <!-- Counter Section -->
+        <div class="section">
+            <h2> Counter</h2>
+            <p>Create a simple counter with increment and decrement buttons.</p>
+
+            <div class="demo-element">
+                <div class="property-label">Counter with buttons</div>
+                <div class="counter-display" id="counterDisplay">0</div>
+                <div class="counter-controls">
+                    <button class="interactive-button danger" onclick="decrementCounter()">-</button>
+                    <button class="interactive-button" onclick="resetCounter()">Reset</button>
+                    <button class="interactive-button secondary" onclick="incrementCounter()">+</button>
+                </div>
+                <div class="property-comment">Use buttons to change the counter value
+            
+
+            <div class="code-snippet">
+<span class="comment">// Counter functionality</span>
+let counter = 0;
+
+function incrementCounter() {
+    counter++;
+    updateCounterDisplay();
+}
+
+function decrementCounter() {
+    counter--;
+    updateCounterDisplay();
+}
+
+function resetCounter() {
+    counter = 0;
+    updateCounterDisplay();
+}
+
+function updateCounterDisplay() {
+    document.getElementById('counterDisplay').textContent = counter;
+}
+            </div>
+        </div>
+
+        <!-- Dynamic List Section -->
+        <div class="section">
+            <h2> Dynamic List</h2>
+            <p>Add and remove items from a list dynamically.</p>
+
+            <div class="demo-element">
+                <div class="property-label">Dynamic list management</div>
+                <div class="form-group">
+                    <input type="text" class="form-input" id="listInput" placeholder="Enter item name">
+                    <button class="interactive-button" onclick="addListItem()">Add Item</button>
+                </div>
+                <ul class="dynamic-list" id="dynamicList">
+                    <li>Sample Item 1 <button class="interactive-button danger" onclick="removeListItem(this)" style="float: right; padding: 0.25rem 0.5rem; font-size: 0.75rem;">Remove</button></li>
+                    <li>Sample Item 2 <button class="interactive-button danger" onclick="removeListItem(this)" style="float: right; padding: 0.25rem 0.5rem; font-size: 0.75rem;">Remove</button></li>
+                </ul>
+                <div class="property-comment">Add new items or remove existing ones
+            
+
+            <div class="code-snippet">
+<span class="comment">// Dynamic list functionality</span>
+function addListItem() {
+    const input = document.getElementById('listInput');
+    const list = document.getElementById('dynamicList');
+    
+    if (input.value.trim() !== '') {
+        const li = document.createElement('li');
+        li.innerHTML = input.value + ' &lt;button class="interactive-button danger" onclick="removeListItem(this)" style="float: right; padding: 0.25rem 0.5rem; font-size: 0.75rem;"&gt;Remove&lt;/button&gt;';
+        list.appendChild(li);
+        input.value = '';
+    }
+}
+
+function removeListItem(button) {
+    const li = button.parentElement;
+    li.classList.add('removing');
+    setTimeout(() => {
+        li.remove();
+    }, 300);
+}
+            </div>
+        </div>
+
+        <!-- Form Handling Section -->
+        <div class="section">
+            <h2> Form Handling</h2>
+            <p>Handle form submissions and validate input.</p>
+
+            <div class="demo-element">
+                <div class="property-label">Form submission handling</div>
+                <form id="demoForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name:</label>
+                        <input type="text" class="form-input" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email:</label>
+                        <input type="email" class="form-input" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message:</label>
+                        <textarea class="form-input" id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="interactive-button">Submit Form</button>
+                </form>
+                <div class="content-area" id="formResult" style="display: none;">
+                    <h3>Form Submitted!</h3>
+                    <p id="formData"></p>
+                </div>
+                <div class="property-comment">Fill out the form and submit to see the result
+            
+
+            <div class="code-snippet">
+<span class="comment">// Form handling</span>
+function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    
+    const resultArea = document.getElementById('formResult');
+    const dataDisplay = document.getElementById('formData');
+    
+    dataDisplay.innerHTML = `
+        &lt;strong&gt;Name:&lt;/strong&gt; ${data.name}&lt;br&gt;
+        &lt;strong&gt;Email:&lt;/strong&gt; ${data.email}&lt;br&gt;
+        &lt;strong&gt;Message:&lt;/strong&gt; ${data.message}
+    `;
+    
+    resultArea.style.display = 'block';
+    resultArea.classList.add('success');
+}
+            </div>
+        </div>
+
+        <!-- Image Gallery Section -->
+        <div class="section">
+            <h2>️ Image Gallery</h2>
+            <p>Create an interactive image gallery with hover effects.</p>
+
+            <div class="demo-element">
+                <div class="property-label">Interactive image gallery</div>
+                <div class="image-gallery" id="imageGallery">
+                    <div class="gallery-item" onclick="openModal('https://picsum.photos/400/300?random=1')">
+                        <img src="https://picsum.photos/150/150?random=1" alt="Gallery Image 1">
+                        <div class="overlay">Click to enlarge
+            
+                    <div class="gallery-item" onclick="openModal('https://picsum.photos/400/300?random=2')">
+                        <img src="https://picsum.photos/150/150?random=2" alt="Gallery Image 2">
+                        <div class="overlay">Click to enlarge</div>
+                    </div>
+                    <div class="gallery-item" onclick="openModal('https://picsum.photos/400/300?random=3')">
+                        <img src="https://picsum.photos/150/150?random=3" alt="Gallery Image 3">
+                        <div class="overlay">Click to enlarge</div>
+                    </div>
+                    <div class="gallery-item" onclick="openModal('https://picsum.photos/400/300?random=4')">
+                        <img src="https://picsum.photos/150/150?random=4" alt="Gallery Image 4">
+                        <div class="overlay">Click to enlarge</div>
+                    </div>
+                </div>
+                <div class="property-comment">Click on images to open them in a modal</div>
+            </div>
+
+            <div class="code-snippet">
+<span class="comment">// Image gallery functionality</span>
+function openModal(imageSrc) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    
+    modalImage.src = imageSrc;
+    modal.classList.add('show');
+}
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('show');
+}
+            </div>
+        </div>
+
+        <!-- Try This Section -->
+        <div class="section">
+            <h2> Try This</h2>
+            <p>Experiment with JavaScript interactions:</p>
+            <ol>
+                <li><strong>Click the buttons:</strong> See how they change content and styles</li>
+                <li><strong>Use the counter:</strong> Increment, decrement, and reset the counter</li>
+                <li><strong>Manage the list:</strong> Add new items and remove existing ones</li>
+                <li><strong>Submit the form:</strong> Fill out the form and see the result</li>
+                <li><strong>Browse the gallery:</strong> Click on images to see them enlarged</li>
+                <li><strong>Modify the code:</strong> Change the JavaScript functions to see different effects</li>
+            </ol>
+            
+
+    <!-- Modal for Image Gallery -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img id="modalImage" src="" alt="Enlarged Image" style="width: 100%; border-radius: 8px;">
+        </div>
+    
+        <!-- Live Code Editor Section -->
+        <div class="section">
+            <h2>Live Code Editor</h2>
+            <p>Edit code in real-time and see the results immediately!</p>
+            
+            <div class="demo-card">
+                <div class="demo-title">Live Code Editor</div>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>live-code.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
+            
+                    <div id="live-code" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="live-code-lines">0 lines</span>
+                            <span id="live-code-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="live-code-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="live-code-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-live-code">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

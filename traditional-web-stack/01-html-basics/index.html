@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive HTML Structure - Click to Explore</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> Interactive HTML Structure</h1>
+            <p>Click the buttons below to explore different HTML elements and their structure</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-button active" onclick="showSection('overview')">Overview</button>
+            <button class="nav-button" onclick="showSection('headings')">Headings</button>
+            <button class="nav-button" onclick="showSection('text')">Text Elements</button>
+            <button class="nav-button" onclick="showSection('lists')">Lists</button>
+            <button class="nav-button" onclick="showSection('forms')">Forms</button>
+            <button class="nav-button" onclick="showSection('interactive')">Interactive</button>
+        </div>
+
+        <!-- Overview Section -->
+        <div id="overview" class="content-section active">
+            <h2 class="section-title"> HTML Structure Overview</h2>
+            <p>HTML (HyperText Markup Language) is the foundation of web pages. It uses tags to structure content and create the visual elements you see on websites.</p>
+
+            <div class="element-demo">
+                <div class="element-label">Basic HTML Document Structure</div>
+                <div class="structure-visual">
+&lt;<span class="tag">!DOCTYPE html</span>&gt;<br>
+&lt;<span class="tag">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;<br>
+<span class="indent">&lt;<span class="tag">head</span>&gt;</span><br>
+<span class="indent"><span class="indent">&lt;<span class="tag">title</span>&gt;<span class="content">Page Title</span>&lt;/<span class="tag">title</span>&gt;</span></span><br>
+<span class="indent">&lt;/<span class="tag">head</span>&gt;</span><br>
+<span class="indent">&lt;<span class="tag">body</span>&gt;</span><br>
+<span class="indent"><span class="indent">&lt;<span class="tag">h1</span>&gt;<span class="content">Main Heading</span>&lt;/<span class="tag">h1</span>&gt;</span></span><br>
+<span class="indent"><span class="indent">&lt;<span class="tag">p</span>&gt;<span class="content">Paragraph content</span>&lt;/<span class="tag">p</span>&gt;</span></span><br>
+<span class="indent">&lt;/<span class="tag">body</span>&gt;</span><br>
+&lt;/<span class="tag">html</span>&gt;
+                </div>
+                <div class="element-comment">Every HTML document follows this basic structure</div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h4>️ HTML Structure</h4>
+                    <ul>
+                        <li>Uses tags to define elements</li>
+                        <li>Tags come in pairs (opening and closing)</li>
+                        <li>Content goes between tags</li>
+                        <li>Creates the skeleton of your page</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4> CSS Styling</h4>
+                    <ul>
+                        <li>Controls visual appearance</li>
+                        <li>Colors, fonts, spacing</li>
+                        <li>Layout and positioning</li>
+                        <li>Makes HTML look beautiful</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3> Try This</h3>
+                <p>Click the buttons above to explore different HTML elements and see how they work!</p>
+                <button class="demo-button" onclick="showDemoResult('overview')">Show HTML Structure</button>
+                <div id="overviewResult" class="demo-result">
+                    <p>HTML is like the skeleton of a webpage - it defines the structure and content, while CSS provides the styling and JavaScript adds interactivity!</p>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <h4 style="color: #fbbf24; margin: 0 0 0.5rem 0;">Basic HTML Structure:</h4>
+                        <code style="color: #10b981;">&lt;!DOCTYPE html&gt;</code><br>
+                        <code style="color: #3b82f6;">&lt;html&gt;</code><br>
+                        <code style="color: #3b82f6;">&nbsp;&nbsp;&lt;head&gt;</code><br>
+                        <code style="color: #3b82f6;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Page Title&lt;/title&gt;</code><br>
+                        <code style="color: #3b82f6;">&nbsp;&nbsp;&lt;/head&gt;</code><br>
+                        <code style="color: #3b82f6;">&nbsp;&nbsp;&lt;body&gt;</code><br>
+                        <code style="color: #3b82f6;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Hello World!&lt;/h1&gt;</code><br>
+                        <code style="color: #3b82f6;">&nbsp;&nbsp;&lt;/body&gt;</code><br>
+                        <code style="color: #3b82f6;">&lt;/html&gt;</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Code Editor for Overview -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor - HTML Structure</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>overview.html</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('overview-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('overview-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('overview-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="overview-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="overview-editor-lines">0 lines</span>
+                            <span id="overview-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="overview-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="overview-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-overview-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Headings Section -->
+        <div id="headings" class="content-section">
+            <h2 class="section-title"> Heading Elements (h1 - h6)</h2>
+            <p>Headings create hierarchy and structure in your content. They help users and search engines understand your page organization.</p>
+
+            <div class="element-demo">
+                <div class="element-label">Heading Hierarchy</div>
+                <div class="structure-visual">
+&lt;<span class="tag">h1</span>&gt;<span class="content">Main Page Title</span>&lt;/<span class="tag">h1</span>&gt;<br>
+&lt;<span class="tag">h2</span>&gt;<span class="content">Section Heading</span>&lt;/<span class="tag">h2</span>&gt;<br>
+<span class="indent">&lt;<span class="tag">h3</span>&gt;<span class="content">Subsection</span>&lt;/<span class="tag">h3</span>&gt;</span><br>
+<span class="indent">&lt;<span class="tag">h3</span>&gt;<span class="content">Another Subsection</span>&lt;/<span class="tag">h3</span>&gt;</span><br>
+&lt;<span class="tag">h2</span>&gt;<span class="content">Another Section</span>&lt;/<span class="tag">h2</span>&gt;
+                </div>
+                <div class="element-comment">Use headings to create a logical content hierarchy</div>
+            </div>
+
+            <div class="code-example">
+<span class="comment">&lt;!-- Visual representation of heading sizes --&gt;</span>
+&lt;<span class="tag">h1</span>&gt;<span class="content">This is H1 - Largest</span>&lt;/<span class="tag">h1</span>&gt;
+&lt;<span class="tag">h2</span>&gt;<span class="content">This is H2 - Large</span>&lt;/<span class="tag">h2</span>&gt;
+&lt;<span class="tag">h3</span>&gt;<span class="content">This is H3 - Medium</span>&lt;/<span class="tag">h3</span>&gt;
+&lt;<span class="tag">h4</span>&gt;<span class="content">This is H4 - Small</span>&lt;/<span class="tag">h4</span>&gt;
+&lt;<span class="tag">h5</span>&gt;<span class="content">This is H5 - Smaller</span>&lt;/<span class="tag">h5</span>&gt;
+&lt;<span class="tag">h6</span>&gt;<span class="content">This is H6 - Smallest</span>&lt;/<span class="tag">h6</span>&gt;
+            </div>
+
+            <div class="interactive-demo">
+                <h3> Interactive Heading Demo</h3>
+                <p>Click the buttons to see different heading styles:</p>
+                <button class="demo-button" onclick="showDemoResult('headings')">Show Heading Structure</button>
+                <div id="headingsResult" class="demo-result">
+                    <h1 style="color: white; margin: 0.5rem 0;">H1: Main Title</h1>
+                    <h2 style="color: white; margin: 0.5rem 0;">H2: Section Title</h2>
+                    <h3 style="color: white; margin: 0.5rem 0;">H3: Subsection</h3>
+                    <p style="margin: 0;">Notice how each heading has a different size and importance!</p>
+                </div>
+            </div>
+
+            <!-- Live Code Editor for Headings -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor - HTML Headings</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>headings.html</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('headings-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('headings-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('headings-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="headings-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="headings-editor-lines">0 lines</span>
+                            <span id="headings-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="headings-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="headings-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-headings-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text Elements Section -->
+        <div id="text" class="content-section">
+            <h2 class="section-title"> Text Elements</h2>
+            <p>Text elements are the building blocks of content. They help organize and structure your text.</p>
+
+            <div class="element-demo">
+                <div class="element-label">Paragraph and Text Elements</div>
+                <div class="structure-visual">
+&lt;<span class="tag">p</span>&gt;<span class="content">This is a paragraph with regular text.</span>&lt;/<span class="tag">p</span>&gt;<br>
+&lt;<span class="tag">p</span>&gt;<span class="content">This paragraph has &lt;<span class="tag">strong</span>&gt;<span class="content">bold text</span>&lt;/<span class="tag">strong</span>&gt; and &lt;<span class="tag">em</span>&gt;<span class="content">italic text</span>&lt;/<span class="tag">em</span>&gt;.</span>&lt;/<span class="tag">p</span>&gt;<br>
+&lt;<span class="tag">p</span>&gt;<span class="content">You can also use &lt;<span class="tag">span</span>&gt;<span class="content">span elements</span>&lt;/<span class="tag">span</span>&gt; for inline styling.</span>&lt;/<span class="tag">p</span>&gt;
+                </div>
+                <div class="element-comment">Text elements help organize and style your content</div>
+            </div>
+
+            <div class="code-example">
+<span class="comment">&lt;!-- Different text formatting options --&gt;</span>
+&lt;<span class="tag">p</span>&gt;<span class="content">Regular paragraph text</span>&lt;/<span class="tag">p</span>&gt;
+&lt;<span class="tag">strong</span>&gt;<span class="content">Bold text for emphasis</span>&lt;/<span class="tag">strong</span>&gt;
+&lt;<span class="tag">em</span>&gt;<span class="content">Italic text for emphasis</span>&lt;/<span class="tag">em</span>&gt;
+&lt;<span class="tag">code</span>&gt;<span class="content">Inline code</span>&lt;/<span class="tag">code</span>&gt;
+&lt;<span class="tag">span</span>&gt;<span class="content">Generic inline element</span>&lt;/<span class="tag">span</span>&gt;
+            </div>
+
+            <div class="interactive-demo">
+                <h3> Text Formatting Demo</h3>
+                <p>Click to see different text formatting options:</p>
+                <button class="demo-button" onclick="showDemoResult('text')">Show Text Formatting</button>
+                <div id="textResult" class="demo-result">
+                    <p style="margin: 0.5rem 0;">Regular paragraph text</p>
+                    <p style="margin: 0.5rem 0;"><strong style="color: #fbbf24;">Bold text for emphasis</strong></p>
+                    <p style="margin: 0.5rem 0;"><em style="color: #10b981;">Italic text for emphasis</em></p>
+                    <p style="margin: 0.5rem 0;"><code style="background: rgba(255,255,255,0.2); padding: 0.25rem; border-radius: 4px;">Inline code</code></p>
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>lists.html</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('lists-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('lists-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('lists-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="lists-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="lists-editor-lines">0 lines</span>
+                            <span id="lists-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="lists-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="lists-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-lists-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+                </div>
+            
+
+        <!-- Lists Section -->
+        <div id="lists" class="content-section">
+            <h2 class="section-title"> List Elements</h2>
+            <p>Lists help organize information in structured ways. There are two main types: ordered (numbered) and unordered (bulleted).</p>
+
+            <div class="element-demo">
+                <div class="element-label">List Structure</div>
+                <div class="structure-visual">
+&lt;<span class="tag">ul</span>&gt; <span class="comment">&lt;!-- Unordered list (bullets) --&gt;</span><br>
+<span class="indent">&lt;<span class="tag">li</span>&gt;<span class="content">First item</span>&lt;/<span class="tag">li</span>&gt;</span><br>
+<span class="indent">&lt;<span class="tag">li</span>&gt;<span class="content">Second item</span>&lt;/<span class="tag">li</span>&gt;</span><br>
+<span class="indent">&lt;<span class="tag">li</span>&gt;<span class="content">Third item</span>&lt;/<span class="tag">li</span>&gt;</span><br>
+&lt;/<span class="tag">ul</span>&gt;<br><br>
+&lt;<span class="tag">ol</span>&gt; <span class="comment">&lt;!-- Ordered list (numbers) --&gt;</span><br>
+<span class="indent">&lt;<span class="tag">li</span>&gt;<span class="content">First step</span>&lt;/<span class="tag">li</span>&gt;</span><br>
+<span class="indent">&lt;<span class="tag">li</span>&gt;<span class="content">Second step</span>&lt;/<span class="tag">li</span>&gt;</span><br>
+<span class="indent">&lt;<span class="tag">li</span>&gt;<span class="content">Third step</span>&lt;/<span class="tag">li</span>&gt;</span><br>
+&lt;/<span class="tag">ol</span>&gt;
+                </div>
+                <div class="element-comment">Lists organize information in structured ways</div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3> List Demo</h3>
+                <p>Click to see different list types:</p>
+                <button class="demo-button" onclick="showDemoResult('lists')">Show List Types</button>
+                <div id="listsResult" class="demo-result">
+                    <div style="text-align: left;">
+                        <h4 style="color: #fbbf24; margin: 1rem 0 0.5rem 0;">Unordered List (Bullets):</h4>
+                        <ul style="margin: 0 0 1rem 0; padding-left: 1.5rem;">
+                            <li>First item</li>
+                            <li>Second item</li>
+                            <li>Third item</li>
+                        </ul>
+                        <h4 style="color: #10b981; margin: 1rem 0 0.5rem 0;">Ordered List (Numbers):</h4>
+                        <ol style="margin: 0; padding-left: 1.5rem;">
+                            <li>First step</li>
+                            <li>Second step</li>
+                            <li>Third step</li>
+                        </ol>
+                    </div>
+                    </div>
+                    <div class="live-preview" id="live-preview">
+                        <div class="live-preview-header">
+                            <div class="live-preview-title">Live Preview</div>
+                        </div>
+                        <div id="live-preview-content">
+                            <!-- Live preview content will be inserted here -->
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>forms.html</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('forms-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('forms-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('forms-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="forms-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="forms-editor-lines">0 lines</span>
+                            <span id="forms-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="forms-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="forms-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-forms-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+                        </div>
+            
+
+        <!-- Forms Section -->
+        <div id="forms" class="content-section">
+            <h2 class="section-title"> Form Elements</h2>
+            <p>Forms collect information from users. They contain various input elements for different types of data.</p>
+
+            <div class="element-demo">
+                <div class="element-label">Form Structure</div>
+                <div class="structure-visual">
+&lt;<span class="tag">form</span> <span class="attribute">action</span>=<span class="value">"/submit"</span> <span class="attribute">method</span>=<span class="value">"POST"</span>&gt;<br>
+<span class="indent">&lt;<span class="tag">label</span> <span class="attribute">for</span>=<span class="value">"name"</span>&gt;<span class="content">Name:</span>&lt;/<span class="tag">label</span>&gt;</span><br>
+<span class="indent">&lt;<span class="tag">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">id</span>=<span class="value">"name"</span> <span class="attribute">name</span>=<span class="value">"name"</span>&gt;</span><br>
+<span class="indent">&lt;<span class="tag">label</span> <span class="attribute">for</span>=<span class="value">"email"</span>&gt;<span class="content">Email:</span>&lt;/<span class="tag">label</span>&gt;</span><br>
+<span class="indent">&lt;<span class="tag">input</span> <span class="attribute">type</span>=<span class="value">"email"</span> <span class="attribute">id</span>=<span class="value">"email"</span> <span class="attribute">name</span>=<span class="value">"email"</span>&gt;</span><br>
+<span class="indent">&lt;<span class="tag">button</span> <span class="attribute">type</span>=<span class="value">"submit"</span>&gt;<span class="content">Submit</span>&lt;/<span class="tag">button</span>&gt;</span><br>
+&lt;/<span class="tag">form</span>&gt;
+                </div>
+                <div class="element-comment">Forms group related input elements together</div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3> Form Demo</h3>
+                <p>Click to see a sample form:</p>
+                <button class="demo-button" onclick="showDemoResult('forms')">Show Form Elements</button>
+                <div id="formsResult" class="demo-result">
+                    <div style="text-align: left;">
+                        <form style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Name:</label>
+                            <input type="text" placeholder="Enter your name" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <label style="display: block; margin-bottom: 0.5rem; color: white;">Email:</label>
+                            <input type="email" placeholder="Enter your email" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.9); color: black; margin-bottom: 1rem;">
+                            
+                            <button type="button" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Submit</button>
+                        </form>
+                    </div>
+                    </div>
+                    <div class="live-preview" id="live-preview">
+                        <div class="live-preview-header">
+                            <div class="live-preview-title">Live Preview</div>
+                        </div>
+                        <div id="live-preview-content">
+                            <!-- Live preview content will be inserted here -->
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>interactive.html</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('interactive-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('interactive-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('interactive-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="interactive-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="interactive-editor-lines">0 lines</span>
+                            <span id="interactive-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="interactive-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="interactive-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-interactive-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+                        </div>
+            
+
+        <!-- Interactive Section -->
+        <div id="interactive" class="content-section">
+            <h2 class="section-title"> Interactive Elements</h2>
+            <p>Interactive elements respond to user actions like clicks, hovers, and form submissions.</p>
+
+            <div class="element-demo">
+                <div class="element-label">Interactive Element Structure</div>
+                <div class="structure-visual">
+&lt;<span class="tag">button</span> <span class="attribute">onclick</span>=<span class="value">"myFunction()"</span>&gt;<span class="content">Click Me!</span>&lt;/<span class="tag">button</span>&gt;<br>
+&lt;<span class="tag">a</span> <span class="attribute">href</span>=<span class="value">"https://example.com"</span>&gt;<span class="content">Link to Website</span>&lt;/<span class="tag">a</span>&gt;<br>
+&lt;<span class="tag">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"Input Button"</span>&gt;
+                </div>
+                <div class="element-comment">Interactive elements respond to user actions</div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3> Interactive Demo</h3>
+                <p>Try these interactive elements:</p>
+                <button class="demo-button" onclick="showDemoResult('interactive')">Show Interactive Elements</button>
+                <button class="demo-button" onclick="changeBackground()">Change Background</button>
+                <button class="demo-button" onclick="showAlert()">Show Alert</button>
+                <div id="interactiveResult" class="demo-result">
+                    <p>Interactive elements make your webpage respond to user actions!</p>
+                    <p>Try clicking the buttons above to see different interactions.</p>
+                </div>
+                    </div>
+                    <div class="live-preview" id="live-preview">
+                        <div class="live-preview-header">
+                            <div class="live-preview-title">Live Preview</div>
+                        </div>
+                        <div id="live-preview-content">
+                            <!-- Live preview content will be inserted here -->
+                        </div>
+                    </div>
+                
+        <!-- Live Code Editor Section -->
+        <div class="section">
+            <h2>Live Code Editor</h2>
+            <p>Edit code in real-time and see the results immediately!</p>
+            
+            <div class="demo-card">
+                <div class="demo-title">Live Code Editor</div>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>live-code.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
+            
+                    <div id="live-code" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="live-code-lines">0 lines</span>
+                            <span id="live-code-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="live-code-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="live-code-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-live-code">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Color Demo - Interactive Color Changing</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> CSS Color Demo</h1>
+            <p>Interactive color changing examples and color theory</p>
+        </div>
+
+        <!-- Color Palette Section -->
+        <div class="section">
+            <h2> Color Palette</h2>
+            <p>Click on any color below to see it in action:</p>
+
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #3b82f6;" onclick="applyColor('#3b82f6')"></div>
+                    <div class="color-name">Blue</div>
+                    <div class="color-code">#3b82f6
+            
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #10b981;" onclick="applyColor('#10b981')"></div>
+                    <div class="color-name">Green</div>
+                    <div class="color-code">#10b981</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #ef4444;" onclick="applyColor('#ef4444')"></div>
+                    <div class="color-name">Red</div>
+                    <div class="color-code">#ef4444</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #f59e0b;" onclick="applyColor('#f59e0b')"></div>
+                    <div class="color-name">Orange</div>
+                    <div class="color-code">#f59e0b</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #8b5cf6;" onclick="applyColor('#8b5cf6')"></div>
+                    <div class="color-name">Purple</div>
+                    <div class="color-code">#8b5cf6</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #06b6d4;" onclick="applyColor('#06b6d4')"></div>
+                    <div class="color-name">Cyan</div>
+                    <div class="color-code">#06b6d4</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #84cc16;" onclick="applyColor('#84cc16')"></div>
+                    <div class="color-name">Lime</div>
+                    <div class="color-code">#84cc16</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #f97316;" onclick="applyColor('#f97316')"></div>
+                    <div class="color-name">Orange Red</div>
+                    <div class="color-code">#f97316</div>
+                    </div>
+                    <div class="live-preview" id="live-preview">
+                        <div class="live-preview-header">
+                            <div class="live-preview-title">Live Preview</div>
+                        </div>
+                        <div id="live-preview-content">
+                            <!-- Live preview content will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+        <!-- Interactive Color Demo -->
+        <div class="interactive-demo">
+            <h3> Interactive Color Demo</h3>
+            <p>Click the buttons below to change colors, or use the color picker:</p>
+            
+            <button class="color-button" onclick="changeTextColor()">Change Text Color</button>
+            <button class="color-button" onclick="changeBackgroundColor()">Change Background</button>
+            <button class="color-button" onclick="changeBorderColor()">Change Border</button>
+            <button class="color-button" onclick="randomColors()">Random Colors</button>
+            
+            <div class="demo-area" id="demoArea">
+                <div class="demo-text" id="demoText">This text will change color when you click the buttons!</div>
+                <div class="demo-background" id="demoBackground">This background will change color too!</div>
+            </div>
+
+            <div style="margin: 1rem 0;">
+                <label for="colorPicker" style="color: white; margin-right: 1rem;">Custom Color:</label>
+                <input type="color" id="colorPicker" class="color-input" onchange="applyCustomColor(this.value)">
+            </div>
+        </div>
+
+        <!-- Color Combinations Section -->
+        <div class="section">
+            <h2> Color Combinations</h2>
+            <p>Learn about good and bad color combinations:</p>
+
+            <div class="color-combination">
+                <div class="combination-card">
+                    <div class="combination-title"> Good Combination</div>
+                    <div class="combination-demo good-combination">
+                        Blue background with white text
+                    </div>
+                    <div class="code-snippet">
+<span class="property">background-color</span>: <span class="value">#3b82f6</span>; <span class="comment">/* Blue */</span>
+<span class="property">color</span>: <span class="value">white</span>; <span class="comment">/* White text */</span>
+                    </div>
+                    <p style="color: var(--secondary-color); font-weight: 600;">High contrast = Good readability</p>
+                </div>
+
+                <div class="combination-card">
+                    <div class="combination-title"> Bad Combination</div>
+                    <div class="combination-demo bad-combination">
+                        Red background with red text
+                    </div>
+                    <div class="code-snippet">
+<span class="property">background-color</span>: <span class="value">#ef4444</span>; <span class="comment">/* Red */</span>
+<span class="property">color</span>: <span class="value">#ef4444</span>; <span class="comment">/* Red text */</span>
+                    </div>
+                    <p style="color: var(--danger-color); font-weight: 600;">Low contrast = Poor readability</p>
+            
+        </div>
+
+        <!-- Color Theory Section -->
+        <div class="section">
+            <h2> Color Theory Basics</h2>
+            <p>Understanding how colors work together:</p>
+
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: linear-gradient(45deg, #3b82f6, #10b981);"></div>
+                    <div class="color-name">Complementary</div>
+                    <div class="color-code">Blue + Green</div>
+                    <p style="font-size: 0.875rem; color: #64748b; margin-top: 0.5rem;">Colors opposite on the color wheel</p>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: linear-gradient(45deg, #3b82f6, #1d4ed8, #1e40af);"></div>
+                    <div class="color-name">Analogous</div>
+                    <div class="color-code">Blue shades</div>
+                    <p style="font-size: 0.875rem; color: #64748b; margin-top: 0.5rem;">Colors next to each other</p>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);"></div>
+                    <div class="color-name">Triadic</div>
+                    <div class="color-code">Blue + Purple + Pink</div>
+                    <p style="font-size: 0.875rem; color: #64748b; margin-top: 0.5rem;">Three evenly spaced colors</p>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: linear-gradient(45deg, #3b82f6, #06b6d4, #10b981, #84cc16);"></div>
+                    <div class="color-name">Tetradic</div>
+                    <div class="color-code">Four colors</div>
+                    <p style="font-size: 0.875rem; color: #64748b; margin-top: 0.5rem;">Two complementary pairs</p>
+            
+        </div>
+
+        <!-- Quick Color Palette -->
+        <div class="section">
+            <h2> Quick Color Palette</h2>
+            <p>Click any color below to apply it to the demo area:</p>
+
+            <div class="color-palette">
+                <div class="palette-color" style="background-color: #ef4444;" onclick="applyColor('#ef4444')"></div>
+                <div class="palette-color" style="background-color: #f97316;" onclick="applyColor('#f97316')"></div>
+                <div class="palette-color" style="background-color: #f59e0b;" onclick="applyColor('#f59e0b')"></div>
+                <div class="palette-color" style="background-color: #eab308;" onclick="applyColor('#eab308')"></div>
+                <div class="palette-color" style="background-color: #84cc16;" onclick="applyColor('#84cc16')"></div>
+                <div class="palette-color" style="background-color: #22c55e;" onclick="applyColor('#22c55e')"></div>
+                <div class="palette-color" style="background-color: #10b981;" onclick="applyColor('#10b981')"></div>
+                <div class="palette-color" style="background-color: #06b6d4;" onclick="applyColor('#06b6d4')"></div>
+                <div class="palette-color" style="background-color: #0ea5e9;" onclick="applyColor('#0ea5e9')"></div>
+                <div class="palette-color" style="background-color: #3b82f6;" onclick="applyColor('#3b82f6')"></div>
+                <div class="palette-color" style="background-color: #6366f1;" onclick="applyColor('#6366f1')"></div>
+                <div class="palette-color" style="background-color: #8b5cf6;" onclick="applyColor('#8b5cf6')"></div>
+                <div class="palette-color" style="background-color: #a855f7;" onclick="applyColor('#a855f7')"></div>
+                <div class="palette-color" style="background-color: #d946ef;" onclick="applyColor('#d946ef')"></div>
+                <div class="palette-color" style="background-color: #ec4899;" onclick="applyColor('#ec4899')"></div>
+                <div class="palette-color" style="background-color: #f43f5e;" onclick="applyColor('#f43f5e')">
+            
+        </div>
+
+        <!-- Try This Section -->
+        <div class="section">
+            <h2> Try This</h2>
+            <p>Experiment with colors:</p>
+            <ol>
+                <li><strong>Click color swatches:</strong> Click any color above to see it applied</li>
+                <li><strong>Use the color picker:</strong> Choose your own custom colors</li>
+                <li><strong>Try different combinations:</strong> Mix and match colors</li>
+                <li><strong>Test readability:</strong> Make sure text is readable on colored backgrounds</li>
+                <li><strong>Create themes:</strong> Use consistent colors throughout your design</li>
+                <li><strong>Consider accessibility:</strong> Ensure sufficient contrast for all users</li>
+            </ol>
+        </div>
+    
+        <!-- Live Code Editor Section -->
+        <div class="section">
+            <h2>Live Code Editor</h2>
+            <p>Edit code in real-time and see the results immediately!</p>
+            
+            <div class="demo-card">
+                <div class="demo-title">Live Code Editor</div>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>live-code.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
+            
+                    <div id="live-code" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="live-code-lines">0 lines</span>
+                            <span id="live-code-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="live-code-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="live-code-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-live-code">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
