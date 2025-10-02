@@ -5,281 +5,89 @@
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript DOM Manipulation - Interactive Web Pages</title>
-    
+    <title>JavaScript DOM Manipulation</title>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1> JavaScript DOM Manipulation</h1>
-            <p>Interactive web pages with JavaScript</p>
+            <h1>JavaScript DOM Manipulation</h1>
+            <p>Learn to manipulate the Document Object Model with JavaScript</p>
         </div>
 
-        <!-- Button Interactions Section -->
-        <div class="section">
-            <h2> Button Interactions</h2>
-            <p>Learn how to handle button clicks and change content dynamically.</p>
+        <div class="navigation">
+            <button class="nav-button active" onclick="showSection('dom-basics')">DOM Fundamentals</button>
+<button class="nav-button " onclick="showSection('dom-events')">DOM and Events</button>
+        </div>
 
-            <div class="demo-element">
-                <div class="property-label">Button click handlers</div>
-                <button class="interactive-button" onclick="changeContent()">Change Content</button>
-                <button class="interactive-button secondary" onclick="toggleHighlight()">Toggle Highlight</button>
-                <button class="interactive-button warning" onclick="showAlert()">Show Alert</button>
-                <button class="interactive-button danger" onclick="changeColor()">Change Color</button>
-                
-                <div class="content-area" id="contentArea">
-                    <p>This content will change when you click the buttons above!</p>
+        
+        <!-- DOM Fundamentals Section -->
+        <div id="dom-basics" class="content-section active">
+            <h2 class="section-title">DOM Fundamentals</h2>
+            
+					<p>The Document Object Model (DOM) represents the structure of HTML documents and allows JavaScript to interact with elements.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">DOM Selection</div>
+						<div class="structure-visual">
+// Select elements<br>
+const element = document.getElementById('myId');<br>
+const elements = document.querySelectorAll('.myClass');<br>
+const firstElement = document.querySelector('.myClass');<br><br>
+// Modify content<br>
+element.textContent = 'New text';<br>
+element.innerHTML = '&lt;strong&gt;Bold text&lt;/strong&gt;';
+						</div>
+						<div class="element-comment">DOM methods allow you to select and modify elements</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 DOM Selection Methods</h3>
+						<ul>
+							<li><strong>getElementById():</strong> Select by ID</li>
+							<li><strong>getElementsByClassName():</strong> Select by class</li>
+							<li><strong>querySelector():</strong> CSS selector (first match)</li>
+							<li><strong>querySelectorAll():</strong> CSS selector (all matches)</li>
+						</ul>
+					</div>
+            
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('dom-basics')">Show DOM Fundamentals Demo</button>
+                <div id="dom-basicsResult" class="demo-result">
+                    
+					<div style="background: #f8fafc; padding: 2rem; border-radius: 12px;">
+						<div id="dom-demo" style="background: #3b82f6; color: white; padding: 1rem; border-radius: 8px; text-align: center; margin-bottom: 1rem;">
+							Click the button to change this text!
+						</div>
+						<button onclick="document.getElementById('dom-demo').textContent='Text changed with DOM manipulation!'" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+							Change Text
+						</button>
+					</div>
                 </div>
-                <div class="property-comment">Click buttons to see different interactions
-            
-
-            <div class="code-snippet">
-<span class="comment">// Button click handlers</span>
-function changeContent() {
-    const contentArea = document.getElementById('contentArea');
-    contentArea.innerHTML = '&lt;p&gt;Content changed! The button worked!&lt;/p&gt;';
-}
-
-function toggleHighlight() {
-    const contentArea = document.getElementById('contentArea');
-    contentArea.classList.toggle('highlighted');
-}
-
-function showAlert() {
-    alert('Hello from JavaScript!');
-}
-
-function changeColor() {
-    const contentArea = document.getElementById('contentArea');
-    contentArea.classList.toggle('error');
-}
             </div>
-        </div>
-
-        <!-- Counter Section -->
-        <div class="section">
-            <h2> Counter</h2>
-            <p>Create a simple counter with increment and decrement buttons.</p>
-
-            <div class="demo-element">
-                <div class="property-label">Counter with buttons</div>
-                <div class="counter-display" id="counterDisplay">0</div>
-                <div class="counter-controls">
-                    <button class="interactive-button danger" onclick="decrementCounter()">-</button>
-                    <button class="interactive-button" onclick="resetCounter()">Reset</button>
-                    <button class="interactive-button secondary" onclick="incrementCounter()">+</button>
-                </div>
-                <div class="property-comment">Use buttons to change the counter value
             
-
-            <div class="code-snippet">
-<span class="comment">// Counter functionality</span>
-let counter = 0;
-
-function incrementCounter() {
-    counter++;
-    updateCounterDisplay();
-}
-
-function decrementCounter() {
-    counter--;
-    updateCounterDisplay();
-}
-
-function resetCounter() {
-    counter = 0;
-    updateCounterDisplay();
-}
-
-function updateCounterDisplay() {
-    document.getElementById('counterDisplay').textContent = counter;
-}
-            </div>
-        </div>
-
-        <!-- Dynamic List Section -->
-        <div class="section">
-            <h2> Dynamic List</h2>
-            <p>Add and remove items from a list dynamically.</p>
-
-            <div class="demo-element">
-                <div class="property-label">Dynamic list management</div>
-                <div class="form-group">
-                    <input type="text" class="form-input" id="listInput" placeholder="Enter item name">
-                    <button class="interactive-button" onclick="addListItem()">Add Item</button>
-                </div>
-                <ul class="dynamic-list" id="dynamicList">
-                    <li>Sample Item 1 <button class="interactive-button danger" onclick="removeListItem(this)" style="float: right; padding: 0.25rem 0.5rem; font-size: 0.75rem;">Remove</button></li>
-                    <li>Sample Item 2 <button class="interactive-button danger" onclick="removeListItem(this)" style="float: right; padding: 0.25rem 0.5rem; font-size: 0.75rem;">Remove</button></li>
-                </ul>
-                <div class="property-comment">Add new items or remove existing ones
             
-
-            <div class="code-snippet">
-<span class="comment">// Dynamic list functionality</span>
-function addListItem() {
-    const input = document.getElementById('listInput');
-    const list = document.getElementById('dynamicList');
-    
-    if (input.value.trim() !== '') {
-        const li = document.createElement('li');
-        li.innerHTML = input.value + ' &lt;button class="interactive-button danger" onclick="removeListItem(this)" style="float: right; padding: 0.25rem 0.5rem; font-size: 0.75rem;"&gt;Remove&lt;/button&gt;';
-        list.appendChild(li);
-        input.value = '';
-    }
-}
-
-function removeListItem(button) {
-    const li = button.parentElement;
-    li.classList.add('removing');
-    setTimeout(() => {
-        li.remove();
-    }, 300);
-}
-            </div>
-        </div>
-
-        <!-- Form Handling Section -->
-        <div class="section">
-            <h2> Form Handling</h2>
-            <p>Handle form submissions and validate input.</p>
-
-            <div class="demo-element">
-                <div class="property-label">Form submission handling</div>
-                <form id="demoForm" onsubmit="handleFormSubmit(event)">
-                    <div class="form-group">
-                        <label class="form-label" for="name">Name:</label>
-                        <input type="text" class="form-input" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="email">Email:</label>
-                        <input type="email" class="form-input" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="message">Message:</label>
-                        <textarea class="form-input" id="message" name="message" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="interactive-button">Submit Form</button>
-                </form>
-                <div class="content-area" id="formResult" style="display: none;">
-                    <h3>Form Submitted!</h3>
-                    <p id="formData"></p>
-                </div>
-                <div class="property-comment">Fill out the form and submit to see the result
-            
-
-            <div class="code-snippet">
-<span class="comment">// Form handling</span>
-function handleFormSubmit(event) {
-    event.preventDefault();
-    
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    
-    const resultArea = document.getElementById('formResult');
-    const dataDisplay = document.getElementById('formData');
-    
-    dataDisplay.innerHTML = `
-        &lt;strong&gt;Name:&lt;/strong&gt; ${data.name}&lt;br&gt;
-        &lt;strong&gt;Email:&lt;/strong&gt; ${data.email}&lt;br&gt;
-        &lt;strong&gt;Message:&lt;/strong&gt; ${data.message}
-    `;
-    
-    resultArea.style.display = 'block';
-    resultArea.classList.add('success');
-}
-            </div>
-        </div>
-
-        <!-- Image Gallery Section -->
-        <div class="section">
-            <h2>️ Image Gallery</h2>
-            <p>Create an interactive image gallery with hover effects.</p>
-
-            <div class="demo-element">
-                <div class="property-label">Interactive image gallery</div>
-                <div class="image-gallery" id="imageGallery">
-                    <div class="gallery-item" onclick="openModal('https://picsum.photos/400/300?random=1')">
-                        <img src="https://picsum.photos/150/150?random=1" alt="Gallery Image 1">
-                        <div class="overlay">Click to enlarge
-            
-                    <div class="gallery-item" onclick="openModal('https://picsum.photos/400/300?random=2')">
-                        <img src="https://picsum.photos/150/150?random=2" alt="Gallery Image 2">
-                        <div class="overlay">Click to enlarge</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('https://picsum.photos/400/300?random=3')">
-                        <img src="https://picsum.photos/150/150?random=3" alt="Gallery Image 3">
-                        <div class="overlay">Click to enlarge</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('https://picsum.photos/400/300?random=4')">
-                        <img src="https://picsum.photos/150/150?random=4" alt="Gallery Image 4">
-                        <div class="overlay">Click to enlarge</div>
-                    </div>
-                </div>
-                <div class="property-comment">Click on images to open them in a modal</div>
-            </div>
-
-            <div class="code-snippet">
-<span class="comment">// Image gallery functionality</span>
-function openModal(imageSrc) {
-    const modal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-    
-    modalImage.src = imageSrc;
-    modal.classList.add('show');
-}
-
-function closeModal() {
-    const modal = document.getElementById('imageModal');
-    modal.classList.remove('show');
-}
-            </div>
-        </div>
-
-        <!-- Try This Section -->
-        <div class="section">
-            <h2> Try This</h2>
-            <p>Experiment with JavaScript interactions:</p>
-            <ol>
-                <li><strong>Click the buttons:</strong> See how they change content and styles</li>
-                <li><strong>Use the counter:</strong> Increment, decrement, and reset the counter</li>
-                <li><strong>Manage the list:</strong> Add new items and remove existing ones</li>
-                <li><strong>Submit the form:</strong> Fill out the form and see the result</li>
-                <li><strong>Browse the gallery:</strong> Click on images to see them enlarged</li>
-                <li><strong>Modify the code:</strong> Change the JavaScript functions to see different effects</li>
-            </ol>
-            
-
-    <!-- Modal for Image Gallery -->
-    <div class="modal" id="imageModal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <img id="modalImage" src="" alt="Enlarged Image" style="width: 100%; border-radius: 8px;">
-        </div>
-    
-        <!-- Live Code Editor Section -->
-        <div class="section">
-            <h2>Live Code Editor</h2>
-            <p>Edit code in real-time and see the results immediately!</p>
-            
-            <div class="demo-card">
-                <div class="demo-title">Live Code Editor</div>
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
                 <div class="live-editor-container">
                     <div class="live-editor-header">
                         <div class="live-editor-title">
-                            <div class="language-icon css">CSS</div>
-                            <span>live-code.css</span>
+                            <div class="language-icon html">HTML</div>
+                            <span>dom-basics.html</span>
                         </div>
                         <div class="live-editor-actions">
-                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
-                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
-                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
-            
-                    <div id="live-code" class="monaco-editor"></div>
+                            <button class="live-editor-btn" onclick="copyCode('dom-basics-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('dom-basics-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('dom-basics-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="dom-basics-editor" class="monaco-editor"></div>
                     <div class="live-editor-footer">
                         <div class="live-editor-stats">
-                            <span id="live-code-lines">0 lines</span>
-                            <span id="live-code-chars">0 characters</span>
+                            <span id="dom-basics-editor-lines">0 lines</span>
+                            <span id="dom-basics-editor-chars">0 characters</span>
                         </div>
                         <div class="live-editor-status">
                             <div class="status-indicator"></div>
@@ -287,23 +95,138 @@ function closeModal() {
                         </div>
                     </div>
                 </div>
-                <div class="live-preview" id="live-code-preview">
+                <div class="live-preview" id="dom-basics-editor-preview">
                     <div class="live-preview-header">
                         <div class="live-preview-title">Live Preview</div>
                     </div>
-                    <div id="live-code-preview-content">
+                    <div id="dom-basics-editor-preview-content">
                         <!-- Live preview content will be inserted here -->
                     </div>
-                    <div class="error-display hidden" id="error-display-live-code">
+                    <div class="error-display hidden" id="error-display-dom-basics-editor">
                         <strong>Error:</strong> <span class="error-message"></span>
                     </div>
                 </div>
             </div>
         </div>
-</div>
 
-    
+        <!-- DOM and Events Section -->
+        <div id="dom-events" class="content-section ">
+            <h2 class="section-title">DOM and Events</h2>
+            
+					<p>Combining DOM manipulation with event handling to create dynamic, interactive web pages.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">DOM + Events</div>
+						<div class="structure-visual">
+// Create and add elements<br>
+const newElement = document.createElement('div');<br>
+newElement.textContent = 'New element';<br>
+newElement.className = 'my-class';<br>
+document.body.appendChild(newElement);<br><br>
+// Remove elements<br>
+element.remove();<br><br>
+// Modify styles<br>
+element.style.backgroundColor = 'red';
+						</div>
+						<div class="element-comment">DOM manipulation combined with events creates dynamic interfaces</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 DOM Manipulation Methods</h3>
+						<ul>
+							<li><strong>createElement():</strong> Create new elements</li>
+							<li><strong>appendChild():</strong> Add elements to DOM</li>
+							<li><strong>remove():</strong> Remove elements</li>
+							<li><strong>classList:</strong> Add/remove CSS classes</li>
+							<li><strong>style:</strong> Modify inline styles</li>
+						</ul>
+					</div>
+            
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('dom-events')">Show DOM and Events Demo</button>
+                <div id="dom-eventsResult" class="demo-result">
+                    
+					<div style="background: #f8fafc; padding: 2rem; border-radius: 12px;">
+						<div id="dynamic-list" style="margin-bottom: 1rem;">
+							<div style="background: #3b82f6; color: white; padding: 0.5rem; margin: 0.25rem 0; border-radius: 4px;">Item 1</div>
+						</div>
+						<button onclick="addListItem()" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem;">
+							Add Item
+						</button>
+						<button onclick="removeListItem()" style="background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+							Remove Item
+						</button>
+					</div>
+					<script>
+						let itemCount = 1;
+						function addListItem() {
+							itemCount++;
+							const list = document.getElementById('dynamic-list');
+							const newItem = document.createElement('div');
+							newItem.style.background = '#3b82f6';
+							newItem.style.color = 'white';
+							newItem.style.padding = '0.5rem';
+							newItem.style.margin = '0.25rem 0';
+							newItem.style.borderRadius = '4px';
+							newItem.textContent = 'Item ' + itemCount;
+							list.appendChild(newItem);
+						}
+						function removeListItem() {
+							const list = document.getElementById('dynamic-list');
+							if (list.children.length > 1) {
+								list.removeChild(list.lastChild);
+								itemCount--;
+							}
+						}
+					</script>
+                </div>
+            </div>
+            
+            
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>dom-events.html</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('dom-events-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('dom-events-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('dom-events-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="dom-events-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="dom-events-editor-lines">0 lines</span>
+                            <span id="dom-events-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="dom-events-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="dom-events-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-dom-events-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
-

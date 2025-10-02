@@ -5,218 +5,90 @@
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Color Demo - Interactive Color Changing</title>
-    
+    <title>CSS Styling Fundamentals</title>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1> CSS Color Demo</h1>
-            <p>Interactive color changing examples and color theory</p>
+            <h1>CSS Styling Fundamentals</h1>
+            <p>Master CSS colors, typography, backgrounds, and borders</p>
         </div>
 
-        <!-- Color Palette Section -->
-        <div class="section">
-            <h2> Color Palette</h2>
-            <p>Click on any color below to see it in action:</p>
+        <div class="navigation">
+            <button class="nav-button active" onclick="showSection('color-palette')">Color Palette & Properties</button>
+<button class="nav-button " onclick="showSection('typography')">Typography & Fonts</button>
+<button class="nav-button " onclick="showSection('backgrounds')">Background Properties</button>
+<button class="nav-button " onclick="showSection('borders')">Border Properties</button>
+        </div>
 
-            <div class="color-grid">
-                <div class="color-card">
-                    <div class="color-swatch" style="background-color: #3b82f6;" onclick="applyColor('#3b82f6')"></div>
-                    <div class="color-name">Blue</div>
-                    <div class="color-code">#3b82f6
+        
+        <!-- Color Palette & Properties Section -->
+        <div id="color-palette" class="content-section active">
+            <h2 class="section-title">Color Palette & Properties</h2>
             
-                <div class="color-card">
-                    <div class="color-swatch" style="background-color: #10b981;" onclick="applyColor('#10b981')"></div>
-                    <div class="color-name">Green</div>
-                    <div class="color-code">#10b981</div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background-color: #ef4444;" onclick="applyColor('#ef4444')"></div>
-                    <div class="color-name">Red</div>
-                    <div class="color-code">#ef4444</div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background-color: #f59e0b;" onclick="applyColor('#f59e0b')"></div>
-                    <div class="color-name">Orange</div>
-                    <div class="color-code">#f59e0b</div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background-color: #8b5cf6;" onclick="applyColor('#8b5cf6')"></div>
-                    <div class="color-name">Purple</div>
-                    <div class="color-code">#8b5cf6</div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background-color: #06b6d4;" onclick="applyColor('#06b6d4')"></div>
-                    <div class="color-name">Cyan</div>
-                    <div class="color-code">#06b6d4</div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background-color: #84cc16;" onclick="applyColor('#84cc16')"></div>
-                    <div class="color-name">Lime</div>
-                    <div class="color-code">#84cc16</div>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background-color: #f97316;" onclick="applyColor('#f97316')"></div>
-                    <div class="color-name">Orange Red</div>
-                    <div class="color-code">#f97316</div>
-                    </div>
-                    <div class="live-preview" id="live-preview">
-                        <div class="live-preview-header">
-                            <div class="live-preview-title">Live Preview</div>
-                        </div>
-                        <div id="live-preview-content">
-                            <!-- Live preview content will be inserted here -->
-                        </div>
-                    </div>
-                </div>
-
-        <!-- Interactive Color Demo -->
-        <div class="interactive-demo">
-            <h3> Interactive Color Demo</h3>
-            <p>Click the buttons below to change colors, or use the color picker:</p>
+					<p>Colors are fundamental to web design. CSS provides multiple ways to specify colors using different formats and properties.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">Color Properties</div>
+						<div class="structure-visual">
+color: #3b82f6; <span class="comment">/* Text color */</span><br>
+background-color: #f8fafc; <span class="comment">/* Background color */</span><br>
+border-color: #e5e7eb; <span class="comment">/* Border color */</span><br>
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); <span class="comment">/* Shadow with alpha */</span>
+						</div>
+						<div class="element-comment">CSS provides multiple color properties for different elements</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Color Formats</h3>
+						<ul>
+							<li><strong>Hex:</strong> #3b82f6 (most common)</li>
+							<li><strong>RGB:</strong> rgb(59, 130, 246)</li>
+							<li><strong>RGBA:</strong> rgba(59, 130, 246, 0.8)</li>
+							<li><strong>HSL:</strong> hsl(217, 91%, 60%)</li>
+							<li><strong>Named:</strong> blue, red, green</li>
+						</ul>
+					</div>
             
-            <button class="color-button" onclick="changeTextColor()">Change Text Color</button>
-            <button class="color-button" onclick="changeBackgroundColor()">Change Background</button>
-            <button class="color-button" onclick="changeBorderColor()">Change Border</button>
-            <button class="color-button" onclick="randomColors()">Random Colors</button>
-            
-            <div class="demo-area" id="demoArea">
-                <div class="demo-text" id="demoText">This text will change color when you click the buttons!</div>
-                <div class="demo-background" id="demoBackground">This background will change color too!</div>
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('color-palette')">Show Color Palette & Properties Demo</button>
+                <div id="color-paletteResult" class="demo-result">
+                    
+					<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; text-align: center;">
+						<h3 style="margin: 0 0 1rem 0;">Color Palette Demo</h3>
+						<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+							<div style="background: #3b82f6; color: white; padding: 1rem; border-radius: 8px; min-width: 100px;">Primary Blue</div>
+							<div style="background: #10b981; color: white; padding: 1rem; border-radius: 8px; min-width: 100px;">Success Green</div>
+							<div style="background: #f59e0b; color: white; padding: 1rem; border-radius: 8px; min-width: 100px;">Warning Orange</div>
+							<div style="background: #ef4444; color: white; padding: 1rem; border-radius: 8px; min-width: 100px;">Error Red</div>
+						</div>
+					</div>
+                </div>
             </div>
-
-            <div style="margin: 1rem 0;">
-                <label for="colorPicker" style="color: white; margin-right: 1rem;">Custom Color:</label>
-                <input type="color" id="colorPicker" class="color-input" onchange="applyCustomColor(this.value)">
-            </div>
-        </div>
-
-        <!-- Color Combinations Section -->
-        <div class="section">
-            <h2> Color Combinations</h2>
-            <p>Learn about good and bad color combinations:</p>
-
-            <div class="color-combination">
-                <div class="combination-card">
-                    <div class="combination-title"> Good Combination</div>
-                    <div class="combination-demo good-combination">
-                        Blue background with white text
-                    </div>
-                    <div class="code-snippet">
-<span class="property">background-color</span>: <span class="value">#3b82f6</span>; <span class="comment">/* Blue */</span>
-<span class="property">color</span>: <span class="value">white</span>; <span class="comment">/* White text */</span>
-                    </div>
-                    <p style="color: var(--secondary-color); font-weight: 600;">High contrast = Good readability</p>
-                </div>
-
-                <div class="combination-card">
-                    <div class="combination-title"> Bad Combination</div>
-                    <div class="combination-demo bad-combination">
-                        Red background with red text
-                    </div>
-                    <div class="code-snippet">
-<span class="property">background-color</span>: <span class="value">#ef4444</span>; <span class="comment">/* Red */</span>
-<span class="property">color</span>: <span class="value">#ef4444</span>; <span class="comment">/* Red text */</span>
-                    </div>
-                    <p style="color: var(--danger-color); font-weight: 600;">Low contrast = Poor readability</p>
             
-        </div>
-
-        <!-- Color Theory Section -->
-        <div class="section">
-            <h2> Color Theory Basics</h2>
-            <p>Understanding how colors work together:</p>
-
-            <div class="color-grid">
-                <div class="color-card">
-                    <div class="color-swatch" style="background: linear-gradient(45deg, #3b82f6, #10b981);"></div>
-                    <div class="color-name">Complementary</div>
-                    <div class="color-code">Blue + Green</div>
-                    <p style="font-size: 0.875rem; color: #64748b; margin-top: 0.5rem;">Colors opposite on the color wheel</p>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: linear-gradient(45deg, #3b82f6, #1d4ed8, #1e40af);"></div>
-                    <div class="color-name">Analogous</div>
-                    <div class="color-code">Blue shades</div>
-                    <p style="font-size: 0.875rem; color: #64748b; margin-top: 0.5rem;">Colors next to each other</p>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);"></div>
-                    <div class="color-name">Triadic</div>
-                    <div class="color-code">Blue + Purple + Pink</div>
-                    <p style="font-size: 0.875rem; color: #64748b; margin-top: 0.5rem;">Three evenly spaced colors</p>
-                </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background: linear-gradient(45deg, #3b82f6, #06b6d4, #10b981, #84cc16);"></div>
-                    <div class="color-name">Tetradic</div>
-                    <div class="color-code">Four colors</div>
-                    <p style="font-size: 0.875rem; color: #64748b; margin-top: 0.5rem;">Two complementary pairs</p>
             
-        </div>
-
-        <!-- Quick Color Palette -->
-        <div class="section">
-            <h2> Quick Color Palette</h2>
-            <p>Click any color below to apply it to the demo area:</p>
-
-            <div class="color-palette">
-                <div class="palette-color" style="background-color: #ef4444;" onclick="applyColor('#ef4444')"></div>
-                <div class="palette-color" style="background-color: #f97316;" onclick="applyColor('#f97316')"></div>
-                <div class="palette-color" style="background-color: #f59e0b;" onclick="applyColor('#f59e0b')"></div>
-                <div class="palette-color" style="background-color: #eab308;" onclick="applyColor('#eab308')"></div>
-                <div class="palette-color" style="background-color: #84cc16;" onclick="applyColor('#84cc16')"></div>
-                <div class="palette-color" style="background-color: #22c55e;" onclick="applyColor('#22c55e')"></div>
-                <div class="palette-color" style="background-color: #10b981;" onclick="applyColor('#10b981')"></div>
-                <div class="palette-color" style="background-color: #06b6d4;" onclick="applyColor('#06b6d4')"></div>
-                <div class="palette-color" style="background-color: #0ea5e9;" onclick="applyColor('#0ea5e9')"></div>
-                <div class="palette-color" style="background-color: #3b82f6;" onclick="applyColor('#3b82f6')"></div>
-                <div class="palette-color" style="background-color: #6366f1;" onclick="applyColor('#6366f1')"></div>
-                <div class="palette-color" style="background-color: #8b5cf6;" onclick="applyColor('#8b5cf6')"></div>
-                <div class="palette-color" style="background-color: #a855f7;" onclick="applyColor('#a855f7')"></div>
-                <div class="palette-color" style="background-color: #d946ef;" onclick="applyColor('#d946ef')"></div>
-                <div class="palette-color" style="background-color: #ec4899;" onclick="applyColor('#ec4899')"></div>
-                <div class="palette-color" style="background-color: #f43f5e;" onclick="applyColor('#f43f5e')">
-            
-        </div>
-
-        <!-- Try This Section -->
-        <div class="section">
-            <h2> Try This</h2>
-            <p>Experiment with colors:</p>
-            <ol>
-                <li><strong>Click color swatches:</strong> Click any color above to see it applied</li>
-                <li><strong>Use the color picker:</strong> Choose your own custom colors</li>
-                <li><strong>Try different combinations:</strong> Mix and match colors</li>
-                <li><strong>Test readability:</strong> Make sure text is readable on colored backgrounds</li>
-                <li><strong>Create themes:</strong> Use consistent colors throughout your design</li>
-                <li><strong>Consider accessibility:</strong> Ensure sufficient contrast for all users</li>
-            </ol>
-        </div>
-    
-        <!-- Live Code Editor Section -->
-        <div class="section">
-            <h2>Live Code Editor</h2>
-            <p>Edit code in real-time and see the results immediately!</p>
-            
-            <div class="demo-card">
-                <div class="demo-title">Live Code Editor</div>
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
                 <div class="live-editor-container">
                     <div class="live-editor-header">
                         <div class="live-editor-title">
                             <div class="language-icon css">CSS</div>
-                            <span>live-code.css</span>
+                            <span>color-palette.css</span>
                         </div>
                         <div class="live-editor-actions">
-                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
-                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
-                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
-            
-                    <div id="live-code" class="monaco-editor"></div>
+                            <button class="live-editor-btn" onclick="copyCode('color-palette-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('color-palette-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('color-palette-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="color-palette-editor" class="monaco-editor"></div>
                     <div class="live-editor-footer">
                         <div class="live-editor-stats">
-                            <span id="live-code-lines">0 lines</span>
-                            <span id="live-code-chars">0 characters</span>
+                            <span id="color-palette-editor-lines">0 lines</span>
+                            <span id="color-palette-editor-chars">0 characters</span>
                         </div>
                         <div class="live-editor-status">
                             <div class="status-indicator"></div>
@@ -224,23 +96,296 @@
                         </div>
                     </div>
                 </div>
-                <div class="live-preview" id="live-code-preview">
+                <div class="live-preview" id="color-palette-editor-preview">
                     <div class="live-preview-header">
                         <div class="live-preview-title">Live Preview</div>
                     </div>
-                    <div id="live-code-preview-content">
+                    <div id="color-palette-editor-preview-content">
                         <!-- Live preview content will be inserted here -->
                     </div>
-                    <div class="error-display hidden" id="error-display-live-code">
+                    <div class="error-display hidden" id="error-display-color-palette-editor">
                         <strong>Error:</strong> <span class="error-message"></span>
                     </div>
                 </div>
             </div>
         </div>
-</div>
 
-    
+        <!-- Typography & Fonts Section -->
+        <div id="typography" class="content-section ">
+            <h2 class="section-title">Typography & Fonts</h2>
+            
+					<p>Typography controls how text appears on your website. CSS provides extensive control over fonts, sizes, spacing, and text styling.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">Typography Properties</div>
+						<div class="structure-visual">
+font-family: 'Arial', sans-serif; <span class="comment">/* Font family */</span><br>
+font-size: 1.2rem; <span class="comment">/* Font size */</span><br>
+font-weight: 600; <span class="comment">/* Font weight */</span><br>
+line-height: 1.6; <span class="comment">/* Line spacing */</span><br>
+text-align: center; <span class="comment">/* Text alignment */</span><br>
+text-decoration: underline; <span class="comment">/* Text decoration */</span>
+						</div>
+						<div class="element-comment">Typography properties control text appearance and readability</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Font Properties</h3>
+						<ul>
+							<li><strong>font-family:</strong> Specifies the font family</li>
+							<li><strong>font-size:</strong> Controls text size (px, em, rem, %)</li>
+							<li><strong>font-weight:</strong> Controls boldness (100-900, normal, bold)</li>
+							<li><strong>font-style:</strong> Controls italic (normal, italic, oblique)</li>
+							<li><strong>line-height:</strong> Controls line spacing</li>
+						</ul>
+					</div>
+            
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('typography')">Show Typography & Fonts Demo</button>
+                <div id="typographyResult" class="demo-result">
+                    
+					<div style="font-family: 'Arial', sans-serif; padding: 2rem; background: #f8fafc; border-radius: 12px;">
+						<h1 style="font-size: 2.5rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;">Heading 1 - Large & Bold</h1>
+						<h2 style="font-size: 2rem; font-weight: 600; color: #374151; margin-bottom: 0.75rem;">Heading 2 - Medium Weight</h2>
+						<h3 style="font-size: 1.5rem; font-weight: 500; color: #4b5563; margin-bottom: 0.5rem;">Heading 3 - Regular Weight</h3>
+						<p style="font-size: 1rem; line-height: 1.6; color: #374151; margin-bottom: 1rem;">This is a paragraph with normal text. It demonstrates proper line height and readability.</p>
+						<p style="font-style: italic; color: #6b7280;">This text is italic and demonstrates font-style property.</p>
+					</div>
+                </div>
+            </div>
+            
+            
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>typography.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('typography-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('typography-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('typography-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="typography-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="typography-editor-lines">0 lines</span>
+                            <span id="typography-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="typography-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="typography-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-typography-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Properties Section -->
+        <div id="backgrounds" class="content-section ">
+            <h2 class="section-title">Background Properties</h2>
+            
+					<p>Background properties control the background appearance of elements, including colors, images, gradients, and positioning.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">Background Properties</div>
+						<div class="structure-visual">
+background-color: #f8fafc; <span class="comment">/* Solid color */</span><br>
+background-image: url('image.jpg'); <span class="comment">/* Background image */</span><br>
+background-size: cover; <span class="comment">/* Image sizing */</span><br>
+background-position: center; <span class="comment">/* Image position */</span><br>
+background-repeat: no-repeat; <span class="comment">/* Image repetition */</span>
+						</div>
+						<div class="element-comment">Background properties create visual depth and interest</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Background Types</h3>
+						<ul>
+							<li><strong>Solid Colors:</strong> Single color backgrounds</li>
+							<li><strong>Gradients:</strong> Linear and radial gradients</li>
+							<li><strong>Images:</strong> Background images with positioning</li>
+							<li><strong>Patterns:</strong> Repeating background patterns</li>
+						</ul>
+					</div>
+            
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('backgrounds')">Show Background Properties Demo</button>
+                <div id="backgroundsResult" class="demo-result">
+                    
+					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 2rem;">
+						<div style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 2rem; border-radius: 8px; text-align: center;">
+							<h4 style="margin: 0;">Linear Gradient</h4>
+						</div>
+						<div style="background: radial-gradient(circle, #f59e0b, #ef4444); color: white; padding: 2rem; border-radius: 8px; text-align: center;">
+							<h4 style="margin: 0;">Radial Gradient</h4>
+						</div>
+						<div style="background: repeating-linear-gradient(45deg, #3b82f6, #3b82f6 10px, #1e40af 10px, #1e40af 20px); color: white; padding: 2rem; border-radius: 8px; text-align: center;">
+							<h4 style="margin: 0;">Pattern Background</h4>
+						</div>
+						<div style="background: #10b981; color: white; padding: 2rem; border-radius: 8px; text-align: center;">
+							<h4 style="margin: 0;">Solid Color</h4>
+						</div>
+					</div>
+                </div>
+            </div>
+            
+            
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>backgrounds.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('backgrounds-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('backgrounds-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('backgrounds-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="backgrounds-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="backgrounds-editor-lines">0 lines</span>
+                            <span id="backgrounds-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="backgrounds-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="backgrounds-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-backgrounds-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Border Properties Section -->
+        <div id="borders" class="content-section ">
+            <h2 class="section-title">Border Properties</h2>
+            
+					<p>Borders define the edges of elements and can be styled with different colors, widths, and styles.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">Border Properties</div>
+						<div class="structure-visual">
+border: 2px solid #3b82f6; <span class="comment">/* All sides */</span><br>
+border-width: 1px 2px 3px 4px; <span class="comment">/* Individual sides */</span><br>
+border-style: dashed; <span class="comment">/* Border style */</span><br>
+border-color: #10b981; <span class="comment">/* Border color */</span><br>
+border-radius: 8px; <span class="comment">/* Rounded corners */</span>
+						</div>
+						<div class="element-comment">Borders add definition and visual separation</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Border Styles</h3>
+						<ul>
+							<li><strong>solid:</strong> A solid line</li>
+							<li><strong>dashed:</strong> A dashed line</li>
+							<li><strong>dotted:</strong> A dotted line</li>
+							<li><strong>double:</strong> A double line</li>
+							<li><strong>groove/ridge:</strong> 3D effects</li>
+						</ul>
+					</div>
+            
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('borders')">Show Border Properties Demo</button>
+                <div id="bordersResult" class="demo-result">
+                    
+					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 2rem;">
+						<div style="border: 3px solid #3b82f6; padding: 1rem; border-radius: 8px; text-align: center;">
+							<h4 style="margin: 0;">Solid Border</h4>
+						</div>
+						<div style="border: 3px dashed #10b981; padding: 1rem; border-radius: 12px; text-align: center;">
+							<h4 style="margin: 0;">Dashed Border</h4>
+						</div>
+						<div style="border: 3px dotted #f59e0b; padding: 1rem; border-radius: 16px; text-align: center;">
+							<h4 style="margin: 0;">Dotted Border</h4>
+						</div>
+						<div style="border: 6px double #ef4444; padding: 1rem; border-radius: 4px; text-align: center;">
+							<h4 style="margin: 0;">Double Border</h4>
+						</div>
+					</div>
+                </div>
+            </div>
+            
+            
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>borders.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('borders-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('borders-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('borders-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="borders-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="borders-editor-lines">0 lines</span>
+                            <span id="borders-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="borders-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="borders-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-borders-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
-

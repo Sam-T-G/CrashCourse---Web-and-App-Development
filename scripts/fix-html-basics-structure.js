@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+#!/usr/bin/env node
+
+const fs = require("fs");
+const path = require("path");
+
+// Clean HTML structure for HTML basics module
+const cleanHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
@@ -478,4 +484,52 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+</html>`;
+
+// Function to fix the HTML basics module
+function fixHTMLBasicsModule() {
+	const modulePath = path.join(
+		__dirname,
+		"..",
+		"traditional-web-stack",
+		"01-html-basics"
+	);
+	const indexPath = path.join(modulePath, "index.html");
+
+	console.log("🔧 Fixing HTML Basics Module Structure...");
+
+	// Write the clean HTML
+	fs.writeFileSync(indexPath, cleanHTML);
+	console.log("✅ HTML structure fixed");
+
+	// Verify the fix
+	const htmlContent = fs.readFileSync(indexPath, "utf8");
+	const sections = htmlContent.match(/class="content-section"/g);
+	const editors = htmlContent.match(/class="monaco-editor"/g);
+	const navButtons = htmlContent.match(/onclick="showSection\('[^']+'\)"/g);
+
+	console.log(`📊 Verification:`);
+	console.log(`   - Content sections: ${sections ? sections.length : 0}`);
+	console.log(`   - Live editors: ${editors ? editors.length : 0}`);
+	console.log(`   - Navigation buttons: ${navButtons ? navButtons.length : 0}`);
+
+	if (
+		sections &&
+		sections.length === 6 &&
+		editors &&
+		editors.length === 6 &&
+		navButtons &&
+		navButtons.length === 6
+	) {
+		console.log("🎉 HTML Basics module structure is now correct!");
+	} else {
+		console.log("❌ Some issues remain - please check manually");
+	}
+}
+
+// Run the fix
+if (require.main === module) {
+	fixHTMLBasicsModule();
+}
+
+module.exports = { fixHTMLBasicsModule };

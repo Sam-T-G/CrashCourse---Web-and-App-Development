@@ -5,325 +5,90 @@
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Centering & Justification - Multiple Techniques</title>
-    
+    <title>CSS Layout & Positioning</title>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1> CSS Centering & Justification</h1>
-            <p>Multiple centering and justification techniques with visual examples</p>
+            <h1>CSS Layout & Positioning</h1>
+            <p>Learn CSS layout techniques including centering, positioning, and the box model</p>
         </div>
 
-        <!-- Text Centering Section -->
-        <div class="section">
-            <h2> Text Centering</h2>
-            <p>Different ways to center and align text content.</p>
-
-            <div class="demo-grid">
-                <div class="demo-card">
-                    <div class="demo-title">Text Alignment</div>
-                    <div class="demo-element">
-                        <div class="property-label">text-align: left</div>
-                        <div class="text-left" style="background-color: #f1f5f9; padding: 1rem; border-radius: 8px;">
-                            This text is aligned to the left side of the container.
-                        </div>
-                        <div class="property-comment">Text starts from the left edge
-            
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Text Centering</div>
-                    <div class="demo-element">
-                        <div class="property-label">text-align: center</div>
-                        <div class="text-center" style="background-color: #f1f5f9; padding: 1rem; border-radius: 8px;">
-                            This text is centered in the container.
-                        </div>
-                        <div class="property-comment">Text is centered horizontally</div>
-                    </div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Text Right Alignment</div>
-                    <div class="demo-element">
-                        <div class="property-label">text-align: right</div>
-                        <div class="text-right" style="background-color: #f1f5f9; padding: 1rem; border-radius: 8px;">
-                            This text is aligned to the right side of the container.
-                        </div>
-                        <div class="property-comment">Text ends at the right edge</div>
-                    </div>
-                    <div class="live-preview" id="live-preview">
-                        <div class="live-preview-header">
-                            <div class="live-preview-title">Live Preview</div>
-                        </div>
-                        <div id="live-preview-content">
-                            <!-- Live preview content will be inserted here -->
-                        </div>
-                    </div>
-                </div>
-
-            <div class="code-snippet">
-<span class="comment">/* Text alignment properties */</span>
-<span class="property">text-align</span>: <span class="value">left</span>; <span class="comment">/* Left alignment */</span>
-<span class="property">text-align</span>: <span class="value">center</span>; <span class="comment">/* Center alignment */</span>
-<span class="property">text-align</span>: <span class="value">right</span>; <span class="comment">/* Right alignment */</span>
-            </div>
+        <div class="navigation">
+            <button class="nav-button active" onclick="showSection('box-model')">Box Model Fundamentals</button>
+<button class="nav-button " onclick="showSection('centering')">Centering Techniques</button>
+<button class="nav-button " onclick="showSection('positioning')">CSS Positioning</button>
         </div>
 
-        <!-- Block Centering Section -->
-        <div class="section">
-            <h2> Block Centering</h2>
-            <p>Centering block-level elements using margin auto.</p>
-
-            <div class="demo-element">
-                <div class="property-label">margin: 0 auto; width: 300px;</div>
-                <div class="block-center">
-                    This block is centered using margin auto. It has a fixed width and is centered horizontally.
-                </div>
-                <div class="property-comment">Block elements can be centered with margin auto
+        
+        <!-- Box Model Fundamentals Section -->
+        <div id="box-model" class="content-section active">
+            <h2 class="section-title">Box Model Fundamentals</h2>
             
-
-            <div class="code-snippet">
-<span class="comment">/* Block centering */</span>
-<span class="property">margin</span>: <span class="value">0 auto</span>; <span class="comment">/* Centers the block */</span>
-<span class="property">width</span>: <span class="value">300px</span>; <span class="comment">/* Fixed width required */</span>
-            </div>
-        </div>
-
-        <!-- Flexbox Centering Section -->
-        <div class="section">
-            <h2> Flexbox Centering</h2>
-            <p>Flexbox provides powerful centering and justification options.</p>
-
-            <div class="demo-grid">
-                <div class="demo-card">
-                    <div class="demo-title">Center (Default)</div>
-                    <div class="demo-element">
-                        <div class="property-label">justify-content: center; align-items: center</div>
-                        <div class="flex-center">
-                            <div class="centered-item">Centered
+					<p>The CSS box model describes how elements are rendered on the page, including content, padding, border, and margin.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">Box Model Components</div>
+						<div class="structure-visual">
+Content <span class="comment">/* The actual content */</span><br>
+Padding <span class="comment">/* Space inside the element */</span><br>
+Border <span class="comment">/* Border around the element */</span><br>
+Margin <span class="comment">/* Space outside the element */</span>
+						</div>
+						<div class="element-comment">Understanding the box model is crucial for layout</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Box Model Properties</h3>
+						<ul>
+							<li><strong>width/height:</strong> Content area dimensions</li>
+							<li><strong>padding:</strong> Space between content and border</li>
+							<li><strong>border:</strong> Border around the element</li>
+							<li><strong>margin:</strong> Space outside the element</li>
+							<li><strong>box-sizing:</strong> Controls how dimensions are calculated</li>
+						</ul>
+					</div>
             
-                        <div class="property-comment">Items are centered both horizontally and vertically</div>
-                    </div>
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('box-model')">Show Box Model Fundamentals Demo</button>
+                <div id="box-modelResult" class="demo-result">
+                    
+					<div style="background: #f8fafc; padding: 2rem; border-radius: 12px;">
+						<div style="background: #3b82f6; color: white; padding: 20px; border: 10px solid #10b981; margin: 20px; text-align: center; box-sizing: content-box;">
+							<h4 style="margin: 0;">Content Box (default)</h4>
+							<p style="margin: 0.5rem 0 0 0;">Width = content only</p>
+						</div>
+						<div style="background: #f59e0b; color: white; padding: 20px; border: 10px solid #ef4444; margin: 20px; text-align: center; box-sizing: border-box;">
+							<h4 style="margin: 0;">Border Box</h4>
+							<p style="margin: 0.5rem 0 0 0;">Width = content + padding + border</p>
+						</div>
+					</div>
                 </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Flex Start</div>
-                    <div class="demo-element">
-                        <div class="property-label">justify-content: flex-start</div>
-                        <div class="flex-start">
-                            <div class="centered-item secondary">Start</div>
-                        </div>
-                        <div class="property-comment">Items are aligned to the start</div>
-                    </div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Flex End</div>
-                    <div class="demo-element">
-                        <div class="property-label">justify-content: flex-end</div>
-                        <div class="flex-end">
-                            <div class="centered-item secondary">End</div>
-                        </div>
-                        <div class="property-comment">Items are aligned to the end</div>
-                    </div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Space Between</div>
-                    <div class="demo-element">
-                        <div class="property-label">justify-content: space-between</div>
-                        <div class="flex-between">
-                            <div class="centered-item warning">Left</div>
-                            <div class="centered-item warning">Right</div>
-                        </div>
-                        <div class="property-comment">Items are spaced with space between them</div>
-                    </div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Space Around</div>
-                    <div class="demo-element">
-                        <div class="property-label">justify-content: space-around</div>
-                        <div class="flex-around">
-                            <div class="centered-item danger">Around 1</div>
-                            <div class="centered-item danger">Around 2</div>
-                        </div>
-                        <div class="property-comment">Items are spaced with space around them</div>
-                    </div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Space Evenly</div>
-                    <div class="demo-element">
-                        <div class="property-label">justify-content: space-evenly</div>
-                        <div class="flex-evenly">
-                            <div class="centered-item danger">Even 1</div>
-                            <div class="centered-item danger">Even 2</div>
-                        </div>
-                        <div class="property-comment">Items are spaced evenly</div>
-                    </div>
-                    <div class="live-preview" id="live-preview">
-                        <div class="live-preview-header">
-                            <div class="live-preview-title">Live Preview</div>
-                        </div>
-                        <div id="live-preview-content">
-                            <!-- Live preview content will be inserted here -->
-                        </div>
-                    </div>
-                </div>
-
-            <div class="code-snippet">
-<span class="comment">/* Flexbox centering and justification */</span>
-<span class="property">display</span>: <span class="value">flex</span>;
-<span class="property">justify-content</span>: <span class="value">center</span>; <span class="comment">/* Horizontal alignment */</span>
-<span class="property">align-items</span>: <span class="value">center</span>; <span class="comment">/* Vertical alignment */</span>
-<span class="property">justify-content</span>: <span class="value">space-between</span>; <span class="comment">/* Space between items */</span>
-<span class="property">justify-content</span>: <span class="value">space-around</span>; <span class="comment">/* Space around items */</span>
-<span class="property">justify-content</span>: <span class="value">space-evenly</span>; <span class="comment">/* Even spacing */</span>
             </div>
-        </div>
-
-        <!-- Grid Centering Section -->
-        <div class="section">
-            <h2> Grid Centering</h2>
-            <p>CSS Grid provides another way to center and align content.</p>
-
-            <div class="demo-grid">
-                <div class="demo-card">
-                    <div class="demo-title">Grid Center</div>
-                    <div class="demo-element">
-                        <div class="property-label">place-items: center</div>
-                        <div class="grid-center">
-                            <div class="centered-item">Grid Centered
             
-                        <div class="property-comment">Items are centered in the grid</div>
-                    </div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Grid Start</div>
-                    <div class="demo-element">
-                        <div class="property-label">place-items: start</div>
-                        <div class="grid-start">
-                            <div class="centered-item secondary">Grid Start</div>
-                        </div>
-                        <div class="property-comment">Items are aligned to the start</div>
-                    </div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Grid End</div>
-                    <div class="demo-element">
-                        <div class="property-label">place-items: end</div>
-                        <div class="grid-end">
-                            <div class="centered-item secondary">Grid End</div>
-                        </div>
-                        <div class="property-comment">Items are aligned to the end</div>
-                    </div>
-                    <div class="live-preview" id="live-preview">
-                        <div class="live-preview-header">
-                            <div class="live-preview-title">Live Preview</div>
-                        </div>
-                        <div id="live-preview-content">
-                            <!-- Live preview content will be inserted here -->
-                        </div>
-                    </div>
-                </div>
-
-            <div class="code-snippet">
-<span class="comment">/* Grid centering */</span>
-<span class="property">display</span>: <span class="value">grid</span>;
-<span class="property">place-items</span>: <span class="value">center</span>; <span class="comment">/* Centers items in grid */</span>
-<span class="property">place-items</span>: <span class="value">start</span>; <span class="comment">/* Aligns to start */</span>
-<span class="property">place-items</span>: <span class="value">end</span>; <span class="comment">/* Aligns to end */</span>
-            </div>
-        </div>
-
-        <!-- Viewport Units Section -->
-        <div class="section">
-            <h2> Viewport Units</h2>
-            <p>Using viewport units for responsive centering and sizing.</p>
-
-            <div class="demo-element">
-                <div class="property-label">height: 50vh (50% of viewport height)</div>
-                <div class="viewport-height">
-                    <div class="centered-item">50% Viewport Height
             
-                <div class="property-comment">This box is 50% of the viewport height</div>
-            </div>
-
-            <div class="demo-element">
-                <div class="property-label">width: 50vw (50% of viewport width)</div>
-                <div class="viewport-width">
-                    50% Viewport Width
-                </div>
-                <div class="property-comment">This box is 50% of the viewport width</div>
-            </div>
-
-            <div class="code-snippet">
-<span class="comment">/* Viewport units */</span>
-<span class="property">height</span>: <span class="value">50vh</span>; <span class="comment">/* 50% of viewport height */</span>
-<span class="property">width</span>: <span class="value">50vw</span>; <span class="comment">/* 50% of viewport width */</span>
-<span class="property">height</span>: <span class="value">100vh</span>; <span class="comment">/* Full viewport height */</span>
-<span class="property">width</span>: <span class="value">100vw</span>; <span class="comment">/* Full viewport width */</span>
-            </div>
-        </div>
-
-        <!-- Interactive Demo Section -->
-        <div class="interactive-demo">
-            <h3> Interactive Centering Demo</h3>
-            <p>Click the buttons below to see different centering techniques:</p>
-            
-            <button class="control-button" onclick="changeCentering('flex-center')">Flexbox Center</button>
-            <button class="control-button" onclick="changeCentering('flex-start')">Flexbox Start</button>
-            <button class="control-button" onclick="changeCentering('flex-end')">Flexbox End</button>
-            <button class="control-button" onclick="changeCentering('flex-between')">Space Between</button>
-            <button class="control-button" onclick="changeCentering('flex-around')">Space Around</button>
-            <button class="control-button" onclick="changeCentering('flex-evenly')">Space Evenly</button>
-            
-            <div class="demo-area" id="demoArea">
-                <div class="demo-box" id="demoBox">Interactive Centering Demo</div>
-            </div>
-        </div>
-
-        <!-- Try This Section -->
-        <div class="section">
-            <h2> Try This</h2>
-            <p>Experiment with centering and justification:</p>
-            <ol>
-                <li><strong>Use the interactive demo:</strong> Click buttons to see different centering techniques</li>
-                <li><strong>Compare techniques:</strong> Notice the differences between flexbox and grid centering</li>
-                <li><strong>Try different values:</strong> Experiment with different justify-content values</li>
-                <li><strong>Test responsiveness:</strong> Resize your browser to see how viewport units work</li>
-                <li><strong>Combine techniques:</strong> Use multiple centering methods together</li>
-                <li><strong>Observe alignment:</strong> See how different alignment options affect layout</li>
-            </ol>
-        </div>
-    
-        <!-- Live Code Editor Section -->
-        <div class="section">
-            <h2>Live Code Editor</h2>
-            <p>Edit code in real-time and see the results immediately!</p>
-            
-            <div class="demo-card">
-                <div class="demo-title">Live Code Editor</div>
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
                 <div class="live-editor-container">
                     <div class="live-editor-header">
                         <div class="live-editor-title">
                             <div class="language-icon css">CSS</div>
-                            <span>live-code.css</span>
+                            <span>box-model.css</span>
                         </div>
                         <div class="live-editor-actions">
-                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
-                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
-                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
-            
-                    <div id="live-code" class="monaco-editor"></div>
+                            <button class="live-editor-btn" onclick="copyCode('box-model-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('box-model-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('box-model-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="box-model-editor" class="monaco-editor"></div>
                     <div class="live-editor-footer">
                         <div class="live-editor-stats">
-                            <span id="live-code-lines">0 lines</span>
-                            <span id="live-code-chars">0 characters</span>
+                            <span id="box-model-editor-lines">0 lines</span>
+                            <span id="box-model-editor-chars">0 characters</span>
                         </div>
                         <div class="live-editor-status">
                             <div class="status-indicator"></div>
@@ -331,22 +96,199 @@
                         </div>
                     </div>
                 </div>
-                <div class="live-preview" id="live-code-preview">
+                <div class="live-preview" id="box-model-editor-preview">
                     <div class="live-preview-header">
                         <div class="live-preview-title">Live Preview</div>
                     </div>
-                    <div id="live-code-preview-content">
+                    <div id="box-model-editor-preview-content">
                         <!-- Live preview content will be inserted here -->
                     </div>
-                    <div class="error-display hidden" id="error-display-live-code">
+                    <div class="error-display hidden" id="error-display-box-model-editor">
                         <strong>Error:</strong> <span class="error-message"></span>
                     </div>
                 </div>
             </div>
         </div>
-</div>
 
-    
+        <!-- Centering Techniques Section -->
+        <div id="centering" class="content-section ">
+            <h2 class="section-title">Centering Techniques</h2>
+            
+					<p>Centering elements is one of the most common CSS challenges. There are multiple techniques depending on what you're centering.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">Centering Methods</div>
+						<div class="structure-visual">
+text-align: center; <span class="comment">/* Inline elements */</span><br>
+margin: 0 auto; <span class="comment">/* Block elements */</span><br>
+display: flex; justify-content: center; <span class="comment">/* Flexbox */</span><br>
+position: absolute; left: 50%; transform: translateX(-50%); <span class="comment">/* Absolute positioning */</span>
+						</div>
+						<div class="element-comment">Different centering methods for different scenarios</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Centering Scenarios</h3>
+						<ul>
+							<li><strong>Inline elements:</strong> Use text-align: center</li>
+							<li><strong>Block elements:</strong> Use margin: 0 auto</li>
+							<li><strong>Flexbox:</strong> Use justify-content and align-items</li>
+							<li><strong>Grid:</strong> Use place-items: center</li>
+							<li><strong>Absolute positioning:</strong> Use transform</li>
+						</ul>
+					</div>
+            
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('centering')">Show Centering Techniques Demo</button>
+                <div id="centeringResult" class="demo-result">
+                    
+					<div style="background: #f8fafc; padding: 2rem; border-radius: 12px;">
+						<div style="text-align: center; margin-bottom: 2rem;">
+							<div style="background: #3b82f6; color: white; padding: 1rem; display: inline-block; border-radius: 8px;">
+								Text-align Center
+							</div>
+						</div>
+						<div style="background: #10b981; color: white; padding: 1rem; margin: 0 auto; width: 200px; border-radius: 8px; text-align: center;">
+							Margin Auto Center
+						</div>
+					</div>
+                </div>
+            </div>
+            
+            
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>centering.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('centering-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('centering-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('centering-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="centering-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="centering-editor-lines">0 lines</span>
+                            <span id="centering-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="centering-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="centering-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-centering-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSS Positioning Section -->
+        <div id="positioning" class="content-section ">
+            <h2 class="section-title">CSS Positioning</h2>
+            
+					<p>CSS positioning allows you to control where elements appear on the page and how they interact with other elements.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">Position Values</div>
+						<div class="structure-visual">
+position: static; <span class="comment">/* Default, normal flow */</span><br>
+position: relative; <span class="comment">/* Relative to normal position */</span><br>
+position: absolute; <span class="comment">/* Relative to nearest positioned parent */</span><br>
+position: fixed; <span class="comment">/* Relative to viewport */</span><br>
+position: sticky; <span class="comment">/* Sticks when scrolling */</span>
+						</div>
+						<div class="element-comment">Positioning controls element placement and stacking</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Positioning Properties</h3>
+						<ul>
+							<li><strong>top, right, bottom, left:</strong> Offset from positioned edge</li>
+							<li><strong>z-index:</strong> Controls stacking order</li>
+							<li><strong>position:</strong> Sets positioning context</li>
+						</ul>
+					</div>
+            
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('positioning')">Show CSS Positioning Demo</button>
+                <div id="positioningResult" class="demo-result">
+                    
+					<div style="background: #f8fafc; padding: 2rem; border-radius: 12px; position: relative; height: 200px;">
+						<div style="background: #3b82f6; color: white; padding: 1rem; border-radius: 8px; position: absolute; top: 20px; left: 20px;">
+							Absolute Top-Left
+						</div>
+						<div style="background: #10b981; color: white; padding: 1rem; border-radius: 8px; position: absolute; bottom: 20px; right: 20px;">
+							Absolute Bottom-Right
+						</div>
+						<div style="background: #f59e0b; color: white; padding: 1rem; border-radius: 8px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+							Centered Absolute
+						</div>
+					</div>
+                </div>
+            </div>
+            
+            
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>positioning.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('positioning-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('positioning-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('positioning-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="positioning-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="positioning-editor-lines">0 lines</span>
+                            <span id="positioning-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="positioning-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="positioning-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-positioning-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

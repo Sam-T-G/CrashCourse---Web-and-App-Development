@@ -5,257 +5,101 @@
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Variables - Custom Properties</title>
-    
+    <title>CSS Custom Properties (Variables)</title>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1> CSS Variables</h1>
-            <p>Custom properties for maintainable and dynamic CSS</p>
+            <h1>CSS Custom Properties (Variables)</h1>
+            <p>Learn CSS custom properties for maintainable and dynamic styling</p>
         </div>
 
-        <!-- Color Variables Section -->
-        <div class="section">
-            <h2> Color Variables</h2>
-            <p>Define colors once and use them throughout your stylesheet.</p>
-
-            <div class="demo-element">
-                <div class="property-label">Color variables in action</div>
-                <div class="color-demo">
-                    <div class="color-box primary">Primary</div>
-                    <div class="color-box secondary">Secondary</div>
-                    <div class="color-box danger">Danger</div>
-                    <div class="color-box warning">Warning
-            
-                <div class="property-comment">All colors are defined as CSS variables and can be changed globally</div>
-            </div>
-
-            <div class="code-snippet">
-<span class="comment">/* Define color variables */</span>
-:root {
-    <span class="property">--primary-color</span>: <span class="value">#3b82f6</span>;
-    <span class="property">--secondary-color</span>: <span class="value">#10b981</span>;
-    <span class="property">--danger-color</span>: <span class="value">#ef4444</span>;
-    <span class="property">--warning-color</span>: <span class="value">#f59e0b</span>;
-}
-
-<span class="comment">/* Use color variables */</span>
-.color-box.primary {
-    <span class="property">background-color</span>: <span class="value">var(--primary-color)</span>;
-}
-
-.color-box.secondary {
-    <span class="property">background-color</span>: <span class="value">var(--secondary-color)</span>;
-}
-            </div>
+        <div class="navigation">
+            <button class="nav-button active" onclick="showSection('variables-basics')">CSS Variables Fundamentals</button>
+<button class="nav-button " onclick="showSection('variables-advanced')">Advanced CSS Variables</button>
         </div>
 
-        <!-- Spacing Variables Section -->
-        <div class="section">
-            <h2> Spacing Variables</h2>
-            <p>Consistent spacing throughout your design system.</p>
-
-            <div class="demo-element">
-                <div class="property-label">Spacing variables in action</div>
-                <div class="spacing-demo">
-                    <div class="spacing-box xs">Extra Small (0.25rem)</div>
-                    <div class="spacing-box sm">Small (0.5rem)</div>
-                    <div class="spacing-box md">Medium (1rem)</div>
-                    <div class="spacing-box lg">Large (1.5rem)</div>
-                    <div class="spacing-box xl">Extra Large (2rem)
+        
+        <!-- CSS Variables Fundamentals Section -->
+        <div id="variables-basics" class="content-section active">
+            <h2 class="section-title">CSS Variables Fundamentals</h2>
             
-                <div class="property-comment">Consistent spacing scale using CSS variables</div>
-            </div>
-
-            <div class="code-snippet">
-<span class="comment">/* Define spacing variables */</span>
-:root {
-    <span class="property">--spacing-xs</span>: <span class="value">0.25rem</span>;
-    <span class="property">--spacing-sm</span>: <span class="value">0.5rem</span>;
-    <span class="property">--spacing-md</span>: <span class="value">1rem</span>;
-    <span class="property">--spacing-lg</span>: <span class="value">1.5rem</span>;
-    <span class="property">--spacing-xl</span>: <span class="value">2rem</span>;
+					<p>CSS custom properties (variables) allow you to store values that can be reused throughout your stylesheet.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">CSS Variables</div>
+						<div class="structure-visual">
+:root {<br>
+&nbsp;&nbsp;--primary-color: #3b82f6;<br>
+&nbsp;&nbsp;--secondary-color: #10b981;<br>
+&nbsp;&nbsp;--font-size: 16px;<br>
+&nbsp;&nbsp;--spacing: 1rem;<br>
+}<br><br>
+.button {<br>
+&nbsp;&nbsp;background: var(--primary-color);<br>
+&nbsp;&nbsp;font-size: var(--font-size);<br>
+&nbsp;&nbsp;padding: var(--spacing);<br>
 }
-
-<span class="comment">/* Use spacing variables */</span>
-.spacing-box.xs {
-    <span class="property">padding</span>: <span class="value">var(--spacing-xs)</span>;
-}
-
-.spacing-box.md {
-    <span class="property">padding</span>: <span class="value">var(--spacing-md)</span>;
-}
-            </div>
-        </div>
-
-        <!-- Typography Variables Section -->
-        <div class="section">
-            <h2> Typography Variables</h2>
-            <p>Consistent typography scale for better readability.</p>
-
-            <div class="demo-element">
-                <div class="property-label">Typography variables in action</div>
-                <div class="typography-demo">
-                    <div class="typography-text xs">Extra Small Text (0.75rem)</div>
-                    <div class="typography-text sm">Small Text (0.875rem)</div>
-                    <div class="typography-text base">Base Text (1rem)</div>
-                    <div class="typography-text lg">Large Text (1.125rem)</div>
-                    <div class="typography-text xl">Extra Large Text (1.25rem)</div>
-                    <div class="typography-text 2xl">2XL Text (1.5rem)</div>
-                    <div class="typography-text 3xl">3XL Text (1.875rem)</div>
-                    <div class="typography-text 4xl">4XL Text (2.25rem)
+						</div>
+						<div class="element-comment">Variables make styles more maintainable and consistent</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Variable Benefits</h3>
+						<ul>
+							<li><strong>Consistency:</strong> Use the same values throughout</li>
+							<li><strong>Maintainability:</strong> Change one value, update everywhere</li>
+							<li><strong>Dynamic:</strong> Can be changed with JavaScript</li>
+							<li><strong>Scoping:</strong> Can be defined at different levels</li>
+						</ul>
+					</div>
             
-                <div class="property-comment">Consistent typography scale using CSS variables</div>
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('variables-basics')">Show CSS Variables Fundamentals Demo</button>
+                <div id="variables-basicsResult" class="demo-result">
+                    
+					<div style="background: #f8fafc; padding: 2rem; border-radius: 12px;">
+						<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+							<div style="background: var(--primary-color, #3b82f6); color: white; padding: 1rem; border-radius: 8px;">
+								Primary Button
+							</div>
+							<div style="background: var(--secondary-color, #10b981); color: white; padding: 1rem; border-radius: 8px;">
+								Secondary Button
+							</div>
+						</div>
+					</div>
+					<style>
+						:root {
+							--primary-color: #3b82f6;
+							--secondary-color: #10b981;
+						}
+					</style>
+                </div>
             </div>
-
-            <div class="code-snippet">
-<span class="comment">/* Define typography variables */</span>
-:root {
-    <span class="property">--font-size-xs</span>: <span class="value">0.75rem</span>;
-    <span class="property">--font-size-sm</span>: <span class="value">0.875rem</span>;
-    <span class="property">--font-size-base</span>: <span class="value">1rem</span>;
-    <span class="property">--font-size-lg</span>: <span class="value">1.125rem</span>;
-    <span class="property">--font-size-xl</span>: <span class="value">1.25rem</span>;
-}
-
-<span class="comment">/* Use typography variables */</span>
-.typography-text.xs {
-    <span class="property">font-size</span>: <span class="value">var(--font-size-xs)</span>;
-}
-
-.typography-text.base {
-    <span class="property">font-size</span>: <span class="value">var(--font-size-base)</span>;
-}
-            </div>
-        </div>
-
-        <!-- Border Radius Variables Section -->
-        <div class="section">
-            <h2> Border Radius Variables</h2>
-            <p>Consistent border radius for a cohesive design.</p>
-
-            <div class="demo-element">
-                <div class="property-label">Border radius variables in action</div>
-                <div class="radius-demo">
-                    <div class="radius-box sm">Small (0.25rem)</div>
-                    <div class="radius-box md">Medium (0.5rem)</div>
-                    <div class="radius-box lg">Large (0.75rem)</div>
-                    <div class="radius-box xl">Extra Large (1rem)</div>
-                    <div class="radius-box 2xl">2XL (1.5rem)
             
-                <div class="property-comment">Consistent border radius scale using CSS variables</div>
-            </div>
-
-            <div class="code-snippet">
-<span class="comment">/* Define border radius variables */</span>
-:root {
-    <span class="property">--radius-sm</span>: <span class="value">0.25rem</span>;
-    <span class="property">--radius-md</span>: <span class="value">0.5rem</span>;
-    <span class="property">--radius-lg</span>: <span class="value">0.75rem</span>;
-    <span class="property">--radius-xl</span>: <span class="value">1rem</span>;
-    <span class="property">--radius-2xl</span>: <span class="value">1.5rem</span>;
-}
-
-<span class="comment">/* Use border radius variables */</span>
-.radius-box.sm {
-    <span class="property">border-radius</span>: <span class="value">var(--radius-sm)</span>;
-}
-
-.radius-box.lg {
-    <span class="property">border-radius</span>: <span class="value">var(--radius-lg)</span>;
-}
-            </div>
-        </div>
-
-        <!-- Shadow Variables Section -->
-        <div class="section">
-            <h2>️ Shadow Variables</h2>
-            <p>Consistent shadow system for depth and hierarchy.</p>
-
-            <div class="demo-element">
-                <div class="property-label">Shadow variables in action</div>
-                <div class="shadow-demo">
-                    <div class="shadow-box sm">Small Shadow</div>
-                    <div class="shadow-box md">Medium Shadow</div>
-                    <div class="shadow-box lg">Large Shadow</div>
-                    <div class="shadow-box xl">Extra Large Shadow
             
-                <div class="property-comment">Consistent shadow system using CSS variables</div>
-            </div>
-
-            <div class="code-snippet">
-<span class="comment">/* Define shadow variables */</span>
-:root {
-    <span class="property">--shadow-sm</span>: <span class="value">0 1px 2px 0 rgba(0, 0, 0, 0.05)</span>;
-    <span class="property">--shadow-md</span>: <span class="value">0 4px 6px -1px rgba(0, 0, 0, 0.1)</span>;
-    <span class="property">--shadow-lg</span>: <span class="value">0 10px 15px -3px rgba(0, 0, 0, 0.1)</span>;
-    <span class="property">--shadow-xl</span>: <span class="value">0 20px 25px -5px rgba(0, 0, 0, 0.1)</span>;
-}
-
-<span class="comment">/* Use shadow variables */</span>
-.shadow-box.sm {
-    <span class="property">box-shadow</span>: <span class="value">var(--shadow-sm)</span>;
-}
-
-.shadow-box.lg {
-    <span class="property">box-shadow</span>: <span class="value">var(--shadow-lg)</span>;
-}
-            </div>
-        </div>
-
-        <!-- Interactive Demo Section -->
-        <div class="interactive-demo">
-            <h3> Interactive Variables Demo</h3>
-            <p>Click the buttons below to see how CSS variables can be changed dynamically:</p>
-            
-            <button class="control-button" onclick="changeTheme('default')">Default Theme</button>
-            <button class="control-button" onclick="changeTheme('dark')">Dark Theme</button>
-            <button class="control-button" onclick="changeTheme('colorful')">Colorful Theme</button>
-            <button class="control-button" onclick="changeTheme('minimal')">Minimal Theme</button>
-            
-            <div class="demo-area">
-                <div class="demo-box" id="demoBox">Dynamic CSS Variables</div>
-            </div>
-        </div>
-
-        <!-- Try This Section -->
-        <div class="section">
-            <h2> Try This</h2>
-            <p>Experiment with CSS variables:</p>
-            <ol>
-                <li><strong>Use the interactive demo:</strong> Click buttons to see different themes</li>
-                <li><strong>Change variable values:</strong> Modify the :root variables to see global changes</li>
-                <li><strong>Create your own variables:</strong> Add new variables for your design system</li>
-                <li><strong>Use fallbacks:</strong> Add fallback values for better browser support</li>
-                <li><strong>Scope variables:</strong> Use variables in different scopes (element, class)</li>
-                <li><strong>Combine variables:</strong> Use calc() with variables for dynamic values</li>
-            </ol>
-        </div>
-    
-        <!-- Live Code Editor Section -->
-        <div class="section">
-            <h2>Live Code Editor</h2>
-            <p>Edit code in real-time and see the results immediately!</p>
-            
-            <div class="demo-card">
-                <div class="demo-title">Live Code Editor</div>
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
                 <div class="live-editor-container">
                     <div class="live-editor-header">
                         <div class="live-editor-title">
                             <div class="language-icon css">CSS</div>
-                            <span>live-code.css</span>
+                            <span>variables-basics.css</span>
                         </div>
                         <div class="live-editor-actions">
-                            <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
-                            <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
-                            <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
-            
-                    <div id="live-code" class="monaco-editor"></div>
+                            <button class="live-editor-btn" onclick="copyCode('variables-basics-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('variables-basics-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('variables-basics-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="variables-basics-editor" class="monaco-editor"></div>
                     <div class="live-editor-footer">
                         <div class="live-editor-stats">
-                            <span id="live-code-lines">0 lines</span>
-                            <span id="live-code-chars">0 characters</span>
+                            <span id="variables-basics-editor-lines">0 lines</span>
+                            <span id="variables-basics-editor-chars">0 characters</span>
                         </div>
                         <div class="live-editor-status">
                             <div class="status-indicator"></div>
@@ -263,23 +107,124 @@
                         </div>
                     </div>
                 </div>
-                <div class="live-preview" id="live-code-preview">
+                <div class="live-preview" id="variables-basics-editor-preview">
                     <div class="live-preview-header">
                         <div class="live-preview-title">Live Preview</div>
                     </div>
-                    <div id="live-code-preview-content">
+                    <div id="variables-basics-editor-preview-content">
                         <!-- Live preview content will be inserted here -->
                     </div>
-                    <div class="error-display hidden" id="error-display-live-code">
+                    <div class="error-display hidden" id="error-display-variables-basics-editor">
                         <strong>Error:</strong> <span class="error-message"></span>
                     </div>
                 </div>
             </div>
         </div>
-</div>
 
-    
+        <!-- Advanced CSS Variables Section -->
+        <div id="variables-advanced" class="content-section ">
+            <h2 class="section-title">Advanced CSS Variables</h2>
+            
+					<p>Advanced techniques with CSS variables including fallbacks, calculations, and JavaScript integration.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">Advanced Variable Usage</div>
+						<div class="structure-visual">
+:root {<br>
+&nbsp;&nbsp;--base-size: 16px;<br>
+&nbsp;&nbsp;--scale: 1.2;<br>
+&nbsp;&nbsp;--h1-size: calc(var(--base-size) * var(--scale) * var(--scale) * var(--scale));<br>
+}<br><br>
+.element {<br>
+&nbsp;&nbsp;font-size: var(--h1-size, 2rem); <span class="comment">/* With fallback */</span><br>
+&nbsp;&nbsp;color: var(--text-color, #333); <span class="comment">/* Fallback value */</span><br>
+}
+						</div>
+						<div class="element-comment">Variables can be used in calculations and have fallbacks</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Advanced Features</h3>
+						<ul>
+							<li><strong>Fallbacks:</strong> var(--color, #333) provides default</li>
+							<li><strong>Calculations:</strong> Use with calc() function</li>
+							<li><strong>JavaScript:</strong> Can be modified dynamically</li>
+							<li><strong>Inheritance:</strong> Variables inherit from parent</li>
+						</ul>
+					</div>
+            
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('variables-advanced')">Show Advanced CSS Variables Demo</button>
+                <div id="variables-advancedResult" class="demo-result">
+                    
+					<div style="background: #f8fafc; padding: 2rem; border-radius: 12px;">
+						<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+							<div style="font-size: var(--h1-size, 2rem); color: var(--primary-color, #3b82f6); font-weight: bold;">
+								Dynamic H1 Size
+							</div>
+							<div style="font-size: var(--h2-size, 1.5rem); color: var(--secondary-color, #10b981); font-weight: bold;">
+								Dynamic H2 Size
+							</div>
+						</div>
+					</div>
+					<style>
+						:root {
+							--base-size: 16px;
+							--scale: 1.2;
+							--h1-size: calc(var(--base-size) * var(--scale) * var(--scale) * var(--scale));
+							--h2-size: calc(var(--base-size) * var(--scale) * var(--scale));
+							--primary-color: #3b82f6;
+							--secondary-color: #10b981;
+						}
+					</style>
+                </div>
+            </div>
+            
+            
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon css">CSS</div>
+                            <span>variables-advanced.css</span>
+                        </div>
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('variables-advanced-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('variables-advanced-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('variables-advanced-editor')">Reset</button>
+                        </div>
+                    </div>
+                    <div id="variables-advanced-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="variables-advanced-editor-lines">0 lines</span>
+                            <span id="variables-advanced-editor-chars">0 characters</span>
+                        </div>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-preview" id="variables-advanced-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
+                    </div>
+                    <div id="variables-advanced-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
+                    </div>
+                    <div class="error-display hidden" id="error-display-variables-advanced-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
-

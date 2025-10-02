@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+#!/usr/bin/env node
+
+const fs = require("fs");
+const path = require("path");
+
+// Complete forms module HTML
+const formsHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
@@ -401,4 +407,51 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+</html>`;
+
+function rebuildFormsModule() {
+	const modulePath = path.join(
+		__dirname,
+		"..",
+		"traditional-web-stack",
+		"11-html-forms"
+	);
+	const indexPath = path.join(modulePath, "index.html");
+
+	console.log("🔧 Rebuilding Forms Module...");
+
+	// Write the complete HTML
+	fs.writeFileSync(indexPath, formsHTML);
+	console.log("✅ Forms module HTML rebuilt");
+
+	// Verify the rebuild
+	const htmlContent = fs.readFileSync(indexPath, "utf8");
+	const sections = htmlContent.match(/class="content-section"/g);
+	const editors = htmlContent.match(/class="monaco-editor"/g);
+	const navButtons = htmlContent.match(/onclick="showSection\('[^']+'\)"/g);
+
+	console.log(`📊 Verification:`);
+	console.log(`   - Content sections: ${sections ? sections.length : 0}`);
+	console.log(`   - Live editors: ${editors ? editors.length : 0}`);
+	console.log(`   - Navigation buttons: ${navButtons ? navButtons.length : 0}`);
+
+	if (
+		sections &&
+		sections.length === 5 &&
+		editors &&
+		editors.length === 5 &&
+		navButtons &&
+		navButtons.length === 5
+	) {
+		console.log("🎉 Forms module is now fully functional!");
+	} else {
+		console.log("❌ Some issues remain - please check manually");
+	}
+}
+
+// Run the rebuild
+if (require.main === module) {
+	rebuildFormsModule();
+}
+
+module.exports = { rebuildFormsModule };

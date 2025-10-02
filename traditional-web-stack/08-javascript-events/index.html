@@ -1,300 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Event Handling - Interactive Web Pages</title>
-    <script src="https://unpkg.com/monaco-editor@0.44.0/min/vs/loader.js"></script>
-    
+    <title>JavaScript Event Handling</title>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <header class="header fade-in">
-            <h1> JavaScript Event Handling</h1>
-            <p>Interactive web pages with proper event management</p>
-        </header>
+        <div class="header">
+            <h1>JavaScript Event Handling</h1>
+            <p>Learn JavaScript event handling, event types, and interactive programming</p>
+        </div>
 
-        <!-- Click Events Section -->
-        <section class="section fade-in">
-            <h2>️ Click Events</h2>
-            <p>Handle user clicks with proper event listeners and DOM manipulation.</p>
+        <div class="navigation">
+            <button class="nav-button active" onclick="showSection('event-basics')">Event Handling Fundamentals</button>
+<button class="nav-button " onclick="showSection('event-types')">Advanced Event Types</button>
+        </div>
 
-            <div class="demo-grid">
-                <div class="demo-card">
-                    <div class="demo-title">Interactive Buttons</div>
-                    <div class="demo-element">
-                        <div class="property-label">Click Event Handlers</div>
-                        <button class="interactive-button" onclick="handleClick('primary')">Primary Button</button>
-                        <button class="interactive-button danger" onclick="handleClick('danger')">Danger Button</button>
-                        <button class="interactive-button success" onclick="handleClick('success')">Success Button</button>
-                        <div id="clickArea" class="event-area" onclick="handleAreaClick()">
-                            <p>Click this area to toggle state</p>
-                        </div>
-                    </div>
-                    <div class="property-comment">Buttons with different click handlers and area interactions</div>
+        
+        <!-- Event Handling Fundamentals Section -->
+        <div id="event-basics" class="content-section active">
+            <h2 class="section-title">Event Handling Fundamentals</h2>
+            
+					<p>JavaScript events allow you to create interactive web pages that respond to user actions.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">Event Handling</div>
+						<div class="structure-visual">
+// HTML<br>
+&lt;button id="myButton"&gt;Click Me&lt;/button&gt;<br><br>
+// JavaScript<br>
+const button = document.getElementById('myButton');<br>
+button.addEventListener('click', function() {<br>
+&nbsp;&nbsp;alert('Button clicked!');<br>
+});
+						</div>
+						<div class="element-comment">Events connect user actions to JavaScript functions</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Common Event Types</h3>
+						<ul>
+							<li><strong>click:</strong> Mouse click</li>
+							<li><strong>mouseover:</strong> Mouse enters element</li>
+							<li><strong>mouseout:</strong> Mouse leaves element</li>
+							<li><strong>keydown:</strong> Key is pressed</li>
+							<li><strong>submit:</strong> Form is submitted</li>
+							<li><strong>load:</strong> Page or element loads</li>
+						</ul>
+					</div>
+            
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('event-basics')">Show Event Handling Fundamentals Demo</button>
+                <div id="event-basicsResult" class="demo-result">
+                    
+					<div style="background: #f8fafc; padding: 2rem; border-radius: 12px;">
+						<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+							<button onclick="alert('Button clicked!')" style="background: #3b82f6; color: white; border: none; padding: 1rem; border-radius: 8px; cursor: pointer;">
+								Click Me
+							</button>
+							<button onmouseover="this.style.background='#1e40af'" onmouseout="this.style.background='#3b82f6'" style="background: #3b82f6; color: white; border: none; padding: 1rem; border-radius: 8px; cursor: pointer;">
+								Hover Me
+							</button>
+						</div>
+					</div>
                 </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Code Implementation</div>
-                    <div class="live-editor-container">
-                        <div class="live-editor-header">
-                            <div class="live-editor-title">
-                                <span></span>
-                                <span>click-handlers.js</span>
-                            </div>
-                            <div class="live-editor-actions">
-                                <button class="live-editor-btn" onclick="copyCode('live-code')">Copy</button>
-                                <button class="live-editor-btn primary" onclick="executeCode('live-code')">Run</button>
-                                <button class="live-editor-btn success" onclick="resetCode('live-code')">Reset</button>
-                            </div>
+            </div>
+            
+            
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>event-basics.html</span>
                         </div>
-                        <div id="live-code" class="monaco-editor"></div>
-                        <div class="live-editor-footer">
-                            JavaScript • Click event handling with DOM manipulation
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('event-basics-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('event-basics-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('event-basics-editor')">Reset</button>
                         </div>
                     </div>
-                    <div class="live-preview" id="live-preview">
-                        <div class="live-preview-header">
-                            <div class="live-preview-title">Live Preview</div>
+                    <div id="event-basics-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="event-basics-editor-lines">0 lines</span>
+                            <span id="event-basics-editor-chars">0 characters</span>
                         </div>
-                        <div id="live-code-preview-content">
-                            <!-- Live preview content will be inserted here -->
-                        </div>
-                        <div class="error-display hidden" id="error-display-live-code">
-                            <strong>Error:</strong> <span class="error-message"></span>
-                        </div>
-                    </div>
-                </div>
-        </section>
-
-        <!-- Mouse Events Section -->
-        <section class="section fade-in">
-            <h2>️ Mouse Events</h2>
-            <p>Track mouse movement and handle mouse interactions with precision.</p>
-
-            <div class="demo-grid">
-                <div class="demo-card">
-                    <div class="demo-title">Mouse Tracking</div>
-                    <div class="demo-element">
-                        <div class="property-label">Real-time Mouse Position</div>
-                        <div id="mouseTracker" class="mouse-tracker" 
-                             onmousemove="trackMouse(event)" 
-                             onmouseenter="handleMouseEnter()" 
-                             onmouseleave="handleMouseLeave()">
-                            <div id="mouseDot" class="mouse-dot"></div>
-                            <div id="mouseInfo" class="mouse-info">X: 0, Y: 0</div>
-                        </div>
-                    </div>
-                    <div class="property-comment">Move your mouse over the area to see real-time tracking</div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Code Implementation</div>
-                    <div class="live-editor-container">
-                        <div class="live-editor-header">
-                            <div class="live-editor-title">
-                                <span></span>
-                                <span>mouse-events.js</span>
-                            </div>
-                            <div class="live-editor-actions">
-                                <button class="live-editor-btn" onclick="copyCode('mouse-code')">Copy</button>
-                                <button class="code-editor-btn primary" onclick="runCode('mouse-code')">Run</button>
-                            </div>
-                        </div>
-                        <div id="mouse-code" class="monaco-editor"></div>
-                        <div class="live-editor-footer">
-                            JavaScript • Mouse event handling with coordinate tracking
-                        </div>
-                    </div>
-                    <div class="live-preview" id="live-preview">
-                        <div class="live-preview-header">
-                            <div class="live-preview-title">Live Preview</div>
-                        </div>
-                        <div id="live-code-preview-content">
-                            <!-- Live preview content will be inserted here -->
-                        </div>
-                        <div class="error-display hidden" id="error-display-live-code">
-                            <strong>Error:</strong> <span class="error-message"></span>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
                         </div>
                     </div>
                 </div>
-        </section>
-
-        <!-- Keyboard Events Section -->
-        <section class="section fade-in">
-            <h2>⌨️ Keyboard Events</h2>
-            <p>Handle keyboard input and create interactive keyboard interfaces.</p>
-
-            <div class="demo-grid">
-                <div class="demo-card">
-                    <div class="demo-title">Keyboard Demo</div>
-                    <div class="demo-element">
-                        <div class="property-label">Press any key to see it highlighted</div>
-                        <div class="keyboard-demo">
-                            <div class="key" data-key="a">A</div>
-                            <div class="key" data-key="s">S</div>
-                            <div class="key" data-key="d">D</div>
-                            <div class="key" data-key="f">F</div>
-                            <div class="key" data-key="g">G</div>
-                            <div class="key" data-key="h">H</div>
-                            <div class="key" data-key="j">J</div>
-                            <div class="key" data-key="k">K</div>
-                        </div>
-                        <div style="margin-top: 1rem;">
-                            <p><strong>Last Key:</strong> <span id="lastKey">None</span></p>
-                            <p><strong>Key Code:</strong> <span id="keyCode">None</span></p>
-                        </div>
+                <div class="live-preview" id="event-basics-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
                     </div>
-                    <div class="property-comment">Press keys on your keyboard to see them highlighted</div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Code Implementation</div>
-                    <div class="live-editor-container">
-                        <div class="live-editor-header">
-                            <div class="live-editor-title">
-                                <span></span>
-                                <span>keyboard-events.js</span>
-                            </div>
-                            <div class="live-editor-actions">
-                                <button class="live-editor-btn" onclick="copyCode('keyboard-code')">Copy</button>
-                                <button class="code-editor-btn primary" onclick="runCode('keyboard-code')">Run</button>
-                            </div>
-                        </div>
-                        <div id="keyboard-code" class="monaco-editor"></div>
-                        <div class="live-editor-footer">
-                            JavaScript • Keyboard event handling with visual feedback
-                        </div>
+                    <div id="event-basics-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
                     </div>
-                    <div class="live-preview" id="live-preview">
-                        <div class="live-preview-header">
-                            <div class="live-preview-title">Live Preview</div>
-                        </div>
-                        <div id="live-code-preview-content">
-                            <!-- Live preview content will be inserted here -->
-                        </div>
-                        <div class="error-display hidden" id="error-display-live-code">
-                            <strong>Error:</strong> <span class="error-message"></span>
-                        </div>
+                    <div class="error-display hidden" id="error-display-event-basics-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
                     </div>
                 </div>
-        </section>
+            </div>
+        </div>
 
-        <!-- Form Events Section -->
-        <section class="section fade-in">
-            <h2> Form Events</h2>
-            <p>Handle form input, validation, and user feedback with real-time processing.</p>
-
-            <div class="demo-grid">
-                <div class="demo-card">
-                    <div class="demo-title">Form Validation</div>
-                    <div class="demo-element">
-                        <div class="property-label">Real-time Email Validation</div>
-                        <div class="form-demo">
-                            <input type="email" id="emailInput" class="form-input" 
-                                   placeholder="Enter your email" 
-                                   oninput="validateEmail()">
-                            <div id="emailFeedback" class="form-feedback"></div>
-                        </div>
-                    </div>
-                    <div class="property-comment">Type in the email field to see real-time validation</div>
+        <!-- Advanced Event Types Section -->
+        <div id="event-types" class="content-section ">
+            <h2 class="section-title">Advanced Event Types</h2>
+            
+					<p>Advanced event handling including form events, keyboard events, and custom event handling.</p>
+					
+					<div class="element-demo">
+						<div class="element-label">Advanced Events</div>
+						<div class="structure-visual">
+// Form events<br>
+form.addEventListener('submit', function(e) {<br>
+&nbsp;&nbsp;e.preventDefault(); <span class="comment">// Prevent default behavior</span><br>
+&nbsp;&nbsp;console.log('Form submitted');<br>
+});<br><br>
+// Keyboard events<br>
+document.addEventListener('keydown', function(e) {<br>
+&nbsp;&nbsp;if (e.key === 'Enter') {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log('Enter pressed');<br>
+&nbsp;&nbsp;}<br>
+});
+						</div>
+						<div class="element-comment">Advanced events provide more control over user interactions</div>
+					</div>
+					
+					<div class="example-box">
+						<h3>📋 Event Object Properties</h3>
+						<ul>
+							<li><strong>event.target:</strong> Element that triggered the event</li>
+							<li><strong>event.type:</strong> Type of event (click, keydown, etc.)</li>
+							<li><strong>event.preventDefault():</strong> Prevent default behavior</li>
+							<li><strong>event.stopPropagation():</strong> Stop event bubbling</li>
+						</ul>
+					</div>
+            
+            <div class="interactive-demo">
+                <h3>🎯 Try This</h3>
+                <p>Click the button below to see a demo of this section!</p>
+                <button class="demo-button" onclick="showDemoResult('event-types')">Show Advanced Event Types Demo</button>
+                <div id="event-typesResult" class="demo-result">
+                    
+					<div style="background: #f8fafc; padding: 2rem; border-radius: 12px;">
+						<form onsubmit="event.preventDefault(); alert('Form submitted!'); return false;">
+							<input type="text" placeholder="Type something..." style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #d1d5db; border-radius: 4px;">
+							<button type="submit" style="background: #3b82f6; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+								Submit Form
+							</button>
+						</form>
+					</div>
                 </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Code Implementation</div>
-                    <div class="live-editor-container">
-                        <div class="live-editor-header">
-                            <div class="live-editor-title">
-                                <span></span>
-                                <span>form-events.js</span>
-                            </div>
-                            <div class="live-editor-actions">
-                                <button class="live-editor-btn" onclick="copyCode('form-code')">Copy</button>
-                                <button class="code-editor-btn primary" onclick="runCode('form-code')">Run</button>
-                            </div>
+            </div>
+            
+            
+            <!-- Live Code Editor -->
+            <div class="live-editor-section">
+                <h3>🎮 Live Code Editor</h3>
+                <div class="live-editor-container">
+                    <div class="live-editor-header">
+                        <div class="live-editor-title">
+                            <div class="language-icon html">HTML</div>
+                            <span>event-types.html</span>
                         </div>
-                        <div id="form-code" class="monaco-editor"></div>
-                        <div class="live-editor-footer">
-                            JavaScript • Form validation with real-time feedback
+                        <div class="live-editor-actions">
+                            <button class="live-editor-btn" onclick="copyCode('event-types-editor')">Copy</button>
+                            <button class="live-editor-btn primary" onclick="executeCode('event-types-editor')">Run</button>
+                            <button class="live-editor-btn success" onclick="resetCode('event-types-editor')">Reset</button>
                         </div>
                     </div>
-                    <div class="live-preview" id="live-preview">
-                        <div class="live-preview-header">
-                            <div class="live-preview-title">Live Preview</div>
+                    <div id="event-types-editor" class="monaco-editor"></div>
+                    <div class="live-editor-footer">
+                        <div class="live-editor-stats">
+                            <span id="event-types-editor-lines">0 lines</span>
+                            <span id="event-types-editor-chars">0 characters</span>
                         </div>
-                        <div id="live-code-preview-content">
-                            <!-- Live preview content will be inserted here -->
-                        </div>
-                        <div class="error-display hidden" id="error-display-live-code">
-                            <strong>Error:</strong> <span class="error-message"></span>
+                        <div class="live-editor-status">
+                            <div class="status-indicator"></div>
+                            <span>Live Editor Ready</span>
                         </div>
                     </div>
                 </div>
-        </section>
-
-        <!-- Scroll Events Section -->
-        <section class="section fade-in">
-            <h2> Scroll Events</h2>
-            <p>Handle scroll events and create dynamic scroll-based interactions.</p>
-
-            <div class="demo-grid">
-                <div class="demo-card">
-                    <div class="demo-title">Scroll Tracking</div>
-                    <div class="demo-element">
-                        <div class="property-label">Scroll Position: <span id="scrollPosition">0</span>px</div>
-                        <div id="scrollDemo" class="scroll-demo" onscroll="handleScroll()">
-                            <div class="scroll-content">
-                                <h3>Scroll Me!</h3>
-                                <p>This is a scrollable area. As you scroll, the background color changes dynamically.</p>
-                                <p>Scroll position is tracked in real-time and displayed above.</p>
-                                <p>The background uses HSL color values that change based on scroll position.</p>
-                                <p>This creates a smooth, dynamic visual effect.</p>
-                                <p>Try scrolling up and down to see the color transitions.</p>
-                                <p>Each scroll event updates the position and triggers the color change.</p>
-                                <p>The effect is smooth and responsive to your scrolling speed.</p>
-                                <p>This demonstrates how scroll events can create engaging user experiences.</p>
-                            </div>
-                        </div>
+                <div class="live-preview" id="event-types-editor-preview">
+                    <div class="live-preview-header">
+                        <div class="live-preview-title">Live Preview</div>
                     </div>
-                    <div class="property-comment">Scroll to see dynamic background color changes</div>
-                </div>
-
-                <div class="demo-card">
-                    <div class="demo-title">Code Implementation</div>
-                    <div class="live-editor-container">
-                        <div class="live-editor-header">
-                            <div class="live-editor-title">
-                                <span></span>
-                                <span>scroll-events.js</span>
-                            </div>
-                            <div class="live-editor-actions">
-                                <button class="live-editor-btn" onclick="copyCode('scroll-code')">Copy</button>
-                                <button class="code-editor-btn primary" onclick="runCode('scroll-code')">Run</button>
-                            </div>
-                        </div>
-                        <div id="scroll-code" class="monaco-editor"></div>
-                        <div class="live-editor-footer">
-                            JavaScript • Scroll event handling with dynamic visual effects
-                        </div>
+                    <div id="event-types-editor-preview-content">
+                        <!-- Live preview content will be inserted here -->
                     </div>
-                    <div class="live-preview" id="live-preview">
-                        <div class="live-preview-header">
-                            <div class="live-preview-title">Live Preview</div>
-                        </div>
-                        <div id="live-code-preview-content">
-                            <!-- Live preview content will be inserted here -->
-                        </div>
-                        <div class="error-display hidden" id="error-display-live-code">
-                            <strong>Error:</strong> <span class="error-message"></span>
-                        </div>
+                    <div class="error-display hidden" id="error-display-event-types-editor">
+                        <strong>Error:</strong> <span class="error-message"></span>
                     </div>
                 </div>
-        </section>
+            </div>
+        </div>
     </div>
 
-    
     <script src="script.js"></script>
 </body>
 </html>
