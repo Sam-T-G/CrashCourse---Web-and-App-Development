@@ -96,7 +96,12 @@ const server = http.createServer((req, res) => {
 						const fileList = files
 							.map((file) => {
 								const fileUrl = path.join(pathname, file).replace(/\\/g, "/");
-								return `<li><a href="${fileUrl}">${file}</a></li>`;
+								if (fileUrl.includes("traditional")) { // If file urls are for the traditional-web-stack, add a trailing slash for webserver to locate .css files
+									return `<li><a href="${fileUrl}/">${file}</a></li>`;
+								} else {
+									return `<li><a href="${fileUrl}">${file}</a></li>`;
+								}
+
 							})
 							.join("");
 
@@ -105,6 +110,7 @@ const server = http.createServer((req, res) => {
 							<!DOCTYPE html>
 							<html>
 							<head>
+							<meta charset="utf-8">
 								<title>Directory Listing - ${pathname}</title>
 								<style>
 									body { font-family: Arial, sans-serif; padding: 20px; }
