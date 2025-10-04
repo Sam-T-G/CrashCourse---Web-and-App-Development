@@ -110,6 +110,7 @@ const server = http.createServer((req, res) => {
 							<!DOCTYPE html>
 							<html>
 							<head>
+							<meta charset="utf-8">
 								<title>Directory Listing - ${pathname}</title>
 								<style>
 									body { font-family: Arial, sans-serif; padding: 20px; }
